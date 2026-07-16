@@ -163,10 +163,10 @@ function initMap() {
   const tamariu = { name: "Tamariu", coords: [41.918, 3.2076] };
   const palafrugell = { name: "Palafrugell", coords: [41.9172, 3.163] };
   const capRoig = { name: "Cap Roig Gardens", coords: [41.8768, 3.177] };
-  const elGolfet = { name: "El Golfet", coords: [41.879, 3.1758] };
+  const castell = { name: "Platja de Castell", coords: [41.858, 3.152] };
   const aiguablava = { name: "Aiguablava", coords: [41.9337, 3.2177] };
   const begur = { name: "Begur", coords: [41.9537, 3.2084] };
-  const lighthouse = { name: "Sant Sebastià lighthouse", coords: [41.8968, 3.2027] };
+  const saRiera = { name: "Sa Riera", coords: [41.9701, 3.2107] };
   const falset = { name: "Falset", coords: [41.1458, 0.8193], type: "stay" };
   const siurana = { name: "Siurana", coords: [41.2585, 0.9329] };
   const dayRoutes = {
@@ -213,10 +213,10 @@ function initMap() {
       stops: [base, palafrugell],
     },
     8: {
-      title: "Cap Roig & El Golfet",
+      title: "Cap Roig & Platja de Castell",
       subtitle: "Thursday 27 August",
-      description: "Camping Palafrugell → gardens → cove",
-      stops: [base, capRoig, elGolfet],
+      description: "Camping Palafrugell → gardens → wild sandy bay",
+      stops: [base, capRoig, castell],
     },
     9: {
       title: "Begur & Aiguablava",
@@ -225,10 +225,10 @@ function initMap() {
       stops: [base, aiguablava, begur],
     },
     10: {
-      title: "Sant Sebastià lookout",
+      title: "Sa Riera beach finale",
       subtitle: "Saturday 29 August",
-      description: "Campsite → lighthouse → Llafranc",
-      stops: [base, lighthouse, llafranc],
+      description: "Camping Palafrugell → Begur's largest cove",
+      stops: [base, saRiera],
     },
     11: {
       title: "The coast to Falset",
