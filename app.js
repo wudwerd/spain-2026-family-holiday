@@ -1,64 +1,101 @@
-/* Spain '26: interaction, route map and custom WebGL coastline */
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-document.addEventListener("DOMContentLoaded", () => {
-  if (window.lucide) window.lucide.createIcons();
-  initDayNavigation();
-  initPracticalNotes();
-  initPackingList();
-  initSharing();
-  initPrinting();
-  initBackToTop();
-  initMap();
-  initCoastScene();
-});
+function initReveal() {
+  const items = [...document.querySelectorAll(".reveal")];
+  if (reduceMotion.matches || !("IntersectionObserver" in window)) {
+    items.forEach((item) => item.classList.add("in-view"));
+    return;
+  }
 
-function initDayNavigation() {
-  const cards = [...document.querySelectorAll(".day-card")];
-  const links = [...document.querySelectorAll(".day-links a")];
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in-view");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.08, rootMargin: "0px 0px -8% 0px" }
+  );
+
+  items.forEach((item) => observer.observe(item));
+}
+
+function initDateRail() {
+  const links = [...document.querySelectorAll(".date-links a")];
+  const days = [...document.querySelectorAll("[data-map-day]")];
+  if (!links.length || !days.length) return;
+
+  const setActive = (day) => {
+    const next = links.find((link) => link.dataset.day === day);
+    links.forEach((link) => link.classList.toggle("active", link === next));
+    if (next) next.scrollIntoView({ behavior: reduceMotion.matches ? "auto" : "smooth", block: "nearest", inline: "center" });
+  };
 
   const observer = new IntersectionObserver(
     (entries) => {
       const visible = entries
         .filter((entry) => entry.isIntersecting)
-        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-      if (!visible) return;
-      const day = visible.target.id.replace("day-", "");
-      links.forEach((link) => link.classList.toggle("active", link.dataset.day === day));
-      if (window.innerWidth <= 820) {
-        const activeLink = links.find((link) => link.dataset.day === day);
-        const dayStrip = document.querySelector(".day-links");
-        if (activeLink && dayStrip) {
-          dayStrip.scrollTo({
-            left: activeLink.offsetLeft - dayStrip.clientWidth / 2 + activeLink.clientWidth / 2,
-            behavior: "smooth",
-          });
-        }
-      }
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+      if (visible[0]) setActive(visible[0].target.dataset.mapDay);
     },
-    { rootMargin: "-22% 0px -60% 0px", threshold: [0.05, 0.25, 0.5] },
+    { rootMargin: "-28% 0px -58% 0px", threshold: [0, 0.12, 0.3] }
   );
 
-  cards.forEach((card) => observer.observe(card));
+  days.forEach((day) => observer.observe(day));
 }
 
-function initPracticalNotes() {
-  document.querySelectorAll(".practical").forEach((details) => {
-    details.addEventListener("toggle", () => {
-      if (!details.open || window.innerWidth >= 821) return;
-      document.querySelectorAll(".practical[open]").forEach((other) => {
-        if (other !== details) other.open = false;
+function initFieldNotes() {
+  document.querySelectorAll(".field-notes").forEach((notes) => {
+    notes.addEventListener("toggle", () => {
+      if (!notes.open) return;
+      const entry = notes.closest(".day-entry");
+      entry?.querySelectorAll(".field-notes[open]").forEach((other) => {
+        if (other !== notes) other.open = false;
       });
     });
   });
 }
 
-function initPackingList() {
-  const boxes = [...document.querySelectorAll("[data-pack]")];
-  const count = document.querySelector("#progress-count");
-  const ring = document.querySelector("#progress-ring");
-  const storageKey = "palafrugell-26-packing";
-  let saved = [];
+function initBeachIndex() {
+  const rows = [...document.querySelectorAll(".beach-row")];
+  const preview = document.querySelector("#beach-preview");
+  const caption = document.querySelector("#beach-caption");
+  if (!rows.length || !preview || !caption) return;
 
+  let current = rows[0];
+  const select = (row) => {
+    if (!row || row === current) return;
+    current = row;
+    rows.forEach((item) => item.classList.toggle("active", item === row));
+
+    const loader = new Image();
+    loader.src = row.dataset.image;
+    preview.classList.add("changing");
+    loader.onload = () => {
+      preview.src = row.dataset.image;
+      preview.alt = row.dataset.alt;
+      caption.textContent = row.dataset.caption;
+      requestAnimationFrame(() => preview.classList.remove("changing"));
+    };
+  };
+
+  rows.forEach((row) => {
+    row.addEventListener("pointerenter", () => select(row));
+    row.addEventListener("focus", () => select(row));
+    row.addEventListener("click", () => select(row));
+  });
+}
+
+function initPacking() {
+  const storageKey = "catalonia-2026-packing";
+  const boxes = [...document.querySelectorAll("[data-pack]")];
+  const bar = document.querySelector("#packing-bar");
+  const count = document.querySelector("#packing-count");
+  if (!boxes.length || !bar || !count) return;
+
+  let saved = [];
   try {
     saved = JSON.parse(localStorage.getItem(storageKey) || "[]");
   } catch {
@@ -67,86 +104,71 @@ function initPackingList() {
 
   boxes.forEach((box) => {
     box.checked = saved.includes(box.dataset.pack);
-    box.addEventListener("change", update);
   });
 
-  function update() {
+  const update = () => {
     const checked = boxes.filter((box) => box.checked);
-    count.textContent = `${checked.length}/${boxes.length}`;
-    const circumference = 326.73;
-    ring.style.strokeDashoffset = String(circumference * (1 - checked.length / boxes.length));
+    bar.style.width = `${(checked.length / boxes.length) * 100}%`;
+    count.textContent = `${checked.length} of ${boxes.length} packed`;
     try {
       localStorage.setItem(storageKey, JSON.stringify(checked.map((box) => box.dataset.pack)));
     } catch {
-      // The checklist still works when storage is unavailable.
+      return;
     }
-  }
+  };
 
+  boxes.forEach((box) => box.addEventListener("change", update));
   update();
 }
 
-function initSharing() {
-  const button = document.querySelector("#share-button");
+function initShareAndUtilities() {
+  const shareButtons = [document.querySelector("#share-button"), document.querySelector("#footer-share")].filter(Boolean);
   const toast = document.querySelector("#toast");
-  let timer;
+  let toastTimer;
 
-  button?.addEventListener("click", async () => {
-    const shareData = {
-      title: "Spain ’26: Girona, Costa Brava & Priorat",
-      text: "Our 13-night family route: Girona, Camping Palafrugell and Falset, 20 August to 2 September 2026.",
-      url: window.location.href,
+  const showToast = () => {
+    if (!toast) return;
+    toast.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove("show"), 1800);
+  };
+
+  const share = async () => {
+    const data = {
+      title: "Our Catalonia 2026 family itinerary",
+      text: "Girona, Camping Palafrugell and Falset, 20 August to 2 September 2026",
+      url: window.location.origin + window.location.pathname,
     };
 
-    if (navigator.share && window.location.protocol.startsWith("http")) {
-      try {
-        await navigator.share(shareData);
-        return;
-      } catch (error) {
-        if (error?.name === "AbortError") return;
+    try {
+      if (navigator.share) {
+        await navigator.share(data);
+      } else {
+        await navigator.clipboard.writeText(data.url);
+        showToast();
+      }
+    } catch (error) {
+      if (error?.name !== "AbortError") {
+        try {
+          await navigator.clipboard.writeText(data.url);
+          showToast();
+        } catch {
+          return;
+        }
       }
     }
+  };
 
-    try {
-      await navigator.clipboard.writeText(window.location.href);
-    } catch {
-      const input = document.createElement("input");
-      input.value = window.location.href;
-      document.body.appendChild(input);
-      input.select();
-      document.execCommand("copy");
-      input.remove();
-    }
+  shareButtons.forEach((button) => button.addEventListener("click", share));
+  document.querySelector("#print-button")?.addEventListener("click", () => window.print());
 
-    clearTimeout(timer);
-    toast?.classList.add("show");
-    timer = setTimeout(() => toast?.classList.remove("show"), 2200);
-  });
-}
-
-function initPrinting() {
-  const button = document.querySelector("#print-button");
-  let openState = [];
-
-  button?.addEventListener("click", () => {
-    const notes = [...document.querySelectorAll(".practical")];
-    openState = notes.map((item) => item.open);
-    notes.forEach((item) => { item.open = true; });
-    window.print();
-  });
-
-  window.addEventListener("afterprint", () => {
-    document.querySelectorAll(".practical").forEach((item, index) => {
-      item.open = openState[index] || false;
-    });
-  });
-}
-
-function initBackToTop() {
-  const button = document.querySelector("#back-top");
-  const update = () => button?.classList.toggle("visible", window.scrollY > 900);
-  window.addEventListener("scroll", update, { passive: true });
-  button?.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
-  update();
+  const backTop = document.querySelector("#back-top");
+  if (backTop) {
+    const updateBackTop = () => backTop.classList.toggle("show", window.scrollY > window.innerHeight * 1.2);
+    window.addEventListener("scroll", updateBackTop, { passive: true });
+    backTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: reduceMotion.matches ? "auto" : "smooth" }));
+    updateBackTop();
+  }
 }
 
 function initMap() {
@@ -169,403 +191,232 @@ function initMap() {
   const saRiera = { name: "Sa Riera", coords: [41.9701, 3.2107] };
   const falset = { name: "Falset", coords: [41.1458, 0.8193], type: "stay" };
   const siurana = { name: "Siurana", coords: [41.2585, 0.9329] };
-  const dayRoutes = {
-    1: {
-      title: "Arrival in Girona",
-      subtitle: "Thursday 20 August",
-      description: "Barcelona Airport → Girona · about 1 hr 20 to 30 min",
-      stops: [airport, girona],
-    },
-    2: {
-      title: "Girona on foot",
-      subtitle: "Friday 21 August",
-      description: "Onyar → old town → city walls",
-      stops: [girona, oldTown, cityWalls],
-    },
-    3: {
-      title: "Lake Banyoles",
-      subtitle: "Saturday 22 August",
-      description: "Girona → designated lakeside swim · 25 to 30 min",
-      stops: [girona, banyoles],
-    },
-    4: {
-      title: "Move to the coast",
-      subtitle: "Sunday 23 August",
-      description: "Girona → Camping Palafrugell → Calella",
-      stops: [girona, base, calella],
-    },
-    5: {
-      title: "Calella to Llafranc",
-      subtitle: "Monday 24 August",
-      description: "Canadell → family coastal walk → Llafranc",
-      stops: [base, calella, llafranc],
-    },
-    6: {
-      title: "Tamariu cove",
-      subtitle: "Tuesday 25 August",
-      description: "Camping Palafrugell → Tamariu · 15 to 20 min",
-      stops: [base, tamariu],
-    },
-    7: {
-      title: "A local slow day",
-      subtitle: "Wednesday 26 August",
-      description: "Campsite downtime → Palafrugell · 10 min",
-      stops: [base, palafrugell],
-    },
-    8: {
-      title: "Cap Roig & Platja de Castell",
-      subtitle: "Thursday 27 August",
-      description: "Camping Palafrugell → gardens → wild sandy bay",
-      stops: [base, capRoig, castell],
-    },
-    9: {
-      title: "Begur & Aiguablava",
-      subtitle: "Friday 28 August",
-      description: "Camping Palafrugell → Aiguablava → Begur",
-      stops: [base, aiguablava, begur],
-    },
-    10: {
-      title: "Sa Riera beach finale",
-      subtitle: "Saturday 29 August",
-      description: "Camping Palafrugell → Begur's largest cove",
-      stops: [base, saRiera],
-    },
-    11: {
-      title: "The coast to Falset",
-      subtitle: "Sunday 30 August",
-      description: "Camping Palafrugell → Falset · about 2 hr 45 min to 3 hr",
-      stops: [base, falset],
-    },
-    12: {
-      title: "Bigotis Del Gat",
-      subtitle: "Monday 31 August",
-      description: "A family day at Bigotis Del Gat, based in Falset",
-      stops: [falset],
-    },
-    13: {
-      title: "Siurana",
-      subtitle: "Tuesday 1 September",
-      description: "Falset → Siurana · about 35 to 40 min",
-      stops: [falset, siurana],
-    },
-    14: {
-      title: "Flight home",
-      subtitle: "Wednesday 2 September",
-      description: "Falset → BCN → Heathrow · flight 19:30",
-      stops: [falset, airport],
-    },
+
+  const routes = {
+    1: { label: "20 August", title: "Barcelona Airport to Girona", stops: [airport, girona] },
+    2: { label: "21 August", title: "Girona on foot", stops: [girona, oldTown, cityWalls] },
+    3: { label: "22 August", title: "Girona to Lake Banyoles", stops: [girona, banyoles] },
+    4: { label: "23 August", title: "Girona to Camping Palafrugell and Calella", stops: [girona, base, calella] },
+    5: { label: "24 August", title: "Calella and Llafranc", stops: [base, calella, llafranc] },
+    6: { label: "25 August", title: "Tamariu", stops: [base, tamariu] },
+    7: { label: "26 August", title: "Palafrugell slow day", stops: [base, palafrugell] },
+    8: { label: "27 August", title: "Cap Roig and Platja de Castell", stops: [base, capRoig, castell] },
+    9: { label: "28 August", title: "Aiguablava and Begur", stops: [base, aiguablava, begur] },
+    10: { label: "29 August", title: "Sa Riera", stops: [base, saRiera] },
+    11: { label: "30 August", title: "Camping Palafrugell to Falset", stops: [base, falset] },
+    12: { label: "31 August", title: "Bigotis Del Gat", stops: [falset] },
+    13: { label: "1 September", title: "Falset to Siurana", stops: [falset, siurana] },
+    14: { label: "2 September", title: "Falset to Barcelona Airport", stops: [falset, airport] },
   };
 
-  const map = L.map("map", {
-    zoomControl: false,
-    scrollWheelZoom: false,
-    attributionControl: true,
-  }).setView([41.62, 2.05], 8);
-
+  const map = L.map("map", { zoomControl: false, scrollWheelZoom: false, attributionControl: true });
   L.control.zoom({ position: "bottomright" }).addTo(map);
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 18,
     attribution: "&copy; OpenStreetMap contributors",
   }).addTo(map);
 
-  const routeLayer = L.layerGroup().addTo(map);
-  const accentColors = [
-    "#ef725d", "#c87b4f", "#307ba0",
-    "#2b8e92", "#307ba0", "#728b5f", "#b85f6f", "#cd8f26", "#2b8e92", "#d85f3e",
-    "#b37a43", "#728b5f", "#307ba0", "#d85f3e",
-  ];
-  const tabs = [...document.querySelectorAll("[data-map-select]")];
+  const layer = L.layerGroup().addTo(map);
+  const controls = [...document.querySelectorAll("[data-map-select]")];
   const note = document.querySelector("#map-note");
+  const colours = ["#c85f43", "#e1b660", "#2b7274", "#8c6c50"];
 
-  function icon(label, isBase = false) {
-    return L.divIcon({
+  const markerIcon = (label, type) =>
+    L.divIcon({
       className: "",
-      html: `<div class="place-pin${isBase ? " base" : ""}"><span>${label}</span></div>`,
-      iconSize: [34, 34],
-      iconAnchor: [17, 31],
-      popupAnchor: [0, -30],
+      html: `<span class="place-pin ${type === "base" ? "base" : ""}">${label}</span>`,
+      iconSize: [28, 28],
+      iconAnchor: [14, 14],
+      popupAnchor: [0, -16],
     });
-  }
 
-  function addMarker(stop, label) {
-    const isBase = stop.type === "base";
-    L.marker(stop.coords, { icon: icon(isBase ? "⌂" : label, isBase) })
-      .bindPopup(`<strong>${stop.name}</strong><span>${isBase ? "Our home base for seven nights" : "One stop on our route"}</span>`)
-      .addTo(routeLayer);
-  }
+  const addMarker = (stop, label) =>
+    L.marker(stop.coords, { icon: markerIcon(label, stop.type) })
+      .bindPopup(`<strong>${stop.name}</strong>`)
+      .addTo(layer);
 
-  function render(selection) {
-    routeLayer.clearLayers();
+  const render = (selection) => {
+    layer.clearLayers();
+    controls.forEach((button) => button.classList.toggle("active", button.dataset.mapSelect === selection));
     const bounds = [];
-    tabs.forEach((tab) => tab.classList.toggle("active", tab.dataset.mapSelect === selection));
 
     if (selection === "all") {
-      const seen = new Set();
-      Object.entries(dayRoutes).forEach(([day, route], routeIndex) => {
+      Object.entries(routes).forEach(([day, route], index) => {
         const points = route.stops.map((stop) => stop.coords);
         points.forEach((point) => bounds.push(point));
         if (points.length > 1) {
-          L.polyline(points, {
-            color: accentColors[routeIndex],
-            weight: 3,
-            opacity: 0.54,
-            dashArray: routeIndex % 2 ? "7 7" : undefined,
-          }).addTo(routeLayer);
+          L.polyline(points, { color: colours[index % colours.length], weight: 2, opacity: 0.72, dashArray: index > 9 ? "5 7" : null }).addTo(layer);
         }
-        route.stops.forEach((stop) => {
-          const key = stop.coords.join(",");
-          if (seen.has(key)) return;
-          seen.add(key);
+        route.stops.forEach((stop, stopIndex) => {
+          if (stopIndex === 0 && Number(day) > 1 && stop.name !== "Falset") return;
           addMarker(stop, day);
         });
       });
-      note.innerHTML = '<span class="map-note-number">∞</span><div><small>Full-trip view</small><strong>13 nights, three bases</strong><p>Select a day to focus the route.</p></div>';
+      if (note) note.innerHTML = "<span>Full route</span><strong>Barcelona / Girona / Palafrugell / Falset</strong>";
     } else {
-      const route = dayRoutes[selection];
+      const route = routes[selection];
+      if (!route) return;
       const points = route.stops.map((stop) => stop.coords);
       points.forEach((point) => bounds.push(point));
-      if (points.length > 1) {
-        L.polyline(points, { color: accentColors[Number(selection) - 1], weight: 4, opacity: 0.88, dashArray: "9 7" }).addTo(routeLayer);
-      }
-      route.stops.forEach((stop, index) => addMarker(stop, index === 0 ? "⌂" : String(index)));
-      note.innerHTML = `<span class="map-note-number">${selection.padStart(2, "0")}</span><div><small>${route.subtitle}</small><strong>${route.title}</strong><p>${route.description}</p></div>`;
+      if (points.length > 1) L.polyline(points, { color: "#c85f43", weight: 3, opacity: 0.9 }).addTo(layer);
+      route.stops.forEach((stop, index) => addMarker(stop, index + 1));
+      if (note) note.innerHTML = `<span>${route.label}</span><strong>${route.title}</strong>`;
     }
 
-    if (bounds.length) {
-      if (bounds.length === 1) map.setView(bounds[0], 12);
-      else map.fitBounds(bounds, { padding: [55, 55], maxZoom: selection === "all" ? 12 : 14 });
-    }
-  }
+    if (bounds.length === 1) map.setView(bounds[0], 12);
+    if (bounds.length > 1) map.fitBounds(bounds, { padding: [55, 55], maxZoom: selection === "all" ? 9 : 13 });
+  };
 
-  tabs.forEach((tab) => tab.addEventListener("click", () => render(tab.dataset.mapSelect)));
+  controls.forEach((button) => button.addEventListener("click", () => render(button.dataset.mapSelect)));
   render("all");
   setTimeout(() => map.invalidateSize(), 150);
 }
 
-function initCoastScene() {
+function initWaterScene() {
   const canvas = document.querySelector("#coast-canvas");
+  const hero = document.querySelector(".hero");
   const toggle = document.querySelector("#motion-toggle");
-  if (!canvas || !window.THREE) {
-    if (toggle) toggle.hidden = true;
-    return;
-  }
+  if (!canvas || !hero || !window.THREE) return;
 
-  const THREE = window.THREE;
   const scene = new THREE.Scene();
-  scene.fog = new THREE.FogExp2(0x0a5258, 0.042);
+  scene.background = new THREE.Color(0x17484c);
+  scene.fog = new THREE.FogExp2(0x17484c, 0.035);
 
-  const camera = new THREE.PerspectiveCamera(43, 1, 0.1, 100);
-  camera.position.set(2.8, 5.7, 11.8);
-  camera.lookAt(2.5, -0.5, -3.5);
+  const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 70);
+  camera.position.set(0, 4.8, 10.5);
+  camera.lookAt(0, -0.2, -6);
 
-  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: "high-performance" });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.7));
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: "high-performance" });
   renderer.outputEncoding = THREE.sRGBEncoding;
-  renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.1;
 
-  scene.add(new THREE.HemisphereLight(0xbce7de, 0x9f4d33, 2.4));
-  const sunlight = new THREE.DirectionalLight(0xffe7ad, 3.1);
-  sunlight.position.set(-3, 10, 7);
-  scene.add(sunlight);
+  const geometry = new THREE.PlaneGeometry(38, 30, window.innerWidth < 700 ? 80 : 150, window.innerWidth < 700 ? 60 : 110);
+  geometry.rotateX(-Math.PI / 2);
 
-  const waterUniforms = {
-    uTime: { value: 0 },
-    uDeep: { value: new THREE.Color(0x07515c) },
-    uShallow: { value: new THREE.Color(0x26a0a0) },
-  };
+  const material = new THREE.ShaderMaterial({
+    uniforms: {
+      uTime: { value: 0 },
+      uDeep: { value: new THREE.Color(0x0b5960) },
+      uLight: { value: new THREE.Color(0x2d8e91) },
+      uSun: { value: new THREE.Color(0xf3d08a) },
+    },
+    vertexShader: `
+      uniform float uTime;
+      varying float vElevation;
+      varying vec2 vUv;
+      void main() {
+        vec3 p = position;
+        float waveA = sin(p.x * 0.52 + uTime * 0.72) * 0.20;
+        float waveB = sin(p.z * 0.42 - uTime * 0.48) * 0.15;
+        float waveC = sin((p.x + p.z) * 1.18 + uTime * 0.9) * 0.045;
+        p.y += waveA + waveB + waveC;
+        vElevation = p.y;
+        vUv = uv;
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.0);
+      }
+    `,
+    fragmentShader: `
+      uniform float uTime;
+      uniform vec3 uDeep;
+      uniform vec3 uLight;
+      uniform vec3 uSun;
+      varying float vElevation;
+      varying vec2 vUv;
+      float hash(vec2 p) {
+        return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
+      }
+      void main() {
+        float level = smoothstep(-0.35, 0.38, vElevation);
+        vec3 colour = mix(uDeep, uLight, level);
+        float horizon = smoothstep(0.14, 0.82, vUv.y);
+        colour = mix(colour, uLight * 0.68, horizon * 0.32);
+        vec2 cells = floor(vUv * vec2(180.0, 120.0));
+        float star = step(0.987, hash(cells + floor(uTime * 0.7)));
+        float glintPath = 1.0 - smoothstep(0.02, 0.20, abs(vUv.x - 0.72));
+        float glint = star * glintPath * smoothstep(0.18, 0.92, vUv.y);
+        colour = mix(colour, uSun, glint * 0.82);
+        gl_FragColor = vec4(colour, 1.0);
+      }
+    `,
+  });
 
-  const water = new THREE.Mesh(
-    new THREE.PlaneGeometry(34, 26, 100, 80),
-    new THREE.ShaderMaterial({
-      uniforms: waterUniforms,
-      transparent: true,
-      vertexShader: `
-        uniform float uTime;
-        varying float vWave;
-        varying vec2 vUv;
-        void main() {
-          vUv = uv;
-          vec3 p = position;
-          float a = sin(p.x * 0.72 + uTime * 0.8) * 0.17;
-          float b = sin(p.y * 0.85 - uTime * 0.62) * 0.12;
-          float c = sin((p.x + p.y) * 1.35 + uTime * 0.45) * 0.055;
-          p.z += a + b + c;
-          vWave = p.z;
-          gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.0);
-        }
-      `,
-      fragmentShader: `
-        uniform float uTime;
-        uniform vec3 uDeep;
-        uniform vec3 uShallow;
-        varying float vWave;
-        varying vec2 vUv;
-        void main() {
-          float glow = smoothstep(-0.16, 0.28, vWave);
-          vec3 color = mix(uDeep, uShallow, glow + vUv.y * 0.18);
-          float glint = pow(max(0.0, sin(vUv.x * 285.0 + uTime * 2.0) * sin(vUv.y * 175.0 - uTime)), 42.0);
-          color += glint * vec3(1.0, 0.92, 0.65) * 0.8;
-          gl_FragColor = vec4(color, 0.92);
-        }
-      `,
-    }),
-  );
-  water.rotation.x = -Math.PI / 2;
-  water.position.set(2.2, -1.72, -3.7);
+  const water = new THREE.Mesh(geometry, material);
+  water.position.set(3.2, -1.55, -7);
   scene.add(water);
 
-  const sand = new THREE.Mesh(
-    new THREE.PlaneGeometry(14, 5),
-    new THREE.MeshStandardMaterial({ color: 0xe7bb73, roughness: 1 }),
-  );
-  sand.rotation.x = -Math.PI / 2;
-  sand.rotation.z = -0.15;
-  sand.position.set(9.3, -1.57, -4.3);
-  scene.add(sand);
-
-  const coast = new THREE.Group();
-  scene.add(coast);
-
-  const rockMaterials = [
-    new THREE.MeshStandardMaterial({ color: 0xa94f38, roughness: 0.95, flatShading: true }),
-    new THREE.MeshStandardMaterial({ color: 0xcf7351, roughness: 1, flatShading: true }),
-    new THREE.MeshStandardMaterial({ color: 0x91513b, roughness: 0.9, flatShading: true }),
-  ];
-
-  const seeded = mulberry32(2026);
-  for (let i = 0; i < 42; i += 1) {
-    const size = 0.45 + seeded() * 1.35;
-    const rock = new THREE.Mesh(new THREE.IcosahedronGeometry(size, 1), rockMaterials[i % rockMaterials.length]);
-    const edge = i < 30 ? 1 : -1;
-    rock.position.set(
-      edge > 0 ? 7.5 + seeded() * 7.5 : -9.5 + seeded() * 3,
-      -1.35 + seeded() * 1.45,
-      -10 + seeded() * 15,
-    );
-    rock.scale.set(1.25 + seeded(), 0.8 + seeded() * 1.4, 0.9 + seeded() * 0.9);
-    rock.rotation.set(seeded() * 2, seeded() * 3, seeded() * 2);
-    coast.add(rock);
-  }
-
-  const trunkMaterial = new THREE.MeshStandardMaterial({ color: 0x5e3928, roughness: 1 });
-  const pineMaterial = new THREE.MeshStandardMaterial({ color: 0x1d5d45, roughness: 0.95, flatShading: true });
-  for (let i = 0; i < 18; i += 1) {
-    const tree = new THREE.Group();
-    const trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.045, 0.08, 0.85, 6), trunkMaterial);
-    const crown = new THREE.Mesh(new THREE.ConeGeometry(0.38 + seeded() * 0.18, 0.82, 7), pineMaterial);
-    crown.position.y = 0.66;
-    tree.add(trunk, crown);
-    tree.position.set(7.2 + seeded() * 7.3, -0.35 + seeded() * 0.75, -8.5 + seeded() * 11.5);
-    tree.rotation.z = (seeded() - 0.5) * 0.15;
-    tree.scale.setScalar(0.8 + seeded() * 0.9);
-    coast.add(tree);
-  }
-
-  const lighthouse = new THREE.Group();
-  const white = new THREE.MeshStandardMaterial({ color: 0xf8e9cf, roughness: 0.72 });
-  const red = new THREE.MeshStandardMaterial({ color: 0xd3553e, roughness: 0.75 });
-  const tower = new THREE.Mesh(new THREE.CylinderGeometry(0.22, 0.32, 1.7, 12), white);
-  const cap = new THREE.Mesh(new THREE.CylinderGeometry(0.31, 0.31, 0.22, 12), red);
-  cap.position.y = 0.95;
-  const lamp = new THREE.PointLight(0xffd875, 4, 6);
-  lamp.position.y = 1.16;
-  lighthouse.add(tower, cap, lamp);
-  lighthouse.position.set(10.6, 0.25, -7.7);
-  lighthouse.scale.setScalar(0.88);
-  scene.add(lighthouse);
-
-  const boat = new THREE.Group();
-  const hull = new THREE.Mesh(new THREE.SphereGeometry(0.45, 16, 8), new THREE.MeshStandardMaterial({ color: 0xf4dfb5, roughness: 0.65 }));
-  hull.scale.set(1.7, 0.33, 0.5);
-  hull.position.y = -0.06;
-  const mast = new THREE.Mesh(new THREE.CylinderGeometry(0.018, 0.018, 1.7, 8), trunkMaterial);
-  mast.position.y = 0.68;
-  const sailGeometry = new THREE.BufferGeometry();
-  sailGeometry.setAttribute("position", new THREE.BufferAttribute(new Float32Array([0, 0, 0, 0, 1.35, 0, 0.95, 0, 0]), 3));
-  sailGeometry.computeVertexNormals();
-  const sail = new THREE.Mesh(sailGeometry, new THREE.MeshStandardMaterial({ color: 0xef725d, side: THREE.DoubleSide, roughness: 0.7 }));
-  sail.position.set(0.04, 0.12, 0);
-  boat.add(hull, mast, sail);
-  boat.position.set(3.6, -1.2, -2.2);
-  boat.rotation.y = -0.42;
-  scene.add(boat);
-
-  const sun = new THREE.Mesh(
-    new THREE.SphereGeometry(1.1, 24, 24),
-    new THREE.MeshBasicMaterial({ color: 0xf3c457 }),
-  );
-  sun.position.set(8.5, 6.3, -15);
+  const sunMaterial = new THREE.MeshBasicMaterial({ color: 0xe7b765, fog: false });
+  const sun = new THREE.Mesh(new THREE.CircleGeometry(1.35, 72), sunMaterial);
+  sun.position.set(6.8, 2.7, -11);
   scene.add(sun);
 
-  const sparkleGeometry = new THREE.BufferGeometry();
-  const sparklePositions = [];
-  for (let i = 0; i < 230; i += 1) {
-    sparklePositions.push(-7 + seeded() * 21, -1.4 + seeded() * 0.32, -9 + seeded() * 15);
-  }
-  sparkleGeometry.setAttribute("position", new THREE.Float32BufferAttribute(sparklePositions, 3));
-  const sparkles = new THREE.Points(
-    sparkleGeometry,
-    new THREE.PointsMaterial({ color: 0xffe5a6, size: 0.04, transparent: true, opacity: 0.58, sizeAttenuation: true }),
-  );
-  scene.add(sparkles);
+  const mastMaterial = new THREE.MeshBasicMaterial({ color: 0xf8f1df });
+  const sailShape = new THREE.Shape();
+  sailShape.moveTo(0, 0);
+  sailShape.lineTo(0.12, 1.55);
+  sailShape.lineTo(1.0, 0.2);
+  sailShape.lineTo(0, 0);
+  const sail = new THREE.Mesh(new THREE.ShapeGeometry(sailShape), mastMaterial);
+  sail.position.set(4.7, -0.36, -4.8);
+  sail.rotation.y = -0.22;
+  scene.add(sail);
 
+  const mast = new THREE.Mesh(new THREE.CylinderGeometry(0.018, 0.018, 1.8, 8), mastMaterial);
+  mast.position.set(4.7, 0.42, -4.8);
+  scene.add(mast);
+
+  let paused = false;
   let pointerX = 0;
   let pointerY = 0;
-  let paused = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  let lastTime = performance.now();
-  let elapsed = 0;
+  const clock = new THREE.Clock();
 
-  if (toggle) {
-    toggle.setAttribute("aria-pressed", String(paused));
-    toggle.lastChild.textContent = paused ? "Play the tide" : "Pause the tide";
-    toggle.addEventListener("click", () => {
-      paused = !paused;
-      toggle.setAttribute("aria-pressed", String(paused));
-      toggle.lastChild.textContent = paused ? "Play the tide" : "Pause the tide";
-      lastTime = performance.now();
-    });
-  }
-
-  window.addEventListener("pointermove", (event) => {
-    pointerX = (event.clientX / window.innerWidth - 0.5) * 2;
-    pointerY = (event.clientY / window.innerHeight - 0.5) * 2;
-  }, { passive: true });
-
-  function resize() {
-    const width = canvas.clientWidth;
-    const height = canvas.clientHeight;
-    if (!width || !height) return;
+  const resize = () => {
+    const width = hero.clientWidth;
+    const height = hero.clientHeight;
     renderer.setSize(width, height, false);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, window.innerWidth < 700 ? 1.35 : 1.75));
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
-  }
-
-  function render(now) {
-    const delta = Math.min((now - lastTime) / 1000, 0.05);
-    lastTime = now;
-    if (!paused) elapsed += delta;
-    waterUniforms.uTime.value = elapsed;
-    boat.position.y = -1.22 + Math.sin(elapsed * 1.35) * 0.075;
-    boat.rotation.z = Math.sin(elapsed * 0.8) * 0.035;
-    sparkles.material.opacity = 0.48 + Math.sin(elapsed * 1.3) * 0.14;
-    camera.position.x += ((2.8 + pointerX * 0.23) - camera.position.x) * 0.025;
-    camera.position.y += ((5.7 - pointerY * 0.13) - camera.position.y) * 0.025;
-    camera.lookAt(2.5, -0.5, -3.5);
-    renderer.render(scene, camera);
-    requestAnimationFrame(render);
-  }
-
-  resize();
-  window.addEventListener("resize", resize, { passive: true });
-  requestAnimationFrame(render);
-}
-
-function mulberry32(seed) {
-  return function random() {
-    let t = (seed += 0x6d2b79f5);
-    t = Math.imul(t ^ (t >>> 15), t | 1);
-    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
   };
+
+  hero.addEventListener("pointermove", (event) => {
+    const rect = hero.getBoundingClientRect();
+    pointerX = ((event.clientX - rect.left) / rect.width - 0.5) * 2;
+    pointerY = ((event.clientY - rect.top) / rect.height - 0.5) * 2;
+  });
+
+  hero.addEventListener("pointerleave", () => {
+    pointerX = 0;
+    pointerY = 0;
+  });
+
+  toggle?.addEventListener("click", () => {
+    paused = !paused;
+    toggle.setAttribute("aria-pressed", String(paused));
+    toggle.lastChild.textContent = paused ? " Play water" : " Pause water";
+  });
+
+  const draw = () => {
+    const elapsed = clock.getElapsedTime();
+    if (!paused && !reduceMotion.matches) material.uniforms.uTime.value = elapsed;
+    camera.position.x += (pointerX * 0.45 - camera.position.x) * 0.025;
+    camera.position.y += (4.8 - pointerY * 0.15 - camera.position.y) * 0.025;
+    camera.lookAt(0, -0.25, -6);
+    sun.quaternion.copy(camera.quaternion);
+    sail.position.y = -0.36 + Math.sin(elapsed * 0.72) * 0.045;
+    mast.position.y = 0.42 + Math.sin(elapsed * 0.72) * 0.045;
+    renderer.render(scene, camera);
+    requestAnimationFrame(draw);
+  };
+
+  window.addEventListener("resize", resize, { passive: true });
+  resize();
+  draw();
 }
+
+initReveal();
+initDateRail();
+initFieldNotes();
+initBeachIndex();
+initPacking();
+initShareAndUtilities();
+initMap();
+initWaterScene();

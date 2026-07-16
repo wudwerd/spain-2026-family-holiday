@@ -3,12 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Our 13-night family route through Girona, Camping Palafrugell and Falset in Priorat, 20 August to 2 September 2026." />
-    <meta name="theme-color" content="#073f43" />
-    <title>Our Spain ’26: Girona, Costa Brava & Priorat</title>
+    <meta name="description" content="Our family route through Girona, Camping Palafrugell and Falset, 20 August to 2 September 2026." />
+    <meta name="theme-color" content="#173a3b" />
+    <title>Catalonia 2026 | Our family itinerary</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="styles.css" />
   </head>
@@ -17,450 +17,468 @@
 
     <header class="hero" id="top">
       <canvas id="coast-canvas" aria-hidden="true"></canvas>
-      <div class="hero-grain" aria-hidden="true"></div>
-      <nav class="hero-nav wrap" aria-label="Primary navigation">
-        <a class="wordmark" href="#top" aria-label="Spain holiday home"><span class="sun-mark" aria-hidden="true"></span><span>SPAIN <em>’26</em></span></a>
-        <div class="hero-nav-actions">
-          <button class="round-button" id="share-button" type="button" aria-label="Share this holiday plan"><i data-lucide="share-2" aria-hidden="true"></i></button>
-          <a class="nav-pill" href="#trip-map"><i data-lucide="map" aria-hidden="true"></i> Map</a>
+      <div class="hero-shade" aria-hidden="true"></div>
+
+      <nav class="top-nav shell" aria-label="Primary navigation">
+        <a class="monogram" href="#top" aria-label="Back to the top">C / E</a>
+        <p>Family notes, Catalonia 2026</p>
+        <div class="top-actions">
+          <a href="#itinerary">Itinerary</a>
+          <a href="#trip-map">Map</a>
+          <button id="share-button" type="button">Share</button>
         </div>
       </nav>
 
-      <div class="hero-content wrap">
-        <div class="hero-copy">
-          <p class="eyebrow light"><span></span> Girona · Costa Brava · Priorat</p>
-          <h1>Fourteen days.<br /><em>Three chapters.</em></h1>
-          <p class="hero-intro">Three nights in Girona, seven at Camping Palafrugell, then three in Falset with family at Bigotis Del Gat, all wrapped around the Mediterranean.</p>
-          <div class="hero-cta-row">
-            <a class="button button-coral" href="#itinerary">Explore day by day <i data-lucide="arrow-down" aria-hidden="true"></i></a>
-            <button class="sound-button" id="motion-toggle" type="button" aria-pressed="false"><span class="motion-bars" aria-hidden="true"><i></i><i></i><i></i></span>Pause the tide</button>
-          </div>
-        </div>
-        <div class="hero-stamp" aria-hidden="true">
-          <span>20 AUG</span>
-          <svg viewBox="0 0 100 100"><defs><path id="stamp-path" d="M 50,50 m -37,0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" /></defs><text><textPath href="#stamp-path">FAMILY EDITION · CATALONIA · </textPath></text></svg>
-          <small>02 SEP</small>
-        </div>
+      <div class="hero-copy shell">
+        <p class="hero-overline">Girona / Costa Brava / Priorat</p>
+        <h1>Girona.<br />Palafrugell.<br /><em>Falset.</em></h1>
+        <p class="hero-deck">A fourteen-day family route from city streets to the Mediterranean, ending with Estelle’s family at Bigotis Del Gat.</p>
       </div>
 
-      <div class="hero-facts wrap" aria-label="Trip summary">
-        <div><span>Full dates</span><strong>20 August to 2 September 2026</strong></div>
-        <div><span>Thirteen nights</span><strong>Girona 3 · coast 7 · Falset 3</strong></div>
-        <div><span>Our crew</span><strong>2 adults · 8 children</strong></div>
+      <div class="hero-ledger shell" aria-label="Trip facts">
+        <div><span>Dates</span><strong>20 August to 2 September 2026</strong></div>
+        <div><span>Stays</span><strong>3 Girona / 7 coast / 3 Falset</strong></div>
+        <div><span>Travellers</span><strong>4 families / 2 adults / 8 children</strong></div>
+        <button id="motion-toggle" type="button" aria-pressed="false"><span></span> Pause water</button>
       </div>
-      <div class="scroll-cue" aria-hidden="true"><span></span> Scroll to shore</div>
     </header>
 
-    <nav class="day-dock" aria-label="Jump to a day">
-      <div class="day-dock-inner wrap">
-        <a class="dock-home" href="#top" aria-label="Back to top"><span class="sun-mark"></span></a>
-        <div class="day-links">
-          <a href="#day-1" data-day="1"><small>Thu</small><strong>20</strong><span>Girona</span></a>
-          <a href="#day-2" data-day="2"><small>Fri</small><strong>21</strong><span>Girona</span></a>
-          <a href="#day-3" data-day="3"><small>Sat</small><strong>22</strong><span>Banyoles</span></a>
-          <a href="#day-4" data-day="4"><small>Sun</small><strong>23</strong><span>Camp</span></a>
-          <a href="#day-5" data-day="5"><small>Mon</small><strong>24</strong><span>Llafranc</span></a>
-          <a href="#day-6" data-day="6"><small>Tue</small><strong>25</strong><span>Tamariu</span></a>
-          <a href="#day-7" data-day="7"><small>Wed</small><strong>26</strong><span>Slow</span></a>
-          <a href="#day-8" data-day="8"><small>Thu</small><strong>27</strong><span>Cap Roig</span></a>
-          <a href="#day-9" data-day="9"><small>Fri</small><strong>28</strong><span>Begur</span></a>
-          <a href="#day-10" data-day="10"><small>Sat</small><strong>29</strong><span>Sa Riera</span></a>
-          <a href="#day-11" data-day="11"><small>Sun</small><strong>30</strong><span>Falset</span></a>
-          <a href="#day-12" data-day="12"><small>Mon</small><strong>31</strong><span>Vines</span></a>
-          <a href="#day-13" data-day="13"><small>Tue</small><strong>01</strong><span>Siurana</span></a>
-          <a href="#day-14" data-day="14"><small>Wed</small><strong>02</strong><span>Home</span></a>
+    <nav class="date-rail" aria-label="Jump to a day">
+      <div class="date-rail-inner shell">
+        <a class="date-home" href="#top"><span>20.08</span><small>Start</small></a>
+        <div class="date-links">
+          <a href="#day-1" data-day="1"><span>20</span><small>Girona</small></a>
+          <a href="#day-2" data-day="2"><span>21</span><small>Girona</small></a>
+          <a href="#day-3" data-day="3"><span>22</span><small>Banyoles</small></a>
+          <a href="#day-4" data-day="4"><span>23</span><small>Camp</small></a>
+          <a href="#day-5" data-day="5"><span>24</span><small>Llafranc</small></a>
+          <a href="#day-6" data-day="6"><span>25</span><small>Tamariu</small></a>
+          <a href="#day-7" data-day="7"><span>26</span><small>Rest</small></a>
+          <a href="#day-8" data-day="8"><span>27</span><small>Castell</small></a>
+          <a href="#day-9" data-day="9"><span>28</span><small>Begur</small></a>
+          <a href="#day-10" data-day="10"><span>29</span><small>Sa Riera</small></a>
+          <a href="#day-11" data-day="11"><span>30</span><small>Falset</small></a>
+          <a href="#day-12" data-day="12"><span>31</span><small>Vines</small></a>
+          <a href="#day-13" data-day="13"><span>01</span><small>Siurana</small></a>
+          <a href="#day-14" data-day="14"><span>02</span><small>Home</small></a>
         </div>
-        <button class="print-button" id="print-button" type="button"><i data-lucide="printer" aria-hidden="true"></i><span>Print</span></button>
+        <button class="print-link" id="print-button" type="button">Print</button>
       </div>
     </nav>
 
     <main>
-      <section class="intro-section section wrap" aria-labelledby="intro-title">
-        <div class="intro-heading"><p class="eyebrow"><span></span> Our holiday rhythm</p><h2 id="intro-title">A grand little tour.<br /><em>Plenty of pauses.</em></h2></div>
-        <div class="intro-copy">
-          <p class="lead">City walls and a lake first. Seven easy coastal days in the middle. Then family time among Priorat’s vines before the flight home.</p>
-          <div class="rhythm-list">
-            <div><span class="rhythm-icon"><i data-lucide="building-2"></i></span><strong>3 Girona nights</strong><small>Old town, walls and Banyoles</small></div>
-            <div><span class="rhythm-icon"><i data-lucide="waves"></i></span><strong>7 campsite nights</strong><small>Swims, snorkels and downtime</small></div>
-            <div><span class="rhythm-icon"><i data-lucide="grape"></i></span><strong>3 Falset nights</strong><small>Family, vines and Priorat</small></div>
-          </div>
+      <section class="foreword shell reveal" aria-labelledby="foreword-title">
+        <div class="route-summary" aria-label="Three trip stages">
+          <div><span>01</span><p><strong>Girona</strong><small>20 to 22 August / 3 nights</small></p></div>
+          <div><span>02</span><p><strong>Camping Palafrugell</strong><small>23 to 29 August / 7 nights</small></p></div>
+          <div><span>03</span><p><strong>Falset</strong><small>30 August to 2 September / 3 nights</small></p></div>
+        </div>
+        <div class="foreword-copy">
+          <p class="section-label">The shape of the trip</p>
+          <h2 id="foreword-title">Fourteen days, arranged around the water.</h2>
+          <p>Girona first, while everyone still has city legs. A full week at Camping Palafrugell for beaches and unplanned afternoons. Then Falset, family and the vineyard before the flight home.</p>
+          <p class="quiet-note">This is a framework, not a timetable. On the coast, calm water and rested children take priority over the planned order.</p>
         </div>
       </section>
 
-      <section class="itinerary-section" id="itinerary" aria-label="Fourteen-day Spain itinerary">
-        <div class="section-heading wrap"><p class="eyebrow"><span></span> The full daily plan</p><p>Every day has a gentle main idea, somewhere easy to eat and enough slack for a group of ten.</p></div>
+      <figure class="coast-plate reveal">
+        <img src="assets/images/calella.jpg" alt="White houses and clear water at Calella de Palafrugell" />
+        <figcaption><span>Calella de Palafrugell</span><small>Our first swim after checking in at Camping Palafrugell</small></figcaption>
+      </figure>
 
-        <div class="chapter-break wrap chapter-girona"><div><small>Chapter one · 3 nights</small><strong>Girona</strong></div><p>Colourful riverside streets, medieval walls and one lake-swim day.</p></div>
+      <section class="itinerary" id="itinerary" aria-label="Fourteen-day itinerary">
+        <header class="itinerary-intro shell reveal">
+          <p class="section-label">Day by day</p>
+          <h2>The working plan</h2>
+          <p>Times are deliberately loose. Each day includes the meal plan, travel, parking and the part most likely to need booking.</p>
+        </header>
 
-        <article class="day-card is-coral" id="day-1" data-map-day="1">
-          <div class="day-photo"><img src="assets/images/girona.jpg" alt="Colourful houses reflected in the River Onyar in Girona" /><div class="photo-label"><i data-lucide="plane"></i> Heathrow → Barcelona → Girona</div><span class="photo-number">01</span></div>
-          <div class="day-content">
-            <header class="day-header"><div><p class="day-kicker">Thursday 20 August 2026 · arrival day</p><h3>Touch down,<br /><em>slowly.</em></h3></div><div class="weather-orb"><i data-lucide="plane"></i><span>Travel day</span></div></header>
-            <p class="day-lede">The first night is about one thing: getting everyone from Heathrow to Girona fed, settled and ready for a proper start tomorrow.</p>
-            <div class="day-schedule">
-              <div><time>12:30</time><span><strong>Lunch & lounge · Heathrow</strong>After security, the two Platinum Amex cardholders can use eligible lounge access before boarding. Check the selected lounge's guest and child rules.</span></div>
-              <div><time>15:15</time><span><strong>British Airways LHR → BCN</strong>Direct flight, 2 hr 20 min; scheduled arrival 18:35 local time.</span></div>
-              <div><time>18:35</time><span><strong>Car pickup & transfer</strong>Allow about 1 hr 20 to 30 min from Barcelona Airport to Girona, plus the car handover.</span></div>
-              <div><time>21:15</time><span><strong>Dinner · Girona</strong>Keep it simple near the stay: pizza, tapas or takeaway rather than a long first-night booking.</span></div>
+        <section class="chapter" aria-labelledby="girona-title">
+          <header class="chapter-heading shell reveal">
+            <p class="chapter-index">I</p>
+            <div><p class="section-label">20 to 22 August / 3 nights</p><h2 id="girona-title">Girona</h2></div>
+            <p>A compact city stay with one proper swim day before moving to the coast.</p>
+          </header>
+
+          <article class="day-entry shell reveal" id="day-1" data-map-day="1">
+            <div class="day-date"><span>Thursday</span><strong>20</strong><small>August</small></div>
+            <div class="day-copy">
+              <p class="day-place">London / Barcelona / Girona</p>
+              <h3>London to Girona</h3>
+              <p class="day-summary">Keep the first evening functional: land, collect the car, feed everyone and settle in.</p>
+              <ol class="agenda">
+                <li><time>12:30</time><div><strong>Heathrow lounge</strong><p>Use the two Platinum Amex cards after security. Check the chosen lounge’s guest and child rules before travel.</p></div></li>
+                <li><time>15:15</time><div><strong>British Airways to Barcelona</strong><p>Direct flight, 2 hr 20 min. Scheduled arrival at 18:35 local time.</p></div></li>
+                <li><time>18:35</time><div><strong>Car and Girona transfer</strong><p>Allow 1 hr 20 to 30 min for the drive after the car handover.</p></div></li>
+                <li><time>21:15</time><div><strong>Dinner near the stay</strong><p>Pizza, tapas or takeaway. Do not build the first night around a long booking.</p></div></li>
+              </ol>
+              <details class="field-notes"><summary>Parking, packing and booking</summary><div><p><b>Parking</b>Pre-arrange parking outside the pedestrian old quarter.</p><p><b>Pack</b>Medicines, sleepwear and children’s car snacks stay accessible.</p><p><b>Book</b>Confirm late check-in, car seats and Amex lounge eligibility.</p></div></details>
             </div>
-            <div class="day-meta"><span><i data-lucide="plane"></i> BA direct</span><span><i data-lucide="credit-card"></i> 2 Platinum cards</span><span><i data-lucide="car-front"></i> 1 hr 20 to 30</span><span><i data-lucide="moon-star"></i> Girona night 1/3</span></div>
-            <details class="practical"><summary><span><i data-lucide="backpack"></i> Practical notes</span><i data-lucide="plus"></i></summary><div class="practical-grid"><p><strong>Parking</strong>Pre-arrange a space outside Girona’s pedestrian old quarter or use the stay’s recommended car park.</p><p><strong>Lounge plan</strong>Check the Amex lounge finder, opening hours, guest allowance and child policy. Plan an adult handover if the whole group cannot enter together.</p><p><strong>Pack / book</strong>Cabin-bag snacks, medicines and sleepwear. Confirm late check-in and the hire-car child-seat plan.</p></div></details>
-          </div>
-        </article>
+            <figure class="day-image"><img src="assets/images/girona.jpg" alt="Colourful houses reflected in the River Onyar in Girona" /><figcaption>Girona / night 1 of 3</figcaption></figure>
+          </article>
 
-        <article class="day-card is-gold reverse" id="day-2" data-map-day="2">
-          <div class="day-photo"><img src="assets/images/girona-walls.jpg" alt="Girona city walls overlooking the cathedral and old town" loading="lazy" /><div class="photo-label"><i data-lucide="map-pin"></i> Girona old town</div><span class="photo-number">02</span></div>
-          <div class="day-content">
-            <header class="day-header"><div><p class="day-kicker">Friday 21 August 2026 · Girona</p><h3>Walls, bridges<br /><em>& gelato.</em></h3></div><div class="weather-orb"><i data-lucide="footprints"></i><span>City walk</span></div></header>
-            <p class="day-lede">A choose-your-own Girona loop: the Onyar bridges, Jewish Quarter lanes and as much of the old walls as the youngest legs want.</p>
-            <div class="day-schedule">
-              <div><time>09:00</time><span><strong>Onyar & old town</strong>Cross the riverside bridges, then wander the narrow lanes before the midday heat.</span></div>
-              <div><time>12:30</time><span><strong>Lunch · Plaça de la Independència</strong>Choose a shaded terrace or assemble a market picnic for maximum flexibility.</span></div>
-              <div><time>15:00</time><span><strong>Reset</strong>Return for a rest, pool or quiet hour; regroup for the city walls after 17:00.</span></div>
-              <div><time>19:30</time><span><strong>Dinner · old town</strong>Book a family-friendly terrace, then finish with a short golden-hour river walk.</span></div>
+          <article class="day-entry shell photo-left reveal" id="day-2" data-map-day="2">
+            <div class="day-date"><span>Friday</span><strong>21</strong><small>August</small></div>
+            <div class="day-copy">
+              <p class="day-place">Girona old town</p>
+              <h3>Old walls and the Onyar</h3>
+              <p class="day-summary">A city loop that can be shortened without spoiling it: bridges, the Jewish Quarter and one section of the walls.</p>
+              <ol class="agenda">
+                <li><time>09:00</time><div><strong>Onyar and old town</strong><p>Cross the river bridges and take the narrow lanes before the heat builds.</p></div></li>
+                <li><time>12:30</time><div><strong>Lunch</strong><p>Choose a shaded terrace around Plaça de la Independència or assemble a market picnic.</p></div></li>
+                <li><time>15:00</time><div><strong>Return and rest</strong><p>Pool or quiet time, then a short wall section after 17:00 if everyone wants it.</p></div></li>
+                <li><time>19:30</time><div><strong>Dinner in the old town</strong><p>Reserve one family-friendly terrace for ten, followed by gelato near the river.</p></div></li>
+              </ol>
+              <details class="field-notes"><summary>Walking and practical notes</summary><div><p><b>Walking</b>Expect cobbles and steps. Aim for 2 to 4 km, not the entire wall circuit.</p><p><b>Parking</b>Leave the car where it is.</p><p><b>Pack</b>Hats, water and shoes with grip.</p></div></details>
             </div>
-            <div class="day-meta"><span><i data-lucide="footprints"></i> 2 to 4 km</span><span><i data-lucide="chevrons-up"></i> Steps optional</span><span><i data-lucide="moon-star"></i> Girona night 2/3</span></div>
-            <details class="practical"><summary><span><i data-lucide="backpack"></i> Practical notes</span><i data-lucide="plus"></i></summary><div class="practical-grid"><p><strong>Parking</strong>Leave the car parked. Girona’s centre works best on foot.</p><p><strong>Walking</strong>Moderate cobbles and steps; do a short wall section and turn back whenever needed.</p><p><strong>Pack / book</strong>Hats, water and grippy shoes. Reserve dinner for ten; cathedral entry can stay optional.</p></div></details>
-          </div>
-        </article>
+            <figure class="day-image portrait"><img src="assets/images/girona-walls.jpg" alt="Girona city walls overlooking the cathedral and old town" loading="lazy" /><figcaption>Girona walls / steps optional</figcaption></figure>
+          </article>
 
-        <article class="day-card is-blue" id="day-3" data-map-day="3">
-          <div class="day-photo"><img src="assets/images/banyoles.jpg" alt="Lake Banyoles with calm blue water and ducks" loading="lazy" /><div class="photo-label"><i data-lucide="waves"></i> Lake Banyoles</div><span class="photo-number">03</span></div>
-          <div class="day-content">
-            <header class="day-header"><div><p class="day-kicker">Saturday 22 August 2026 · Banyoles</p><h3>A freshwater<br /><em>interlude.</em></h3></div><div class="weather-orb"><i data-lucide="waves"></i><span>Lake day</span></div></header>
-            <p class="day-lede">A gentle day-trip from Girona for waterside wandering and a supervised swim only in one of Banyoles’ designated bathing areas.</p>
-            <div class="day-schedule">
-              <div><time>09:00</time><span><strong>Drive to Banyoles</strong>About 25 to 30 min each way; arrive early and choose the legal swimming area first.</span></div>
-              <div><time>10:00</time><span><strong>Lake time</strong>Swim, hire a boat if available, or do a short out-and-back section of the flat lakeside path.</span></div>
-              <div><time>13:00</time><span><strong>Lunch · lakeside picnic</strong>Bring a big picnic or choose a shaded café near the eastern shore.</span></div>
-              <div><time>18:30</time><span><strong>Dinner · Girona</strong>Return for downtime, then an early supper and a relaxed final Girona evening.</span></div>
+          <article class="day-entry shell reveal" id="day-3" data-map-day="3">
+            <div class="day-date"><span>Saturday</span><strong>22</strong><small>August</small></div>
+            <div class="day-copy">
+              <p class="day-place">Lake Banyoles</p>
+              <h3>Fresh water outside the city</h3>
+              <p class="day-summary">A 25 to 30 minute drive for a designated lake swim and a short, flat section of the shore path.</p>
+              <ol class="agenda">
+                <li><time>09:00</time><div><strong>Drive to Banyoles</strong><p>Park near the eastern shore and identify the legal bathing area before settling.</p></div></li>
+                <li><time>10:00</time><div><strong>Lake swim</strong><p>Swim only in a designated area. A short boat hire can replace the walk if available.</p></div></li>
+                <li><time>13:00</time><div><strong>Lunch by the lake</strong><p>Bring a substantial picnic or use a café near the eastern shore.</p></div></li>
+                <li><time>18:30</time><div><strong>Dinner in Girona</strong><p>Return early enough for downtime and an uncomplicated final city supper.</p></div></li>
+              </ol>
+              <details class="field-notes"><summary>Swimming and practical notes</summary><div><p><b>Swimming</b>Use approved zones only and check access on the day.</p><p><b>Walking</b>The full circuit is about 8 km. Do a family-sized section.</p><p><b>Pack</b>Towels, shade, swim kit and picnic.</p></div></details>
             </div>
-            <div class="day-meta"><span><i data-lucide="car-front"></i> 25 to 30 min</span><span><i data-lucide="waves"></i> Designated swim only</span><span><i data-lucide="moon-star"></i> Girona night 3/3</span></div>
-            <details class="practical"><summary><span><i data-lucide="backpack"></i> Practical notes</span><i data-lucide="plus"></i></summary><div class="practical-grid"><p><strong>Parking</strong>Use signed public parking near the lake and avoid blocking residents or cycling paths.</p><p><strong>Walking</strong>Easy and mostly flat; the full lake circuit is about 8 km, so choose only a family-sized section.</p><p><strong>Pack / book</strong>Swim kit, towels, shade and picnic. Check the approved swim zones and any paid access before leaving.</p></div></details>
-          </div>
-        </article>
+            <figure class="day-image landscape"><img src="assets/images/banyoles.jpg" alt="Calm blue water at Lake Banyoles" loading="lazy" /><figcaption>Banyoles / 25 to 30 min from Girona</figcaption></figure>
+          </article>
 
-        <aside class="swim-upgrade wrap" id="girona-swim" aria-labelledby="swim-upgrade-title">
-          <div class="swim-art" aria-hidden="true">
-            <span class="thermal-ring ring-one"></span>
-            <span class="thermal-ring ring-two"></span>
-            <span class="thermal-ring ring-three"></span>
-            <div class="swim-monogram"><i data-lucide="sparkles"></i><strong>M</strong><small>Magma</small></div>
-          </div>
-          <div class="swim-copy">
-            <p class="eyebrow light"><span></span> Our bougie Girona swim pick</p>
-            <h3 id="swim-upgrade-title">Bubbles for<br /><em>everyone.</em></h3>
-            <p class="swim-intro"><strong>Magma Thermal Leisure Centre</strong> in Santa Coloma de Farners is the polished family option, about 30 minutes from Girona. Think indoor and outdoor thermal pools, hydro-massage jets, a counter-current river and a proper children’s water area.</p>
-            <div class="swim-badges">
-              <span><i data-lucide="baby"></i> Children welcome</span>
-              <span><i data-lucide="calendar-check"></i> Book online</span>
-              <span><i data-lucide="clock-3"></i> 2 or 3 hour session</span>
-            </div>
-            <div class="swim-rules">
-              <div><i data-lucide="waves"></i><p><strong>Use it your way</strong>Swap it for Banyoles on day 3, or keep it as the smart heat, wind or rain plan.</p></div>
-              <div><i data-lucide="shield-check"></i><p><strong>Kid rules</strong>Under 16s need adult supervision. Children aged 5 and under need armbands or a swim bubble in the main pools.</p></div>
-              <div><i data-lucide="camera-off"></i><p><strong>For all ten</strong>Reserve everyone together, arrive swim-ready and leave phones or cameras away inside the facilities.</p></div>
-            </div>
-            <a class="swim-link" href="https://www.magma-cat.com/en/faqs/" target="_blank" rel="noreferrer">Check family rules and book <i data-lucide="arrow-up-right"></i></a>
-          </div>
-        </aside>
-
-        <div class="chapter-break wrap chapter-coast"><div><small>Chapter two · 7 nights</small><strong>Camping Palafrugell</strong></div><p>One home base, six coves and permission to do absolutely nothing.</p></div>
-
-        <article class="day-card is-aqua reverse" id="day-4" data-map-day="4">
-          <div class="day-photo"><img src="assets/images/calella.jpg" alt="Calella de Palafrugell’s white houses beside a bright blue bay" loading="lazy" /><div class="photo-label"><i data-lucide="tent-tree"></i> Girona → Camping Palafrugell</div><span class="photo-number">04</span></div>
-          <div class="day-content">
-            <header class="day-header"><div><p class="day-kicker">Sunday 23 August 2026 · Calella de Palafrugell</p><h3>Settle into<br /><em>the coast.</em></h3></div><div class="weather-orb"><i data-lucide="tent-tree"></i><span>Check-in</span></div></header>
-            <p class="day-lede">Move to Camping Palafrugell, unpack once and celebrate the main stay with a first saltwater swim at Calella.</p>
-            <div class="day-schedule">
-              <div><time>10:30</time><span><strong>Girona → campsite</strong>Allow about 50 to 60 min, then check in, make beds and establish the shared snack shelf.</span></div>
-              <div><time>13:00</time><span><strong>Lunch · campsite picnic</strong>Bread, fruit, cheese and easy cold food while everyone gets oriented.</span></div>
-              <div><time>16:00</time><span><strong>Calella first swim</strong>Choose Port Bo or Canadell for paddling, rock-pooling and a low-pressure beach afternoon.</span></div>
-              <div><time>19:30</time><span><strong>Dinner · campsite</strong>Barbecue or simple pasta, followed by a walk for ice cream if energy survives.</span></div>
-            </div>
-            <div class="day-meta"><span><i data-lucide="car-front"></i> 50 to 60 min</span><span><i data-lucide="waves"></i> Easy first swim</span><span><i data-lucide="moon-star"></i> Camp night 1/7</span></div>
-            <details class="practical"><summary><span><i data-lucide="backpack"></i> Practical notes</span><i data-lucide="plus"></i></summary><div class="practical-grid"><p><strong>Parking</strong>Unload at Camping Palafrugell, then walk or use signed village parking rather than chasing seafront spaces.</p><p><strong>Walking</strong>Easy village paths with some slopes and steps to the beach.</p><p><strong>Pack / book</strong>Keep swim kit on top of the luggage. Confirm campsite arrival time; no beach booking needed.</p></div></details>
-          </div>
-        </article>
-
-        <article class="day-card is-blue" id="day-5" data-map-day="5">
-          <div class="day-photo"><img src="assets/images/llafranc.jpg" alt="Llafranc beach and waterfront on the Costa Brava" loading="lazy" /><div class="photo-label"><i data-lucide="footprints"></i> Calella → Llafranc</div><span class="photo-number">05</span></div>
-          <div class="day-content">
-            <header class="day-header"><div><p class="day-kicker">Monday 24 August 2026 · Calella & Llafranc</p><h3>Walk the<br /><em>waterline.</em></h3></div><div class="weather-orb"><i data-lucide="footprints"></i><span>Coastal walk</span></div></header>
-            <p class="day-lede">Swim at Canadell, follow the family-friendly stretch of the coastal path to Llafranc and reward the group with a long waterfront lunch.</p>
-            <div class="day-schedule">
-              <div><time>09:30</time><span><strong>Canadell swim</strong>Claim a base, snorkel along the edge in calm conditions and rotate adults on shade duty.</span></div>
-              <div><time>11:45</time><span><strong>Coastal walk</strong>About 1.5 km / 35 to 45 min each way with children, steps and photo stops.</span></div>
-              <div><time>13:00</time><span><strong>Lunch · Llafranc promenade</strong>Book one relaxed table for rice, fish or children’s favourites; split tables only if the group prefers.</span></div>
-              <div><time>19:00</time><span><strong>Dinner · campsite</strong>Leftovers, salads and an early night after the walk.</span></div>
-            </div>
-            <div class="day-meta"><span><i data-lucide="footprints"></i> 1.5 km each way</span><span><i data-lucide="gauge"></i> Easy to moderate</span><span><i data-lucide="moon-star"></i> Camp night 2/7</span></div>
-            <details class="practical"><summary><span><i data-lucide="backpack"></i> Practical notes</span><i data-lucide="plus"></i></summary><div class="practical-grid"><p><strong>Parking</strong>Leave the car at camp or use upper Calella parking; waterfront spaces fill early.</p><p><strong>Walking</strong>Paved but stepped, exposed in places and unsuitable for a pushchair all the way.</p><p><strong>Pack / book</strong>Grippy sandals, water and hats. Reserve lunch for ten and check sea conditions before snorkelling.</p></div></details>
-          </div>
-        </article>
-
-        <article class="day-card is-green reverse" id="day-6" data-map-day="6">
-          <div class="day-photo"><img src="assets/images/tamariu.jpg" alt="Clear turquoise water and boats in Tamariu cove" loading="lazy" /><div class="photo-label"><i data-lucide="waves"></i> Tamariu</div><span class="photo-number">06</span></div>
-          <div class="day-content">
-            <header class="day-header"><div><p class="day-kicker">Tuesday 25 August 2026 · Tamariu</p><h3>The snorkel<br /><em>day.</em></h3></div><div class="weather-orb"><i data-lucide="waves"></i><span>Cove day</span></div></header>
-            <p class="day-lede">Tamariu’s compact cove is ideal for a big group: clear water, a visible beach base and optional kayaks for confident older children.</p>
-            <div class="day-schedule">
-              <div><time>08:45</time><span><strong>Drive to Tamariu</strong>About 15 to 20 min; arrive early enough to park and choose a clear meeting point.</span></div>
-              <div><time>09:30</time><span><strong>Swim & snorkel</strong>Buddy up, stay within the marked bathing area and keep one adult on shore.</span></div>
-              <div><time>13:00</time><span><strong>Lunch · Tamariu</strong>Reserve a seafront table or bring a picnic if ten damp diners feels ambitious.</span></div>
-              <div><time>18:30</time><span><strong>Dinner · campsite barbecue</strong>Make this the shared grill night; children can wind down close to home.</span></div>
-            </div>
-            <div class="day-meta"><span><i data-lucide="car-front"></i> 15 to 20 min</span><span><i data-lucide="waves"></i> Best snorkel</span><span><i data-lucide="moon-star"></i> Camp night 3/7</span></div>
-            <details class="practical"><summary><span><i data-lucide="backpack"></i> Practical notes</span><i data-lucide="plus"></i></summary><div class="practical-grid"><p><strong>Parking</strong>Use the signed upper car parks; the final walk down is steep and spaces disappear quickly.</p><p><strong>Walking</strong>Short but sloping. The beach is pebbly in places, so water shoes help.</p><p><strong>Pack / book</strong>Masks, rash vests, dry bag and reef-safe SPF. Pre-book kayaks and lunch if wanted.</p></div></details>
-          </div>
-        </article>
-
-        <article class="day-card is-rose" id="day-7" data-map-day="7">
-          <div class="day-photo"><img src="assets/images/coastline.jpg" alt="Rocky coves and blue water on the Costa Brava coastline" loading="lazy" /><div class="photo-label"><i data-lucide="tent-tree"></i> Campsite & Palafrugell</div><span class="photo-number">07</span></div>
-          <div class="day-content">
-            <header class="day-header"><div><p class="day-kicker">Wednesday 26 August 2026 · slow day</p><h3>Pool, pause<br /><em>& potter.</em></h3></div><div class="weather-orb"><i data-lucide="coffee"></i><span>Downtime</span></div></header>
-            <p class="day-lede">The deliberate nothing-much day: campsite pool, laundry, games and a short Palafrugell wander only when everyone is ready.</p>
-            <div class="day-schedule">
-              <div><time>09:00</time><span><strong>Campsite morning</strong>No alarm: swim, read, wash beach towels and give the car a day off.</span></div>
-              <div><time>12:30</time><span><strong>Lunch · at camp</strong>Big salad, tortilla and fruit in the shade; save the restaurant energy for tonight.</span></div>
-              <div><time>16:30</time><span><strong>Palafrugell potter</strong>About 10 min by car for the centre, ice cream and the Cork Museum if the group wants culture and air-con.</span></div>
-              <div><time>19:00</time><span><strong>Dinner · Palafrugell</strong>Pizza or tapas in town, then home before everyone unravels.</span></div>
-            </div>
-            <div class="day-meta"><span><i data-lucide="car-front"></i> 10 min optional</span><span><i data-lucide="tent-tree"></i> Maximum downtime</span><span><i data-lucide="moon-star"></i> Camp night 4/7</span></div>
-            <details class="practical"><summary><span><i data-lucide="backpack"></i> Practical notes</span><i data-lucide="plus"></i></summary><div class="practical-grid"><p><strong>Parking</strong>Use a central public car park in Palafrugell and walk the compact centre.</p><p><strong>Walking</strong>Easy and optional; make the museum the hot-weather plan B.</p><p><strong>Pack / book</strong>Laundry coins or supplies, cards and sketchbooks. Check museum hours; book dinner for ten.</p></div></details>
-          </div>
-        </article>
-
-        <article class="day-card is-gold reverse" id="day-8" data-map-day="8">
-          <div class="day-photo"><img src="assets/images/castell.jpg" alt="Wide sandy Platja de Castell beside the Mediterranean" loading="lazy" /><div class="photo-label"><i data-lucide="flower-2"></i> Cap Roig & Platja de Castell</div><span class="photo-number">08</span></div>
-          <div class="day-content">
-            <header class="day-header"><div><p class="day-kicker">Thursday 27 August 2026 · Cap Roig & Castell</p><h3>Gardens first,<br /><em>wild sand later.</em></h3></div><div class="weather-orb"><i data-lucide="flower-2"></i><span>Nature day</span></div></header>
-            <p class="day-lede">Balance one cultural stop with a generous beach: explore Cap Roig’s terraces early, then spread the whole group out on unspoilt Platja de Castell.</p>
-            <div class="day-schedule">
-              <div><time>09:15</time><span><strong>Cap Roig Gardens</strong>Roughly 10 to 15 min from camp; take the shady routes and let the children lead the photo hunt.</span></div>
-              <div><time>12:30</time><span><strong>Lunch · packed for Castell</strong>Collect a big picnic, then drive about 20 min south to the protected sandy bay.</span></div>
-              <div><time>14:00</time><span><strong>Platja de Castell</strong>Swim, build a roomy beach base and let the afternoon stay gloriously unstructured.</span></div>
-              <div><time>19:30</time><span><strong>Dinner · campsite</strong>Come home sandy for a simple grill, salads and an easy evening close to bed.</span></div>
-            </div>
-            <div class="day-meta"><span><i data-lucide="car-front"></i> 20 min to Castell</span><span><i data-lucide="umbrella"></i> Best wild beach</span><span><i data-lucide="moon-star"></i> Camp night 5/7</span></div>
-            <details class="practical"><summary><span><i data-lucide="backpack"></i> Practical notes</span><i data-lucide="plus"></i></summary><div class="practical-grid"><p><strong>Parking</strong>Use the garden car park first, then the signed paid car park near Castell. Arrive before the mid-afternoon turnover.</p><p><strong>Walking</strong>Gardens have moderate slopes. Castell has a straightforward walk from the car park, but take a beach trolley for the group kit.</p><p><strong>Pack / book</strong>Closed sandals, shade, water and a substantial picnic. Advance garden tickets are sensible; the beach needs no booking.</p></div></details>
-          </div>
-        </article>
-
-        <article class="day-card is-aqua" id="day-9" data-map-day="9">
-          <div class="day-photo"><img src="assets/images/aiguablava.jpg" alt="Turquoise Aiguablava beach framed by green hills" loading="lazy" /><div class="photo-label"><i data-lucide="waves"></i> Begur & Aiguablava</div><span class="photo-number">09</span></div>
-          <div class="day-content">
-            <header class="day-header"><div><p class="day-kicker">Friday 28 August 2026 · Begur</p><h3>Blue water,<br /><em>early start.</em></h3></div><div class="weather-orb"><i data-lucide="umbrella"></i><span>Big beach day</span></div></header>
-            <p class="day-lede">Aiguablava earns the early alarm: pale sand, beautiful water and good snorkelling, followed by Begur’s lanes once the beach gets busy.</p>
-            <div class="day-schedule">
-              <div><time>08:15</time><span><strong>Drive to Aiguablava</strong>Allow 25 to 30 min on winding local roads and aim to park before the main rush.</span></div>
-              <div><time>09:00</time><span><strong>Swim & snorkel</strong>Set a bright beach marker, use buddies and explore the rocky edges only in calm water.</span></div>
-              <div><time>12:30</time><span><strong>Lunch · beach or Begur</strong>Book ahead near the cove or drive uphill for an easier family lunch in town.</span></div>
-              <div><time>18:30</time><span><strong>Dinner · campsite</strong>Simple rice, vegetables and an early night after the busiest beach day.</span></div>
-            </div>
-            <div class="day-meta"><span><i data-lucide="car-front"></i> 25 to 30 min</span><span><i data-lucide="parking-circle"></i> Arrive early</span><span><i data-lucide="moon-star"></i> Camp night 6/7</span></div>
-            <details class="practical"><summary><span><i data-lucide="backpack"></i> Practical notes</span><i data-lucide="plus"></i></summary><div class="practical-grid"><p><strong>Parking</strong>Follow live signage; access may be controlled when the cove is full. Never rely on roadside space.</p><p><strong>Walking</strong>Short from the car park but sloping. Begur’s old streets and castle are steeper.</p><p><strong>Pack / book</strong>Shade, masks, water shoes and lots of water. Book lunch; keep a Tamariu or pool fallback.</p></div></details>
-          </div>
-        </article>
-
-        <article class="day-card is-sunset reverse" id="day-10" data-map-day="10">
-          <div class="day-photo"><img src="assets/images/sa-riera.jpg" alt="The broad sandy beach and blue water at Sa Riera" loading="lazy" /><div class="photo-label"><i data-lucide="umbrella"></i> Sa Riera, Begur</div><span class="photo-number">10</span></div>
-          <div class="day-content">
-            <header class="day-header"><div><p class="day-kicker">Saturday 29 August 2026 · Sa Riera</p><h3>Room to<br /><em>roam.</em></h3></div><div class="weather-orb"><i data-lucide="sunset"></i><span>Coast finale</span></div></header>
-            <p class="day-lede">Finish with Begur’s largest cove: plenty of sand for a ten-person base, useful beach facilities and one last long Mediterranean swim.</p>
-            <div class="day-schedule">
-              <div><time>08:45</time><span><strong>Drive to Sa Riera</strong>Allow about 25 to 30 min and arrive early enough to park before the Saturday beach rush.</span></div>
-              <div><time>09:30</time><span><strong>Big beach morning</strong>Build the final beach base, swim in buddy groups and rotate adults between water and shade.</span></div>
-              <div><time>12:30</time><span><strong>Lunch · Sa Riera</strong>Book a relaxed terrace, or bring a beach picnic and maximise swimming time.</span></div>
-              <div><time>15:30</time><span><strong>Last swim, then camp</strong>Head back before everyone is overtired and dry the beach kit before packing.</span></div>
-              <div><time>19:30</time><span><strong>Dinner · camp farewell</strong>Use up the fridge, toast the coast and pack only after the children are settled.</span></div>
-            </div>
-            <div class="day-meta"><span><i data-lucide="car-front"></i> 25 to 30 min</span><span><i data-lucide="umbrella"></i> Best for space</span><span><i data-lucide="moon-star"></i> Camp night 7/7</span></div>
-            <details class="practical"><summary><span><i data-lucide="backpack"></i> Practical notes</span><i data-lucide="plus"></i></summary><div class="practical-grid"><p><strong>Parking</strong>Follow signed parking on arrival and keep a backup cove in mind if access is full. Early is the winning move.</p><p><strong>Walking</strong>Easy beach access compared with the smaller rocky coves. The optional coastal path has steps and exposed sections.</p><p><strong>Pack / book</strong>Shade, a bright meeting marker and dry clothes for camp. Reserve lunch for ten; beach access needs no booking.</p></div></details>
-          </div>
-        </article>
-
-        <section class="beach-edit wrap" id="beach-edit" aria-labelledby="beach-edit-title">
-          <div class="beach-edit-heading">
+          <aside class="magma-note shell reveal" id="girona-swim">
+            <div class="magma-mark" aria-hidden="true"><span></span><span></span><span></span></div>
             <div>
-              <p class="eyebrow"><span></span> The Camping Palafrugell beach edit</p>
-              <h2 id="beach-edit-title">Six beaches.<br /><em>Each with a job.</em></h2>
+              <p class="section-label">The better pool option</p>
+              <h2>Magma, Santa Coloma de Farners</h2>
+              <p>About 30 minutes from Girona. Indoor and outdoor thermal pools, hydro-massage jets, a counter-current river and a children’s area make this the more polished swim. Use it instead of Banyoles if the weather turns or everyone needs an easier day.</p>
             </div>
-            <p>These are the strongest choices for a group of ten. Pick by mood, not obligation, and always let the sea conditions decide.</p>
-          </div>
-          <div class="beach-grid">
-            <article class="beach-pick featured">
-              <div class="beach-pick-photo"><img src="assets/images/llafranc.jpg" alt="Llafranc beach and its waterfront promenade" loading="lazy" /><span>01</span><strong>Best all-rounder</strong></div>
-              <div class="beach-pick-copy"><h3>Llafranc</h3><p>Fine sand, a long promenade and restaurants close at hand. The easiest full day when every age wants something slightly different.</p><dl><div><dt>Drive</dt><dd>About 10 min</dd></div><div><dt>Parking</dt><dd>Streets behind the beach</dd></div><div><dt>Catch</dt><dd>Fill-up happens early</dd></div></dl><a href="https://visitpalafrugell.cat/en/llafranc/beaches-from-llafranc/llafranc/" target="_blank" rel="noreferrer">Official beach guide <i data-lucide="arrow-up-right"></i></a></div>
-            </article>
-            <article class="beach-pick">
-              <div class="beach-pick-photo"><img src="assets/images/tamariu.jpg" alt="Clear turquoise water in Tamariu cove" loading="lazy" /><span>02</span><strong>Best snorkel</strong></div>
-              <div class="beach-pick-copy"><h3>Tamariu</h3><p>A compact cove with clear water and a marked aquatic lane towards Aigua Xelida. Excellent for confident buddy swimmers in calm conditions.</p><dl><div><dt>Drive</dt><dd>15 to 20 min</dd></div><div><dt>Parking</dt><dd>About 5 min on foot</dd></div><div><dt>Catch</dt><dd>Short, sloping return</dd></div></dl><a href="https://visitpalafrugell.cat/en/tamariu/beaches-from-tamariu/platja-de-tamariu/" target="_blank" rel="noreferrer">Official beach guide <i data-lucide="arrow-up-right"></i></a></div>
-            </article>
-            <article class="beach-pick">
-              <div class="beach-pick-photo"><img src="assets/images/aiguablava.jpg" alt="Turquoise water and pale sand at Aiguablava" loading="lazy" /><span>03</span><strong>Most beautiful</strong></div>
-              <div class="beach-pick-copy"><h3>Aiguablava</h3><p>A protected, fine-sand bay with gentle water access and family facilities. This is the postcard choice, if you can beat the crowd.</p><dl><div><dt>Drive</dt><dd>25 to 30 min</dd></div><div><dt>Parking</dt><dd>On-site, limited</dd></div><div><dt>Catch</dt><dd>Leave camp by 08:15</dd></div></dl><a href="https://visitbegur.cat/en/platja/aiguablava/" target="_blank" rel="noreferrer">Official beach guide <i data-lucide="arrow-up-right"></i></a></div>
-            </article>
-            <article class="beach-pick">
-              <div class="beach-pick-photo"><img src="assets/images/sa-riera.jpg" alt="Wide sandy Sa Riera beach and blue Mediterranean water" loading="lazy" /><span>04</span><strong>Best for space</strong></div>
-              <div class="beach-pick-copy"><h3>Sa Riera</h3><p>Begur’s largest cove gives ten people room to spread out, plus showers, toilets, a bar and seasonal first aid.</p><dl><div><dt>Drive</dt><dd>25 to 30 min</dd></div><div><dt>Parking</dt><dd>Signed local parking</dd></div><div><dt>Catch</dt><dd>Go early on Saturday</dd></div></dl><a href="https://visitbegur.cat/en/platja/sa-riera/" target="_blank" rel="noreferrer">Official beach guide <i data-lucide="arrow-up-right"></i></a></div>
-            </article>
-            <article class="beach-pick">
-              <div class="beach-pick-photo"><img src="assets/images/castell.jpg" alt="Unspoilt sandy bay at Platja de Castell" loading="lazy" /><span>05</span><strong>Best wild day</strong></div>
-              <div class="beach-pick-copy"><h3>Platja de Castell</h3><p>A broad, unspoilt bay with enough sand for games, a picnic base and serious downtime. It feels wild without losing useful facilities.</p><dl><div><dt>Drive</dt><dd>About 20 min</dd></div><div><dt>Parking</dt><dd>Paid car park nearby</dd></div><div><dt>Catch</dt><dd>Bring shade and a trolley</dd></div></dl><a href="https://visitpalamos.cat/en/platja-de-castell/" target="_blank" rel="noreferrer">Official beach guide <i data-lucide="arrow-up-right"></i></a></div>
-            </article>
-            <article class="beach-pick">
-              <div class="beach-pick-photo"><img src="assets/images/calella.jpg" alt="Calella de Palafrugell and the beach at El Canadell" loading="lazy" /><span>06</span><strong>Easiest first swim</strong></div>
-              <div class="beach-pick-copy"><h3>El Canadell</h3><p>Two hundred metres of beach beside Calella’s white houses. Ideal for arrival day, a quick dip or the low-effort fallback everyone knows.</p><dl><div><dt>Drive</dt><dd>About 10 min</dd></div><div><dt>Parking</dt><dd>Nearby village streets</dd></div><div><dt>Catch</dt><dd>Some steps to the sand</dd></div></dl><a href="https://visitpalafrugell.cat/en/beaches-and-routes/" target="_blank" rel="noreferrer">Official beach guide <i data-lucide="arrow-up-right"></i></a></div>
-            </article>
-          </div>
+            <dl>
+              <div><dt>Children</dt><dd>Welcome with adult supervision</dd></div>
+              <div><dt>Session</dt><dd>Choose 2 or 3 hours</dd></div>
+              <div><dt>Planning</dt><dd>Reserve all ten places online</dd></div>
+              <div><dt>Inside</dt><dd>No phone or camera photography</dd></div>
+            </dl>
+            <a href="https://www.magma-cat.com/en/faqs/" target="_blank" rel="noreferrer">Family rules and booking ↗</a>
+          </aside>
         </section>
 
-        <div class="chapter-break wrap chapter-priorat"><div><small>Chapter three · 3 nights</small><strong>Falset & Priorat</strong></div><p>Family time at Bigotis Del Gat, warm village evenings and one dramatic hilltop outing.</p></div>
+        <section class="chapter chapter-coast" aria-labelledby="coast-title">
+          <header class="chapter-heading shell reveal">
+            <p class="chapter-index">II</p>
+            <div><p class="section-label">23 to 29 August / 7 nights</p><h2 id="coast-title">Camping Palafrugell</h2></div>
+            <p>The centre of the holiday. Beach mornings, long lunches and enough time at camp to avoid turning leisure into logistics.</p>
+          </header>
 
-        <article class="day-card is-gold" id="day-11" data-map-day="11">
-          <div class="day-photo"><img src="assets/images/priorat.jpg" alt="Terraced vineyard slopes in Priorat" loading="lazy" /><div class="photo-label"><i data-lucide="grape"></i> Camping Palafrugell → Falset</div><span class="photo-number">11</span></div>
-          <div class="day-content">
-            <header class="day-header"><div><p class="day-kicker">Sunday 30 August 2026 · transfer to Falset</p><h3>Saltwater<br /><em>to vines.</em></h3></div><div class="weather-orb"><i data-lucide="car-front"></i><span>Transfer</span></div></header>
-            <p class="day-lede">Pack up the campsite and cross Catalonia to Falset, where the final three nights are about family, Bigotis Del Gat and a much slower table.</p>
-            <div class="day-schedule">
-              <div><time>09:30</time><span><strong>Check out</strong>Leave Camping Palafrugell after breakfast with swimwear and snacks accessible.</span></div>
-              <div><time>10:30</time><span><strong>Drive to Falset</strong>Allow about 2 hr 45 min to 3 hr plus one comfort stop; avoid stretching the transfer too far.</span></div>
-              <div><time>13:30</time><span><strong>Lunch · en route picnic</strong>Stop halfway in shade or eat on arrival, depending on traffic and the children.</span></div>
-              <div><time>19:00</time><span><strong>Dinner · with family</strong>A relaxed first evening in Falset and the gentlest introduction to Bigotis Del Gat.</span></div>
+          <article class="day-entry shell photo-left reveal" id="day-4" data-map-day="4">
+            <div class="day-date"><span>Sunday</span><strong>23</strong><small>August</small></div>
+            <div class="day-copy">
+              <p class="day-place">Girona / Camping Palafrugell / Calella</p>
+              <h3>Move to the coast</h3>
+              <p class="day-summary">Check in, unpack once and keep the first saltwater swim close and undemanding.</p>
+              <ol class="agenda">
+                <li><time>10:30</time><div><strong>Girona to camp</strong><p>Allow 50 to 60 min, then make beds and establish the shared food shelf.</p></div></li>
+                <li><time>13:00</time><div><strong>Lunch at camp</strong><p>Bread, cheese, fruit and cold food while everyone gets oriented.</p></div></li>
+                <li><time>16:00</time><div><strong>Calella first swim</strong><p>Use Port Bo or El Canadell for a low-pressure beach afternoon.</p></div></li>
+                <li><time>19:30</time><div><strong>Dinner at camp</strong><p>Barbecue or simple pasta. Add ice cream in Calella only if energy survives.</p></div></li>
+              </ol>
+              <details class="field-notes"><summary>Arrival and practical notes</summary><div><p><b>Parking</b>Unload at camp, then use signed village parking for Calella.</p><p><b>Walking</b>Easy village paths with some slopes and beach steps.</p><p><b>Pack</b>Keep one swim bag on top of the luggage.</p></div></details>
             </div>
-            <div class="day-meta"><span><i data-lucide="car-front"></i> 2 hr 45 min to 3 hr</span><span><i data-lucide="grape"></i> Family arrival</span><span><i data-lucide="moon-star"></i> Falset night 1/3</span></div>
-            <details class="practical"><summary><span><i data-lucide="backpack"></i> Practical notes</span><i data-lucide="plus"></i></summary><div class="practical-grid"><p><strong>Parking</strong>Confirm the Falset parking plan privately before setting off; do not rely on narrow vineyard access for several cars.</p><p><strong>Walking</strong>Very light today. Vineyard ground can be dusty, steep and uneven.</p><p><strong>Pack / book</strong>Closed shoes, water and car snacks. Confirm campsite checkout and Falset arrival arrangements.</p></div></details>
-          </div>
-        </article>
+            <figure class="day-image landscape"><img src="assets/images/calella.jpg" alt="Calella de Palafrugell beside a clear blue bay" loading="lazy" /><figcaption>Camping Palafrugell / night 1 of 7</figcaption></figure>
+          </article>
 
-        <article class="day-card is-green reverse" id="day-12" data-map-day="12">
-          <div class="day-photo"><img src="assets/images/priorat-summer.jpg" alt="Terraced rows of vines on a warm Priorat hillside" loading="lazy" /><div class="photo-label"><i data-lucide="grape"></i> Bigotis Del Gat · Priorat</div><span class="photo-number">12</span></div>
-          <div class="day-content">
-            <header class="day-header"><div><p class="day-kicker">Monday 31 August 2026 · Bigotis Del Gat</p><h3>A day among<br /><em>the vines.</em></h3></div><div class="weather-orb"><i data-lucide="grape"></i><span>Family day</span></div></header>
-            <p class="day-lede">The heart of the Falset stay: an unhurried family day with Estelle’s dad at Bigotis Del Gat, shaped around heat, harvest activity and the children.</p>
-            <div class="day-schedule">
-              <div><time>09:00</time><span><strong>Bigotis Del Gat morning</strong>Walk a short safe route together, learn what is growing and keep everyone on the agreed paths.</span></div>
-              <div><time>13:00</time><span><strong>Lunch · family table</strong>Make this the long lunch: local bread, tomatoes, fruit and plenty of water alongside the grown-up tasting.</span></div>
-              <div><time>16:00</time><span><strong>Shade & reset</strong>Quiet games, a pool if available or downtime back in Falset during the hottest hours.</span></div>
-              <div><time>19:30</time><span><strong>Dinner · Falset</strong>Stroll into town for an easy terrace supper, or stay with family if the day is flowing.</span></div>
+          <article class="day-entry shell reveal" id="day-5" data-map-day="5">
+            <div class="day-date"><span>Monday</span><strong>24</strong><small>August</small></div>
+            <div class="day-copy">
+              <p class="day-place">El Canadell / Llafranc</p>
+              <h3>The coastal path to Llafranc</h3>
+              <p class="day-summary">Start with a swim, then follow the manageable section of the coast path to lunch.</p>
+              <ol class="agenda">
+                <li><time>09:30</time><div><strong>El Canadell</strong><p>Set a clear beach base and snorkel only along the edge in calm conditions.</p></div></li>
+                <li><time>11:45</time><div><strong>Walk to Llafranc</strong><p>About 1.5 km each way. Allow 35 to 45 min with children and stops.</p></div></li>
+                <li><time>13:00</time><div><strong>Lunch on the promenade</strong><p>Reserve a table for rice, fish and straightforward children’s options.</p></div></li>
+                <li><time>19:00</time><div><strong>Dinner at camp</strong><p>Leftovers, salads and an early night after the walk.</p></div></li>
+              </ol>
+              <details class="field-notes"><summary>Path and practical notes</summary><div><p><b>Walking</b>Paved but stepped and exposed in places. Not pushchair-friendly throughout.</p><p><b>Parking</b>Leave the car at camp or use upper Calella parking.</p><p><b>Book</b>Reserve lunch for ten.</p></div></details>
             </div>
-            <div class="day-meta"><span><i data-lucide="footprints"></i> Short uneven walk</span><span><i data-lucide="grape"></i> Family-first</span><span><i data-lucide="moon-star"></i> Falset night 2/3</span></div>
-            <details class="practical"><summary><span><i data-lucide="backpack"></i> Practical notes</span><i data-lucide="plus"></i></summary><div class="practical-grid"><p><strong>Parking</strong>Follow the family’s instructions and keep access clear for vineyard work.</p><p><strong>Walking</strong>Uneven, dusty and potentially steep. Children stay with an adult and away from machinery.</p><p><strong>Pack / book</strong>Closed shoes, hats, refillable bottles and a light layer. No public booking needed; coordinate privately.</p></div></details>
-          </div>
-        </article>
+            <figure class="day-image"><img src="assets/images/llafranc.jpg" alt="Llafranc beach and waterfront" loading="lazy" /><figcaption>Llafranc / our best all-round beach</figcaption></figure>
+          </article>
 
-        <article class="day-card is-blue" id="day-13" data-map-day="13">
-          <div class="day-photo"><img src="assets/images/siurana.jpg" alt="The hilltop village of Siurana above dramatic Priorat cliffs" loading="lazy" /><div class="photo-label"><i data-lucide="mountain"></i> Siurana · Priorat</div><span class="photo-number">13</span></div>
-          <div class="day-content">
-            <header class="day-header"><div><p class="day-kicker">Tuesday 1 September 2026 · Siurana or Bellmunt</p><h3>One last<br /><em>adventure.</em></h3></div><div class="weather-orb"><i data-lucide="mountain"></i><span>Hilltop day</span></div></header>
-            <p class="day-lede">Choose Siurana’s dramatic village and viewpoints in cooler weather, or the Bellmunt mines as a contained cultural alternative when heat or young legs win.</p>
-            <div class="day-schedule">
-              <div><time>09:00</time><span><strong>Drive to Siurana</strong>About 35 to 40 min on winding roads; park outside the village and keep children close near viewpoints.</span></div>
-              <div><time>10:00</time><span><strong>Village wander</strong>Short lanes, church and selected viewpoints, with no cliff-edge scrambling for the group.</span></div>
-              <div><time>12:45</time><span><strong>Lunch · Siurana or Cornudella</strong>Reserve a table with shade, or bring a picnic and retreat before the hottest hours.</span></div>
-              <div><time>19:00</time><span><strong>Dinner · final Falset evening</strong>Favourite local food, family time and a calm pack for tomorrow’s flight.</span></div>
+          <article class="day-entry shell photo-left reveal" id="day-6" data-map-day="6">
+            <div class="day-date"><span>Tuesday</span><strong>25</strong><small>August</small></div>
+            <div class="day-copy">
+              <p class="day-place">Tamariu</p>
+              <h3>A proper snorkel morning</h3>
+              <p class="day-summary">The compact cove makes it easier to keep a visible base while confident swimmers explore in pairs.</p>
+              <ol class="agenda">
+                <li><time>08:45</time><div><strong>Drive to Tamariu</strong><p>Allow 15 to 20 min and arrive before the parking becomes difficult.</p></div></li>
+                <li><time>09:30</time><div><strong>Swim and snorkel</strong><p>Use buddies, stay inside marked water and keep one adult on shore.</p></div></li>
+                <li><time>13:00</time><div><strong>Lunch in Tamariu</strong><p>Reserve a seafront table or bring a picnic for the simplest option.</p></div></li>
+                <li><time>18:30</time><div><strong>Dinner at camp</strong><p>Make this the shared barbecue evening.</p></div></li>
+              </ol>
+              <details class="field-notes"><summary>Water and practical notes</summary><div><p><b>Parking</b>Use signed parking about 5 min from the beach.</p><p><b>Walking</b>The return is short but sloping.</p><p><b>Pack</b>Masks, rash vests, dry bag and water shoes.</p></div></details>
             </div>
-            <div class="day-meta"><span><i data-lucide="car-front"></i> 35 to 40 min</span><span><i data-lucide="triangle-alert"></i> Cliff supervision</span><span><i data-lucide="moon-star"></i> Falset night 3/3</span></div>
-            <details class="practical"><summary><span><i data-lucide="backpack"></i> Practical notes</span><i data-lucide="plus"></i></summary><div class="practical-grid"><p><strong>Parking</strong>Use designated parking before Siurana and obey any access controls; roads are narrow.</p><p><strong>Walking</strong>Moderate cobbles with unguarded drops nearby. Bellmunt, about 15 min from Falset, is the cooler plan B.</p><p><strong>Pack / book</strong>Grippy shoes, hats and water. Book lunch and any Bellmunt mine tour in advance.</p></div></details>
-          </div>
-        </article>
+            <figure class="day-image panorama"><img src="assets/images/tamariu.jpg" alt="Clear water and boats in Tamariu cove" loading="lazy" /><figcaption>Tamariu / best for snorkelling</figcaption></figure>
+          </article>
 
-        <article class="day-card is-sunset reverse" id="day-14" data-map-day="14">
-          <div class="day-photo"><img src="assets/images/falset.jpg" alt="The town of Falset in the Priorat landscape" loading="lazy" /><div class="photo-label"><i data-lucide="plane"></i> Falset → Barcelona → Heathrow</div><span class="photo-number">14</span></div>
-          <div class="day-content">
-            <header class="day-header"><div><p class="day-kicker">Wednesday 2 September 2026 · flight home</p><h3>Goodbye vines,<br /><em>hello home.</em></h3></div><div class="weather-orb"><i data-lucide="plane"></i><span>Homeward</span></div></header>
-            <p class="day-lede">A last Falset morning, a generous airport buffer and the evening flight back to Heathrow.</p>
-            <div class="day-schedule">
-              <div><time>09:00</time><span><strong>Morning & packing</strong>Slow breakfast, family goodbyes and a final check of passports, chargers and car-return details.</span></div>
-              <div><time>12:30</time><span><strong>Lunch · Falset</strong>Eat before the road so the airport run is not controlled by hungry children.</span></div>
-              <div><time>14:30</time><span><strong>Drive to Barcelona Airport</strong>Allow about 1 hr 45 min to 2 hr, then fuel, return the car and walk to the terminal.</span></div>
-              <div><time>17:00</time><span><strong>Dinner & lounge · Barcelona Airport</strong>The two Platinum Amex cardholders can use eligible lounge access after the car return. Check guest and child rules before travel.</span></div>
-              <div><time>19:30</time><span><strong>British Airways BCN → LHR</strong>Direct flight 2 hr 15 min, arriving Heathrow at 20:45 local time.</span></div>
+          <article class="day-entry shell rest-day reveal" id="day-7" data-map-day="7">
+            <div class="day-date"><span>Wednesday</span><strong>26</strong><small>August</small></div>
+            <div class="day-copy">
+              <p class="day-place">Camp / Palafrugell</p>
+              <h3>Nothing booked before dinner</h3>
+              <p class="day-summary">Pool, laundry, games and an optional late-afternoon trip into Palafrugell. This is deliberately the quiet day.</p>
+              <ol class="agenda">
+                <li><time>Morning</time><div><strong>Stay at camp</strong><p>No alarm. Swim, read and give the car a rest.</p></div></li>
+                <li><time>12:30</time><div><strong>Lunch in the shade</strong><p>Tortilla, salad and fruit at camp.</p></div></li>
+                <li><time>16:30</time><div><strong>Optional Palafrugell visit</strong><p>Ice cream, the centre or the Cork Museum if the heat makes indoor time useful.</p></div></li>
+                <li><time>19:00</time><div><strong>Dinner in Palafrugell</strong><p>Book pizza or tapas, or stay at camp if nobody wants to move.</p></div></li>
+              </ol>
+              <details class="field-notes"><summary>Low-effort notes</summary><div><p><b>Parking</b>Use a central public car park if going into town.</p><p><b>Walking</b>Easy and entirely optional.</p><p><b>Pack</b>Laundry supplies, cards and sketchbooks.</p></div></details>
             </div>
-            <div class="day-meta"><span><i data-lucide="car-front"></i> 1 hr 45 min to 2 hr</span><span><i data-lucide="credit-card"></i> Lounge stop</span><span><i data-lucide="plane"></i> BA direct</span><span><i data-lucide="clock-3"></i> LHR 20:45</span></div>
-            <details class="practical"><summary><span><i data-lucide="backpack"></i> Practical notes</span><i data-lucide="plus"></i></summary><div class="practical-grid"><p><strong>Parking</strong>Follow the hire-car return signs at BCN and allow time for fuel and unloading ten people.</p><p><strong>Lounge plan</strong>Check the eligible Barcelona lounge, opening hours, guest allowance and child policy before travel. Keep snacks as a fallback.</p><p><strong>Pack / book</strong>Passports, medicines and devices in cabin bags. Recheck live traffic, terminal and flight status that morning.</p></div></details>
-          </div>
-        </article>
+            <figure class="day-image"><img src="assets/images/coastline.jpg" alt="Rocky Costa Brava coastline and blue water" loading="lazy" /><figcaption>Camp / night 4 of 7</figcaption></figure>
+          </article>
+
+          <article class="day-entry shell reveal" id="day-8" data-map-day="8">
+            <div class="day-date"><span>Thursday</span><strong>27</strong><small>August</small></div>
+            <div class="day-copy">
+              <p class="day-place">Cap Roig / Platja de Castell</p>
+              <h3>Gardens, then a wide beach</h3>
+              <p class="day-summary">A short cultural morning followed by enough sand for all ten of us to spread out.</p>
+              <ol class="agenda">
+                <li><time>09:15</time><div><strong>Cap Roig Gardens</strong><p>Take the shaded routes and let the children lead a photo hunt.</p></div></li>
+                <li><time>12:30</time><div><strong>Picnic for Castell</strong><p>Collect lunch, then drive about 20 min south.</p></div></li>
+                <li><time>14:00</time><div><strong>Platja de Castell</strong><p>Swim, play and let the afternoon stay unstructured.</p></div></li>
+                <li><time>19:30</time><div><strong>Dinner at camp</strong><p>Simple grill and salads after the drive back.</p></div></li>
+              </ol>
+              <details class="field-notes"><summary>Parking and practical notes</summary><div><p><b>Parking</b>Use the garden car park, then the signed paid car park near Castell.</p><p><b>Walking</b>Moderate garden slopes, then a straightforward beach approach.</p><p><b>Book</b>Advance garden tickets are sensible.</p></div></details>
+            </div>
+            <figure class="day-image landscape"><img src="assets/images/castell.jpg" alt="The broad sandy bay at Platja de Castell" loading="lazy" /><figcaption>Platja de Castell / best wild beach</figcaption></figure>
+          </article>
+
+          <article class="day-entry shell photo-left reveal" id="day-9" data-map-day="9">
+            <div class="day-date"><span>Friday</span><strong>28</strong><small>August</small></div>
+            <div class="day-copy">
+              <p class="day-place">Aiguablava / Begur</p>
+              <h3>The early-start beach</h3>
+              <p class="day-summary">Aiguablava is the most beautiful option and the least forgiving if we arrive late.</p>
+              <ol class="agenda">
+                <li><time>08:15</time><div><strong>Leave camp</strong><p>Allow 25 to 30 min on local roads and follow live parking controls.</p></div></li>
+                <li><time>09:00</time><div><strong>Swim and snorkel</strong><p>Use a bright meeting marker and explore rocky edges only when the water is calm.</p></div></li>
+                <li><time>12:30</time><div><strong>Lunch</strong><p>Book near the beach or drive up to Begur for more choice.</p></div></li>
+                <li><time>18:30</time><div><strong>Dinner at camp</strong><p>Keep the evening light after the busiest beach morning.</p></div></li>
+              </ol>
+              <details class="field-notes"><summary>Access and practical notes</summary><div><p><b>Parking</b>Access can close when full. Never depend on roadside space.</p><p><b>Walking</b>Short but sloping from the parking area.</p><p><b>Fallback</b>Use Tamariu or the camp pool if access is full.</p></div></details>
+            </div>
+            <figure class="day-image"><img src="assets/images/aiguablava.jpg" alt="Turquoise Aiguablava beach framed by green hills" loading="lazy" /><figcaption>Aiguablava / leave camp at 08:15</figcaption></figure>
+          </article>
+
+          <article class="day-entry shell reveal" id="day-10" data-map-day="10">
+            <div class="day-date"><span>Saturday</span><strong>29</strong><small>August</small></div>
+            <div class="day-copy">
+              <p class="day-place">Sa Riera</p>
+              <h3>Space for the final beach day</h3>
+              <p class="day-summary">Begur’s largest cove gives the group more room, useful facilities and an easy final swim before packing.</p>
+              <ol class="agenda">
+                <li><time>08:45</time><div><strong>Drive to Sa Riera</strong><p>Allow 25 to 30 min and arrive before the Saturday rush.</p></div></li>
+                <li><time>09:30</time><div><strong>Beach morning</strong><p>Build one clear base and rotate adults between water and shade.</p></div></li>
+                <li><time>12:30</time><div><strong>Lunch at Sa Riera</strong><p>Reserve a relaxed terrace or bring a beach picnic.</p></div></li>
+                <li><time>15:30</time><div><strong>Return and farewell dinner</strong><p>Dry the beach kit, use up the camp food and pack after the children settle.</p></div></li>
+              </ol>
+              <details class="field-notes"><summary>Parking and practical notes</summary><div><p><b>Parking</b>Follow signed local parking and keep a backup beach in mind.</p><p><b>Walking</b>Easy beach access. The optional coast path adds steps.</p><p><b>Book</b>Reserve lunch for ten.</p></div></details>
+            </div>
+            <figure class="day-image"><img src="assets/images/sa-riera.jpg" alt="Broad sandy Sa Riera beach and Mediterranean water" loading="lazy" /><figcaption>Sa Riera / camp night 7 of 7</figcaption></figure>
+          </article>
+
+          <section class="beach-index shell reveal" id="beach-edit" aria-labelledby="beach-index-title">
+            <div class="beach-index-lead">
+              <p class="section-label">Six useful answers</p>
+              <h2 id="beach-index-title">Choose the beach by mood.</h2>
+              <p>The itinerary is not a ranking. This is the quick decision tool when we need to change the plan.</p>
+              <figure class="beach-preview"><img id="beach-preview" src="assets/images/llafranc.jpg" alt="Llafranc beach and promenade" /><figcaption id="beach-caption">Llafranc / the best all-rounder</figcaption></figure>
+            </div>
+            <div class="beach-list" role="list">
+              <button class="beach-row active" type="button" data-image="assets/images/llafranc.jpg" data-alt="Llafranc beach and promenade" data-caption="Llafranc / the best all-rounder">
+                <span>01</span><strong>Llafranc</strong><em>Best all-rounder</em><small>10 min / parking behind the beach</small>
+              </button>
+              <button class="beach-row" type="button" data-image="assets/images/tamariu.jpg" data-alt="Clear water and boats at Tamariu" data-caption="Tamariu / the snorkel choice">
+                <span>02</span><strong>Tamariu</strong><em>Best snorkel</em><small>15 to 20 min / 5 min walk from parking</small>
+              </button>
+              <button class="beach-row" type="button" data-image="assets/images/aiguablava.jpg" data-alt="Turquoise water at Aiguablava" data-caption="Aiguablava / the early-start beauty">
+                <span>03</span><strong>Aiguablava</strong><em>Most beautiful</em><small>25 to 30 min / leave by 08:15</small>
+              </button>
+              <button class="beach-row" type="button" data-image="assets/images/sa-riera.jpg" data-alt="Broad sandy Sa Riera beach" data-caption="Sa Riera / the most room for ten">
+                <span>04</span><strong>Sa Riera</strong><em>Best for space</em><small>25 to 30 min / useful facilities</small>
+              </button>
+              <button class="beach-row" type="button" data-image="assets/images/castell.jpg" data-alt="Unspoilt bay at Platja de Castell" data-caption="Platja de Castell / the wild beach day">
+                <span>05</span><strong>Platja de Castell</strong><em>Best wild day</em><small>About 20 min / paid car park</small>
+              </button>
+              <button class="beach-row" type="button" data-image="assets/images/calella.jpg" data-alt="Calella de Palafrugell beside the sea" data-caption="El Canadell / the easiest first swim">
+                <span>06</span><strong>El Canadell</strong><em>Easiest fallback</em><small>About 10 min / some beach steps</small>
+              </button>
+              <p class="beach-source">Official access details: <a href="https://visitpalafrugell.cat/en/beaches-and-routes/" target="_blank" rel="noreferrer">Palafrugell</a>, <a href="https://visitbegur.cat/en/discover/beaches/" target="_blank" rel="noreferrer">Begur</a> and <a href="https://visitpalamos.cat/en/platja-de-castell/" target="_blank" rel="noreferrer">Castell</a>.</p>
+            </div>
+          </section>
+        </section>
+
+        <section class="chapter chapter-priorat" aria-labelledby="priorat-title">
+          <header class="chapter-heading shell reveal">
+            <p class="chapter-index">III</p>
+            <div><p class="section-label">30 August to 2 September / 3 nights</p><h2 id="priorat-title">Falset and Priorat</h2></div>
+            <p>Three nights in Falset for Estelle’s family, Bigotis Del Gat and one carefully chosen hill day.</p>
+          </header>
+
+          <article class="day-entry shell photo-left reveal" id="day-11" data-map-day="11">
+            <div class="day-date"><span>Sunday</span><strong>30</strong><small>August</small></div>
+            <div class="day-copy">
+              <p class="day-place">Camping Palafrugell / Falset</p>
+              <h3>From the coast to Priorat</h3>
+              <p class="day-summary">Pack the campsite and cross Catalonia without adding unnecessary stops.</p>
+              <ol class="agenda">
+                <li><time>09:30</time><div><strong>Check out</strong><p>Breakfast first, with swimwear and road snacks kept accessible.</p></div></li>
+                <li><time>10:30</time><div><strong>Drive to Falset</strong><p>Allow 2 hr 45 min to 3 hr plus one comfort stop.</p></div></li>
+                <li><time>13:30</time><div><strong>Lunch</strong><p>Use an en-route picnic or eat on arrival, depending on traffic.</p></div></li>
+                <li><time>19:00</time><div><strong>Dinner with family</strong><p>A quiet first evening and introduction to Bigotis Del Gat.</p></div></li>
+              </ol>
+              <details class="field-notes"><summary>Transfer and practical notes</summary><div><p><b>Parking</b>Confirm the Falset parking plan privately.</p><p><b>Walking</b>Keep today very light.</p><p><b>Pack</b>Closed shoes and water for uneven vineyard ground.</p></div></details>
+            </div>
+            <figure class="day-image"><img src="assets/images/priorat.jpg" alt="Terraced vineyard slopes in Priorat" loading="lazy" /><figcaption>Falset / night 1 of 3</figcaption></figure>
+          </article>
+
+          <article class="day-entry shell reveal" id="day-12" data-map-day="12">
+            <div class="day-date"><span>Monday</span><strong>31</strong><small>August</small></div>
+            <div class="day-copy">
+              <p class="day-place">Bigotis Del Gat</p>
+              <h3>A family day at the vineyard</h3>
+              <p class="day-summary">The purpose of the Falset stay: time with Estelle’s dad, shaped around the heat and whatever vineyard work is happening.</p>
+              <ol class="agenda">
+                <li><time>09:00</time><div><strong>Vineyard morning</strong><p>Walk a short safe route and keep the children on agreed paths.</p></div></li>
+                <li><time>13:00</time><div><strong>Long family lunch</strong><p>Local bread, tomatoes and fruit, with plenty of water alongside the grown-up tasting.</p></div></li>
+                <li><time>16:00</time><div><strong>Shade and reset</strong><p>Quiet games or downtime in Falset through the hottest hours.</p></div></li>
+                <li><time>19:30</time><div><strong>Dinner in Falset</strong><p>Use a terrace in town or stay with family if the day is flowing.</p></div></li>
+              </ol>
+              <details class="field-notes"><summary>Vineyard safety and practical notes</summary><div><p><b>Parking</b>Follow the family’s instructions and keep work access clear.</p><p><b>Walking</b>Dusty, uneven and potentially steep.</p><p><b>Pack</b>Closed shoes, hats and refillable bottles.</p></div></details>
+            </div>
+            <figure class="day-image portrait"><img src="assets/images/priorat-summer.jpg" alt="Rows of vines on a warm Priorat hillside" loading="lazy" /><figcaption>Bigotis Del Gat / family day</figcaption></figure>
+          </article>
+
+          <article class="day-entry shell photo-left reveal" id="day-13" data-map-day="13">
+            <div class="day-date"><span>Tuesday</span><strong>01</strong><small>September</small></div>
+            <div class="day-copy">
+              <p class="day-place">Siurana / Bellmunt alternative</p>
+              <h3>One hilltop outing</h3>
+              <p class="day-summary">Choose Siurana in cooler conditions. Use the Bellmunt mines if heat or younger legs make a contained visit wiser.</p>
+              <ol class="agenda">
+                <li><time>09:00</time><div><strong>Drive to Siurana</strong><p>Allow 35 to 40 min on winding roads and park outside the village.</p></div></li>
+                <li><time>10:00</time><div><strong>Village walk</strong><p>Short lanes, the church and selected viewpoints with close child supervision.</p></div></li>
+                <li><time>12:45</time><div><strong>Lunch</strong><p>Reserve shade in Siurana or Cornudella, or bring a picnic.</p></div></li>
+                <li><time>19:00</time><div><strong>Final Falset dinner</strong><p>Family time and a calm pack for tomorrow’s flight.</p></div></li>
+              </ol>
+              <details class="field-notes"><summary>Safety and practical notes</summary><div><p><b>Parking</b>Use designated spaces before Siurana.</p><p><b>Walking</b>Cobbles and nearby drops require close supervision.</p><p><b>Alternative</b>Bellmunt is about 15 min from Falset. Book any mine tour.</p></div></details>
+            </div>
+            <figure class="day-image panorama"><img src="assets/images/siurana.jpg" alt="Siurana village above dramatic cliffs" loading="lazy" /><figcaption>Siurana / 35 to 40 min from Falset</figcaption></figure>
+          </article>
+
+          <article class="day-entry shell reveal" id="day-14" data-map-day="14">
+            <div class="day-date"><span>Wednesday</span><strong>02</strong><small>September</small></div>
+            <div class="day-copy">
+              <p class="day-place">Falset / Barcelona / London</p>
+              <h3>Falset to Heathrow</h3>
+              <p class="day-summary">A slow morning, a generous airport buffer and the evening flight home.</p>
+              <ol class="agenda">
+                <li><time>09:00</time><div><strong>Morning and packing</strong><p>Breakfast, family goodbyes and a final check of passports and chargers.</p></div></li>
+                <li><time>12:30</time><div><strong>Lunch in Falset</strong><p>Eat before the road so the airport run is not controlled by hunger.</p></div></li>
+                <li><time>14:30</time><div><strong>Drive to Barcelona Airport</strong><p>Allow 1 hr 45 min to 2 hr, then fuel and return the car.</p></div></li>
+                <li><time>17:00</time><div><strong>Barcelona lounge and flight</strong><p>Use eligible Amex access if guest rules work. BA departs 19:30 and arrives Heathrow at 20:45.</p></div></li>
+              </ol>
+              <details class="field-notes"><summary>Airport and practical notes</summary><div><p><b>Car return</b>Allow time for fuel and unloading ten people.</p><p><b>Lounge</b>Confirm opening hours, guests and child access.</p><p><b>Cabin bags</b>Passports, medicines and devices stay with the adults.</p></div></details>
+            </div>
+            <figure class="day-image"><img src="assets/images/falset.jpg" alt="Falset in the Priorat landscape" loading="lazy" /><figcaption>British Airways BCN to LHR / 19:30</figcaption></figure>
+          </article>
+        </section>
       </section>
 
-      <section class="map-section section" id="trip-map" aria-labelledby="map-title">
-        <div class="wrap map-heading"><div><p class="eyebrow light"><span></span> The whole route at a glance</p><h2 id="map-title">City, sea<br /><em>& vineyard.</em></h2></div><p>Choose a chapter or any day. Drive times are approximate; live traffic, parking controls and seasonal access always win.</p></div>
-        <div class="map-shell wrap">
-          <div class="map-panel">
-            <div class="map-tabs" role="tablist" aria-label="Map day selector">
-              <button class="active" data-map-select="all" type="button"><span>All</span><small>Full route</small></button>
-              <button data-map-select="1" type="button"><span>01</span><small>Arrival</small></button>
-              <button data-map-select="2" type="button"><span>02</span><small>Girona</small></button>
-              <button data-map-select="3" type="button"><span>03</span><small>Banyoles</small></button>
-              <button data-map-select="4" type="button"><span>04</span><small>To camp</small></button>
-              <button data-map-select="5" type="button"><span>05</span><small>Llafranc</small></button>
-              <button data-map-select="6" type="button"><span>06</span><small>Tamariu</small></button>
-              <button data-map-select="7" type="button"><span>07</span><small>Palafrugell</small></button>
-              <button data-map-select="8" type="button"><span>08</span><small>Cap Roig</small></button>
-              <button data-map-select="9" type="button"><span>09</span><small>Begur</small></button>
-              <button data-map-select="10" type="button"><span>10</span><small>Sa Riera</small></button>
-              <button data-map-select="11" type="button"><span>11</span><small>To Falset</small></button>
-              <button data-map-select="12" type="button"><span>12</span><small>Vineyard</small></button>
-              <button data-map-select="13" type="button"><span>13</span><small>Siurana</small></button>
-              <button data-map-select="14" type="button"><span>14</span><small>Flight</small></button>
-            </div>
-            <div class="map-note" id="map-note"><span class="map-note-number">∞</span><div><small>Full-trip view</small><strong>13 nights, three bases</strong><p>Select a day to focus the route.</p></div></div>
+      <section class="map-section" id="trip-map" aria-labelledby="map-title">
+        <div class="map-head shell reveal">
+          <div><p class="section-label">All three chapters</p><h2 id="map-title">The route</h2></div>
+          <p>Select any day to isolate its drive. Times remain planning estimates, not promises.</p>
+        </div>
+        <div class="map-frame shell reveal">
+          <div class="map-controls" role="tablist" aria-label="Map day selector">
+            <button class="active" data-map-select="all" type="button">Whole route</button>
+            <button data-map-select="1" type="button">20</button>
+            <button data-map-select="2" type="button">21</button>
+            <button data-map-select="3" type="button">22</button>
+            <button data-map-select="4" type="button">23</button>
+            <button data-map-select="5" type="button">24</button>
+            <button data-map-select="6" type="button">25</button>
+            <button data-map-select="7" type="button">26</button>
+            <button data-map-select="8" type="button">27</button>
+            <button data-map-select="9" type="button">28</button>
+            <button data-map-select="10" type="button">29</button>
+            <button data-map-select="11" type="button">30</button>
+            <button data-map-select="12" type="button">31</button>
+            <button data-map-select="13" type="button">01</button>
+            <button data-map-select="14" type="button">02</button>
           </div>
-          <div id="map" aria-label="Interactive map of the full Catalonia itinerary"></div>
+          <div id="map" aria-label="Interactive map of the Catalonia itinerary"></div>
+          <div class="map-caption" id="map-note" aria-live="polite"><span>Full route</span><strong>Barcelona / Girona / Palafrugell / Falset</strong></div>
         </div>
       </section>
 
-      <section class="packing-section section wrap" aria-labelledby="packing-title">
-        <div class="packing-intro">
-          <p class="eyebrow"><span></span> One trip, three kinds of bag</p>
-          <h2 id="packing-title">Pack light.<br /><em>Move easily.</em></h2>
-          <p>Tick things off as they land in the bag. Progress stays saved on this device.</p>
-          <div class="packing-progress" aria-live="polite"><svg viewBox="0 0 120 120" aria-hidden="true"><circle class="progress-track" cx="60" cy="60" r="52"></circle><circle class="progress-value" id="progress-ring" cx="60" cy="60" r="52"></circle></svg><div><strong id="progress-count">0/12</strong><span>ready</span></div></div>
-        </div>
-        <div class="packing-lists">
-          <div class="pack-group"><div class="pack-group-title"><i data-lucide="plane"></i><span><strong>Travel days</strong><small>Close at hand</small></span></div>
-            <label><input type="checkbox" data-pack="passports" /><span>Passports + flight details <small>One adult owns the pouch</small></span></label>
-            <label><input type="checkbox" data-pack="seats" /><span>Car-seat plan <small>Checked before pickup</small></span></label>
-            <label><input type="checkbox" data-pack="snacks" /><span>Travel snacks <small>Enough for delays</small></span></label>
-            <label><input type="checkbox" data-pack="chargers" /><span>Chargers + power bank <small>Cabin bag</small></span></label>
-          </div>
-          <div class="pack-group"><div class="pack-group-title"><i data-lucide="waves"></i><span><strong>Into the blue</strong><small>Shared coast kit</small></span></div>
-            <label><input type="checkbox" data-pack="masks" /><span>Snorkel masks <small>Fit-test at home</small></span></label>
-            <label><input type="checkbox" data-pack="shoes" /><span>Water shoes <small>Rocky-cove essential</small></span></label>
-            <label><input type="checkbox" data-pack="vests" /><span>Bright rash vests <small>Easy group spotting</small></span></label>
-            <label><input type="checkbox" data-pack="spf" /><span>High SPF + hats <small>Label every hat</small></span></label>
-          </div>
-          <div class="pack-group"><div class="pack-group-title"><i data-lucide="grape"></i><span><strong>City & vines</strong><small>For land days</small></span></div>
-            <label><input type="checkbox" data-pack="walkers" /><span>Grippy walking shoes <small>Cobbles + vineyard rows</small></span></label>
-            <label><input type="checkbox" data-pack="bottles" /><span>Refillable bottles <small>Colour-coded</small></span></label>
-            <label><input type="checkbox" data-pack="layers" /><span>Light evening layers <small>One each</small></span></label>
-            <label><input type="checkbox" data-pack="firstaid" /><span>Mini first-aid kit <small>Plasters + bite relief</small></span></label>
-          </div>
+      <section class="packing shell reveal" aria-labelledby="packing-title">
+        <header>
+          <p class="section-label">Shared packing list</p>
+          <h2 id="packing-title">Only what earns its place.</h2>
+          <p>Ticked items are saved on this device.</p>
+          <div class="packing-meter"><span id="packing-bar"></span></div>
+          <small id="packing-count">0 of 12 packed</small>
+        </header>
+        <div class="packing-columns">
+          <fieldset><legend>Travel</legend>
+            <label><input type="checkbox" data-pack="passports" /><span>Passports and flight details</span></label>
+            <label><input type="checkbox" data-pack="seats" /><span>Car-seat plan</span></label>
+            <label><input type="checkbox" data-pack="snacks" /><span>Travel snacks</span></label>
+            <label><input type="checkbox" data-pack="chargers" /><span>Chargers and power bank</span></label>
+          </fieldset>
+          <fieldset><legend>Water</legend>
+            <label><input type="checkbox" data-pack="masks" /><span>Snorkel masks</span></label>
+            <label><input type="checkbox" data-pack="shoes" /><span>Water shoes</span></label>
+            <label><input type="checkbox" data-pack="vests" /><span>Bright rash vests</span></label>
+            <label><input type="checkbox" data-pack="spf" /><span>High SPF and hats</span></label>
+          </fieldset>
+          <fieldset><legend>City and vines</legend>
+            <label><input type="checkbox" data-pack="walkers" /><span>Grippy walking shoes</span></label>
+            <label><input type="checkbox" data-pack="bottles" /><span>Refillable bottles</span></label>
+            <label><input type="checkbox" data-pack="layers" /><span>Light evening layers</span></label>
+            <label><input type="checkbox" data-pack="firstaid" /><span>Small first-aid kit</span></label>
+          </fieldset>
         </div>
       </section>
-
-      <section class="group-pact section"><div class="wrap pact-inner"><div class="pact-seal"><i data-lucide="shell"></i><span>Our<br />holiday<br />pact</span></div><blockquote>“Nobody rushes a swim,<br />and everyone carries <em>something.</em>”</blockquote><div class="pact-rules"><span>01 · Buddy up near water</span><span>02 · Shade at midday</span><span>03 · One flexible plan B</span><span>04 · Family time beats the timetable</span></div></div></section>
     </main>
 
     <footer>
-      <div class="wrap footer-main">
-        <div><a class="wordmark" href="#top"><span class="sun-mark"></span><span>SPAIN <em>’26</em></span></a><p>Made for our 20 August to 2 September<br />family route through Catalonia.</p></div>
-        <div class="footer-links"><strong>Jump back in</strong><a href="#itinerary">Day-by-day plan</a><a href="#girona-swim">Girona swim pick</a><a href="#beach-edit">Perfect beach edit</a><a href="#trip-map">Interactive map</a><a href="#packing-title">Packing list</a></div>
-        <div class="footer-links"><strong>Useful sources</strong><a href="https://www.magma-cat.com/en/faqs/" target="_blank" rel="noreferrer">Magma family guide ↗</a><a href="https://visitpalafrugell.cat/en/" target="_blank" rel="noreferrer">Visit Palafrugell ↗</a><a href="https://visitbegur.cat/en/discover/beaches/" target="_blank" rel="noreferrer">Visit Begur beaches ↗</a><a href="https://visitpalamos.cat/en/platja-de-castell/" target="_blank" rel="noreferrer">Platja de Castell ↗</a><a href="https://www.turismepriorat.org/en" target="_blank" rel="noreferrer">Priorat tourism ↗</a></div>
+      <div class="footer-main shell">
+        <div><a class="monogram" href="#top">C / E</a><p>Our Catalonia notes<br />20 August to 2 September 2026</p></div>
+        <div><p class="footer-label">Go to</p><a href="#itinerary">Itinerary</a><a href="#beach-edit">Beach guide</a><a href="#trip-map">Map</a><a href="#packing-title">Packing</a></div>
+        <div><p class="footer-label">Useful sources</p><a href="https://www.magma-cat.com/en/faqs/" target="_blank" rel="noreferrer">Magma family guide ↗</a><a href="https://visitpalafrugell.cat/en/" target="_blank" rel="noreferrer">Visit Palafrugell ↗</a><a href="https://visitbegur.cat/en/discover/beaches/" target="_blank" rel="noreferrer">Visit Begur ↗</a><a href="https://www.turismepriorat.org/en" target="_blank" rel="noreferrer">Priorat tourism ↗</a></div>
+        <button class="footer-share" id="footer-share" type="button">Copy the link</button>
       </div>
-      <div class="wrap credits">
-        <p>Times and access notes are planning guidance. Check live traffic, local conditions, lifeguard flags and seasonal opening hours before setting out.</p>
-        <details><summary>Photography credits</summary><p>Girona riverside © Infernalfox (CC BY-SA 3.0); Girona walls © Joe Mabel (CC BY-SA 4.0); Banyoles © Mikipons (CC BY-SA 4.0); Priorat vineyards © Angela Llop (CC BY-SA 2.0); Siurana © Elemaki (CC BY 3.0); Falset © Jordi Gili (CC BY-SA 4.0). Calella © Jorge Franganillo (CC BY 2.0); Llafranc © Chris j wood (CC BY-SA 4.0); Tamariu © Isidro Jabato (CC BY-SA 4.0); Aiguablava © PaddyBriggs (public domain); Sa Riera © PaddyBriggs (public domain); Platja de Castell © Kritzolina (CC BY-SA 4.0); Cap Roig © Jacques Le Letty (CC BY-SA 4.0); Costa Brava © Green slash (CC BY-SA 3.0). Images via Wikimedia Commons.</p></details>
+      <div class="footer-legal shell">
+        <p>Access, traffic and sea conditions change. Check local signs, lifeguard flags and opening hours on the day.</p>
+        <details><summary>Photography credits</summary><p>Girona riverside © Infernalfox; Girona walls © Joe Mabel; Banyoles © Mikipons; Priorat vineyards © Angela Llop; Siurana © Elemaki; Falset © Jordi Gili; Calella © Jorge Franganillo; Llafranc © Chris j wood; Tamariu © Isidro Jabato; Aiguablava and Sa Riera © PaddyBriggs; Platja de Castell © Kritzolina; Costa Brava © Green slash. Creative Commons or public domain images via Wikimedia Commons.</p></details>
       </div>
     </footer>
 
-    <div class="toast" id="toast" role="status" aria-live="polite"><i data-lucide="check"></i><span>Holiday link copied</span></div>
-    <button class="back-top" id="back-top" type="button" aria-label="Back to the top"><i data-lucide="arrow-up"></i></button>
+    <div class="toast" id="toast" role="status" aria-live="polite">Link copied</div>
+    <button class="back-top" id="back-top" type="button" aria-label="Back to top">↑</button>
 
     <script src="https://unpkg.com/three@0.149.0/build/three.min.js"></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
     <script src="app.js"></script>
   </body>
 </html>
