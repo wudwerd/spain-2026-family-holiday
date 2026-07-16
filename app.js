@@ -7,6 +7,12 @@ function initReveal() {
     return;
   }
 
+  items.forEach((item) => {
+    const top = item.getBoundingClientRect().top;
+    if (top > window.innerHeight * 0.82) item.classList.add("will-reveal");
+    else item.classList.add("in-view");
+  });
+
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
@@ -19,18 +25,91 @@ function initReveal() {
     { threshold: 0.08, rootMargin: "0px 0px -8% 0px" }
   );
 
-  items.forEach((item) => observer.observe(item));
+  items.filter((item) => item.classList.contains("will-reveal")).forEach((item) => observer.observe(item));
+}
+
+function initAnchorNavigation() {
+  const rail = document.querySelector(".date-rail");
+  const initialHash = window.location.hash;
+  let animationFrame = 0;
+
+  if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+
+  const getTargetY = (target) => {
+    if (target.id === "top") return 0;
+    const offset = (rail?.getBoundingClientRect().height || 0) + 18;
+    let absoluteTop = 0;
+    let node = target;
+    while (node) {
+      absoluteTop += node.offsetTop || 0;
+      node = node.offsetParent;
+    }
+    return Math.max(0, absoluteTop - offset);
+  };
+
+  const scrollToTarget = (target, animate = true) => {
+    cancelAnimationFrame(animationFrame);
+    target.classList.add("in-view");
+    const start = window.scrollY;
+    const end = getTargetY(target);
+    const distance = end - start;
+
+    if (!animate || reduceMotion.matches || Math.abs(distance) < 2) {
+      window.scrollTo(0, end);
+      return;
+    }
+
+    const duration = 620;
+    const started = performance.now();
+    const frame = (now) => {
+      const progress = Math.min(1, (now - started) / duration);
+      const eased = 1 - Math.pow(1 - progress, 4);
+      window.scrollTo(0, start + distance * eased);
+      if (progress < 1) animationFrame = requestAnimationFrame(frame);
+    };
+    animationFrame = requestAnimationFrame(frame);
+  };
+
+  document.querySelectorAll('a[href^="#"]').forEach((link) => {
+    link.addEventListener("click", (event) => {
+      const hash = link.getAttribute("href");
+      const target = hash ? document.querySelector(hash) : null;
+      if (!target) return;
+      event.preventDefault();
+      history.pushState(null, "", hash);
+      scrollToTarget(target, true);
+    });
+  });
+
+  const restoreHash = (hash = window.location.hash) => {
+    const target = hash ? document.querySelector(hash) : null;
+    if (target) scrollToTarget(target, false);
+  };
+
+  window.addEventListener("popstate", () => restoreHash());
+  if (initialHash) {
+    requestAnimationFrame(() => restoreHash(initialHash));
+    window.addEventListener("load", () => setTimeout(() => restoreHash(initialHash), 40), { once: true });
+    window.addEventListener("pageshow", () => setTimeout(() => restoreHash(initialHash), 80), { once: true });
+    if (document.fonts?.ready) {
+      document.fonts.ready.then(() => setTimeout(() => restoreHash(initialHash), 20)).catch(() => undefined);
+    }
+  }
 }
 
 function initDateRail() {
   const links = [...document.querySelectorAll(".date-links a")];
+  const scroller = document.querySelector(".date-links");
   const days = [...document.querySelectorAll("[data-map-day]")];
   if (!links.length || !days.length) return;
 
   const setActive = (day) => {
     const next = links.find((link) => link.dataset.day === day);
     links.forEach((link) => link.classList.toggle("active", link === next));
-    if (next) next.scrollIntoView({ behavior: reduceMotion.matches ? "auto" : "smooth", block: "nearest", inline: "center" });
+    if (next && scroller) {
+      const left = next.offsetLeft - scroller.clientWidth / 2 + next.clientWidth / 2;
+      scroller.scrollTo({ left, behavior: "auto" });
+    }
   };
 
   const observer = new IntersectionObserver(
@@ -412,6 +491,7 @@ function initWaterScene() {
   draw();
 }
 
+initAnchorNavigation();
 initReveal();
 initDateRail();
 initFieldNotes();
