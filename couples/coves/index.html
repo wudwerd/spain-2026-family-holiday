@@ -336,6 +336,11 @@ h1, h2, h3 { text-transform: uppercase; font-family: var(--serif); font-weight: 
 .training { padding: 120px 5vw 60px; }
 .training .split { margin-bottom: 40px; }
 .run-links { display: flex; flex-direction: column; gap: 2px; align-items: flex-start; }
+.btn-add { display: inline-block; border: 1px solid var(--ink); padding: 14px 28px; font-family: var(--sans); font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; white-space: nowrap; transition: all 0.25s; }
+.btn-add:hover { background: var(--ink); color: var(--ground); opacity: 1; }
+.own-form.panel { border: 1px solid var(--rule); padding: 52px 56px; margin-top: 56px; scroll-margin-top: 120px; background: rgba(38,35,30,0.02); }
+.own-form.panel .eyebrow { margin-bottom: 16px; }
+.own-form.panel h3 { font-size: clamp(22px,2.4vw,32px); }
 .own-form form { display: flex; flex-direction: column; gap: 22px; max-width: 560px; }
 .form-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 22px; }
 .own-form label { display: flex; flex-direction: column; gap: 8px; font-family: var(--sans); font-size: 9.5px; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-45); }
@@ -350,7 +355,7 @@ h1, h2, h3 { text-transform: uppercase; font-family: var(--serif); font-weight: 
 .own-run .spot-body { margin-top: 16px; }
 .own-run .own-actions { margin-top: 22px; display: flex; gap: 34px; }
 .own-run .own-actions a, .own-run .own-actions button { background: none; border: 0; padding: 0 0 6px; cursor: pointer; font-family: var(--sans); font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--ink); border-bottom: 1px solid var(--ink); }
-@media (max-width: 760px) { .own-run { grid-template-columns: 1fr; gap: 10px; padding: 38px 0; } .form-grid { grid-template-columns: 1fr; } }
+@media (max-width: 760px) { .own-run { grid-template-columns: 1fr; gap: 10px; padding: 38px 0; } .form-grid { grid-template-columns: 1fr; } .own-form.panel { padding: 30px 22px; margin-top: 36px; } .btn-add { padding: 12px 20px; } }
 .light-footnote { font-family: var(--sans); font-weight: 300; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-45); margin: 44px 0 0; text-align: center; }
 
 /* weather */
@@ -385,6 +390,8 @@ h1, h2, h3 { text-transform: uppercase; font-family: var(--serif); font-weight: 
 .map-name { font-family: var(--serif); font-weight: 300; font-size: 21px; line-height: 1.2; letter-spacing: 0.1em; text-transform: uppercase; }
 .map-note { font-family: var(--sans); font-weight: 300; font-size: 9.5px; letter-spacing: 0.14em; text-transform: uppercase; margin-top: 6px; opacity: 0.75; }
 .map-drive { font-family: var(--sans); font-weight: 300; font-size: 9.5px; letter-spacing: 0.1em; text-transform: uppercase; text-align: right; line-height: 1.7; opacity: 0.85; }
+.map-dir { display: block; margin-top: 8px; font-size: 9px; letter-spacing: 0.22em; color: var(--dark-text); border: 0; }
+.map-dir:hover { opacity: 0.7; }
 .map-panel { flex: 1 1 480px; min-width: 320px; position: sticky; top: 120px; }
 .map-panel svg { width: 100%; height: auto; max-height: 74vh; display: block; }
 .sea-label { font-family: var(--serif); font-style: italic; font-size: 20px; }
@@ -783,6 +790,7 @@ footer { border-top: 1px solid var(--rule); padding: 100px 5vw 48px; }
   <div class="split asym" data-reveal>
     <h2>The runner’s pages.</h2>
     <p>Three routes from the gate of Camping Palafrugell, one per training intent. Distances are map-measured; treat them as ±5% and calibrate on the first run. August sunrise is around 07:05.</p>
+    <a class="btn-add" href="#add-route">Add your own route ↓</a>
   </div>
 <article class="run" data-reveal>
       <div class="run-head">
@@ -872,8 +880,8 @@ footer { border-top: 1px solid var(--rule); padding: 100px 5vw 48px; }
       </div>
     </article>
   <div id="own-runs"></div>
-  <article class="spot-plain own-form" data-reveal>
-    <div><h3>Add your own route</h3><div class="spot-tag">Saved on this phone, for whoever runs</div></div>
+  <article class="spot-plain own-form panel" id="add-route" data-reveal>
+    <div><div class="eyebrow">For the runners</div><h3>Add your own route</h3><div class="spot-tag">Saved on this phone, for whoever runs</div></div>
     <div>
       <form id="run-form" autocomplete="off">
         <div class="form-grid">
@@ -969,31 +977,31 @@ footer { border-top: 1px solid var(--rule); padding: 100px 5vw 48px; }
 <div class="map-header">The base / Camping Palafrugell</div>
 <div class="map-row is-active" data-place="0" role="button" tabindex="0" aria-label="Show drive to Camping Palafrugell">
         <div><div class="map-name">Camping Palafrugell</div><div class="map-note">Base II, seven nights</div></div>
-        <div class="map-drive">BCN → camp / 1 h 45 to 2 h</div>
+        <div class="map-drive">BCN → camp / 1 h 45 to 2 h<a class="map-dir" href="https://www.google.com/maps/dir/?api=1&amp;origin=Josep+Tarradellas+Barcelona-El+Prat+Airport&amp;destination=Camping+Calella+de+Palafrugell&amp;travelmode=driving" target="_blank" rel="noopener" aria-label="Driving directions to Camping Palafrugell">Directions ↗</a></div>
       </div>
 <div class="map-row" data-place="1" role="button" tabindex="0" aria-label="Show drive to Calella &amp; El Canadell">
         <div><div class="map-name">Calella &amp; El Canadell</div><div class="map-note">Town beach, easiest</div></div>
-        <div class="map-drive">10 min</div>
+        <div class="map-drive">10 min<a class="map-dir" href="https://www.google.com/maps/dir/?api=1&amp;origin=Camping+Calella+de+Palafrugell&amp;destination=Calella+de+Palafrugell&amp;travelmode=driving" target="_blank" rel="noopener" aria-label="Driving directions to Calella &amp; El Canadell">Directions ↗</a></div>
       </div>
 <div class="map-row" data-place="2" role="button" tabindex="0" aria-label="Show drive to Llafranc">
         <div><div class="map-name">Llafranc</div><div class="map-note">All-rounder, date nights</div></div>
-        <div class="map-drive">10 min</div>
+        <div class="map-drive">10 min<a class="map-dir" href="https://www.google.com/maps/dir/?api=1&amp;origin=Camping+Calella+de+Palafrugell&amp;destination=Llafranc&amp;travelmode=driving" target="_blank" rel="noopener" aria-label="Driving directions to Llafranc">Directions ↗</a></div>
       </div>
 <div class="map-row" data-place="3" role="button" tabindex="0" aria-label="Show drive to Tamariu">
         <div><div class="map-name">Tamariu</div><div class="map-note">Snorkel cove</div></div>
-        <div class="map-drive">15 to 20 min</div>
+        <div class="map-drive">15 to 20 min<a class="map-dir" href="https://www.google.com/maps/dir/?api=1&amp;origin=Camping+Calella+de+Palafrugell&amp;destination=Tamariu%2C+Palafrugell&amp;travelmode=driving" target="_blank" rel="noopener" aria-label="Driving directions to Tamariu">Directions ↗</a></div>
       </div>
 <div class="map-row" data-place="4" role="button" tabindex="0" aria-label="Show drive to Aiguablava">
         <div><div class="map-name">Aiguablava</div><div class="map-note">Most spectacular, Toc al Mar</div></div>
-        <div class="map-drive">25 to 30 min</div>
+        <div class="map-drive">25 to 30 min<a class="map-dir" href="https://www.google.com/maps/dir/?api=1&amp;origin=Camping+Calella+de+Palafrugell&amp;destination=Platja+de+Aiguablava&amp;travelmode=driving" target="_blank" rel="noopener" aria-label="Driving directions to Aiguablava">Directions ↗</a></div>
       </div>
 <div class="map-row" data-place="5" role="button" tabindex="0" aria-label="Show drive to Sa Riera &amp; Illa Roja">
         <div><div class="map-name">Sa Riera &amp; Illa Roja</div><div class="map-note">Space, plus the wild cove</div></div>
-        <div class="map-drive">25 to 30 min</div>
+        <div class="map-drive">25 to 30 min<a class="map-dir" href="https://www.google.com/maps/dir/?api=1&amp;origin=Camping+Calella+de+Palafrugell&amp;destination=Sa+Riera%2C+Begur&amp;travelmode=driving" target="_blank" rel="noopener" aria-label="Driving directions to Sa Riera &amp; Illa Roja">Directions ↗</a></div>
       </div>
 <div class="map-row" data-place="6" role="button" tabindex="0" aria-label="Show drive to Platja de Castell">
         <div><div class="map-name">Platja de Castell</div><div class="map-note">Wild beach, Cap Roig above</div></div>
-        <div class="map-drive">About 20 min</div>
+        <div class="map-drive">About 20 min<a class="map-dir" href="https://www.google.com/maps/dir/?api=1&amp;origin=Camping+Calella+de+Palafrugell&amp;destination=Platja+de+Castell%2C+Palamos&amp;travelmode=driving" target="_blank" rel="noopener" aria-label="Driving directions to Platja de Castell">Directions ↗</a></div>
       </div>
       </div>
       <div class="map-panel">
