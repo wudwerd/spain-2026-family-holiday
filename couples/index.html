@@ -326,6 +326,29 @@ h1, h2, h3 { text-transform: uppercase; font-family: var(--serif); font-weight: 
 .run-links { display: flex; flex-direction: column; gap: 2px; align-items: flex-start; }
 .light-footnote { font-family: var(--sans); font-weight: 300; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-45); margin: 44px 0 0; text-align: center; }
 
+/* weather */
+.weather-sec { padding: 120px 5vw 60px; }
+.weather-sec .split { margin-bottom: 26px; }
+.wx-sea { font-family: var(--sans); font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--ink-45); text-align: center; margin-bottom: 34px; min-height: 14px; }
+.wx-head[hidden] { display: none; }
+.wx-head { display: grid; grid-template-columns: minmax(88px,150px) 1fr 1fr 1fr; gap: 10px 22px; padding: 0 0 12px; font-family: var(--sans); font-size: 9.5px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--ink-45); text-align: left; max-width: 980px; margin: 0 auto; }
+.wx-days { max-width: 980px; margin: 0 auto; border-bottom: 1px solid var(--rule); }
+.wx-loading, .wx-fail { font-family: var(--serif); font-style: italic; font-size: 18px; color: var(--ink-45); text-align: center; padding: 30px 0 34px; }
+.wx-row { display: grid; grid-template-columns: minmax(88px,150px) 1fr 1fr 1fr; gap: 10px 22px; align-items: baseline; padding: 16px 0; border-top: 1px solid var(--rule-soft); }
+.wx-row:first-child { border-top: 1px solid var(--rule); }
+.wx-day { font-family: var(--sans); font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-60); }
+.wx-cell { min-width: 0; }
+.wx-temp { font-family: var(--serif); font-weight: 300; font-size: 25px; font-variant-numeric: tabular-nums; }
+.wx-word { font-family: var(--serif); font-style: italic; font-size: 15px; color: var(--ink-60); margin-top: 2px; }
+.wx-rain { font-family: var(--sans); font-weight: 300; font-size: 9.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-45); margin-top: 3px; }
+@media (max-width: 760px) {
+  .weather-sec { padding: 76px 5vw 40px; }
+  .wx-head { grid-template-columns: 54px 1fr 1fr 1fr; gap: 8px 10px; }
+  .wx-row { grid-template-columns: 54px 1fr 1fr 1fr; gap: 8px 10px; }
+  .wx-temp { font-size: 20px; }
+  .wx-word { font-size: 13px; }
+}
+
 /* trip map */
 .map-cols { display: flex; flex-wrap: wrap; gap: 80px; align-items: start; }
 .map-list { flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; border-bottom: 1px solid var(--dark-rule); }
@@ -436,6 +459,7 @@ footer { border-top: 1px solid var(--rule); padding: 100px 5vw 48px; }
     <a href="#datenights">Date nights</a>
     <a href="#running">Running</a>
     <a href="#training">Training</a>
+    <a href="#weather">Weather</a>
     <a href="#trip-map">Map</a>
   </nav>
 </header>
@@ -1020,6 +1044,19 @@ footer { border-top: 1px solid var(--rule); padding: 100px 5vw 48px; }
   <p class="light-footnote">Gym opening hours vary through August, check at reception on day one. Sand and stair sessions belong before 09:00; the heat after is for the towel.</p>
 </section>
 
+<section id="weather" class="wrap weather-sec">
+  <div class="split" data-reveal>
+    <h2>The next ten days.</h2>
+    <p>Live for the Palafrugell coast, refreshed every time the page opens: morning, afternoon and night from the blended European forecast models.</p>
+  </div>
+  <div class="wx-sea" id="wx-sea"></div>
+  <div class="wx-head" id="wx-head" hidden>
+    <div></div><div>Morning</div><div>Afternoon</div><div>Night</div>
+  </div>
+  <div id="weather-days" class="wx-days"><div class="wx-loading">Reading the sky…</div></div>
+  <p class="light-footnote">Forecast: Open-Meteo best-match model blend. Beyond day seven, treat it as a mood, not a promise.</p>
+</section>
+
 <section id="trip-map" class="dark-section trip-map">
   <div class="wrap-inner">
     <div class="split head-gap" data-reveal>
@@ -1124,6 +1161,7 @@ footer { border-top: 1px solid var(--rule); padding: 100px 5vw 48px; }
             <a href="#datenights">Date nights</a>
             <a href="#running">The runner's pages</a>
             <a href="#training">The Hyrox block</a>
+            <a href="#weather">The next ten days</a>
             <a href="#trip-map">Map</a>
             <a href="coves/">The campsite-week edition</a>
           </div>
@@ -1228,6 +1266,67 @@ footer { border-top: 1px solid var(--rule); padding: 100px 5vw 48px; }
     });
   });
   setPlace(0);
+})();
+</script>
+<script>
+(function () {
+  var days = document.getElementById('weather-days');
+  if (!days || !window.fetch) return;
+  var WORDS = {0:'Clear',1:'Mostly clear',2:'Sun and cloud',3:'Overcast',45:'Fog',48:'Fog',51:'Drizzle',53:'Drizzle',55:'Drizzle',61:'Light rain',63:'Rain',65:'Heavy rain',66:'Rain',67:'Rain',80:'Showers',81:'Showers',82:'Heavy showers',95:'Thunderstorm',96:'Storm and hail',99:'Storm and hail'};
+  var DAYS = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  var MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  function word(code) { return WORDS[code] || 'Changeable'; }
+  function cell(part) {
+    if (!part) return '<div class="wx-cell"></div>';
+    var rain = part.rain >= 20 ? '<div class="wx-rain">' + part.rain + '% rain</div>' : '<div class="wx-rain">&nbsp;</div>';
+    return '<div class="wx-cell"><div class="wx-temp">' + part.temp + '°</div><div class="wx-word">' + word(part.code) + '</div>' + rain + '</div>';
+  }
+  function agg(hours, from, to) {
+    var t = 0, n = 0, code = -1, rain = 0;
+    hours.forEach(function (h) {
+      var hr = +h.time.slice(11, 13);
+      if (hr < from || hr >= to) return;
+      t += h.temp; n++;
+      if (h.code > code) code = h.code;
+      if (h.rain > rain) rain = h.rain;
+    });
+    if (!n) return null;
+    return { temp: Math.round(t / n), code: code, rain: rain };
+  }
+  function fail() { days.innerHTML = '<div class="wx-fail">The live forecast could not load here — it runs on the website edition.</div>'; }
+  function timedFetch(url) {
+    var ac = ('AbortController' in window) ? new AbortController() : null;
+    if (ac) setTimeout(function () { ac.abort(); }, 12000);
+    return fetch(url, ac ? { signal: ac.signal } : undefined);
+  }
+  timedFetch('https://api.open-meteo.com/v1/forecast?latitude=41.8983&longitude=3.1738&hourly=temperature_2m,precipitation_probability,weather_code&forecast_days=10&timezone=Europe%2FMadrid')
+    .then(function (r) { if (!r.ok) throw 0; return r.json(); })
+    .then(function (d) {
+      var h = d.hourly, byDay = {}, order = [];
+      for (var i = 0; i < h.time.length; i++) {
+        var date = h.time[i].slice(0, 10);
+        if (!byDay[date]) { byDay[date] = []; order.push(date); }
+        byDay[date].push({ time: h.time[i], temp: h.temperature_2m[i], code: h.weather_code[i], rain: h.precipitation_probability[i] || 0 });
+      }
+      var html = '';
+      order.slice(0, 10).forEach(function (date) {
+        var hours = byDay[date];
+        var dt = new Date(date + 'T12:00:00');
+        var label = DAYS[dt.getDay()] + ' ' + dt.getDate() + ' ' + MONTHS[dt.getMonth()];
+        html += '<div class="wx-row"><div class="wx-day">' + label + '</div>' +
+          cell(agg(hours, 6, 12)) + cell(agg(hours, 12, 18)) + cell(agg(hours, 18, 24)) + '</div>';
+      });
+      days.innerHTML = html;
+      document.getElementById('wx-head').hidden = false;
+    })
+    .catch(fail);
+  timedFetch('https://marine-api.open-meteo.com/v1/marine?latitude=41.8983&longitude=3.1738&hourly=sea_surface_temperature&forecast_days=1&timezone=Europe%2FMadrid')
+    .then(function (r) { if (!r.ok) throw 0; return r.json(); })
+    .then(function (d) {
+      var t = d.hourly.sea_surface_temperature[12];
+      if (t != null) document.getElementById('wx-sea').textContent = 'Sea temperature today · ' + Math.round(t) + '°';
+    })
+    .catch(function () {});
 })();
 </script>
 </body>
