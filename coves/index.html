@@ -1024,6 +1024,7 @@ footer { border-top: 1px solid var(--rule); padding: 100px 5vw 48px; }
     <p>Live for the Palafrugell coast, refreshed every time the page opens: morning, afternoon and night from the blended European forecast models.</p>
   </div>
   <div class="wx-sea" id="wx-sea"></div>
+  <div class="wx-sea" id="fx-line"></div>
   <div class="wx-head" id="wx-head" hidden>
     <div></div><div>Morning</div><div>Afternoon</div><div>Night</div>
   </div>
@@ -1269,6 +1270,15 @@ footer { border-top: 1px solid var(--rule); padding: 100px 5vw 48px; }
       document.getElementById('wx-head').hidden = false;
     })
     .catch(fail);
+  timedFetch('https://api.frankfurter.dev/v1/latest?base=EUR&symbols=GBP')
+    .then(function (r) { if (!r.ok) throw 0; return r.json(); })
+    .then(function (d) {
+      var g = d.rates && d.rates.GBP;
+      if (!g) return;
+      document.getElementById('fx-line').textContent =
+        '€1 = £' + g.toFixed(2) + ' · £1 = €' + (1 / g).toFixed(2) + ' · ECB daily rate';
+    })
+    .catch(function () {});
   timedFetch('https://marine-api.open-meteo.com/v1/marine?latitude=41.8983&longitude=3.1738&hourly=sea_surface_temperature&forecast_days=1&timezone=Europe%2FMadrid')
     .then(function (r) { if (!r.ok) throw 0; return r.json(); })
     .then(function (d) {
