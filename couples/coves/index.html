@@ -202,13 +202,15 @@ h1, h2, h3 { text-transform: uppercase; font-family: var(--serif); font-weight: 
 .split.sub h3 { font-size: clamp(24px,2.8vw,38px); line-height: 1.2; margin: 0; }
 .split.sub { margin-bottom: 60px; }
 .split.towel { margin: 120px 0 30px; }
+.split.asym { flex-direction: row; flex-wrap: wrap; align-items: baseline; justify-content: space-between; text-align: left; gap: 18px 70px; }
+.split.asym > p { margin-left: auto; max-width: 38ch; font-size: 18px; }
 
 /* hero — full-screen image, RH England overlay */
 .hero-full { position: relative; height: 100vh; height: 100svh; min-height: 560px; }
 .hero-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
 .hero-full::after { content: ''; position: absolute; inset: 0; background: linear-gradient(rgba(22,20,16,0.42), rgba(22,20,16,0.38) 45%, rgba(22,20,16,0.5)); }
 .hero-overlay { position: absolute; inset: 0; z-index: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; text-align: center; padding: 120px 6vw 9vh; color: #f6f3ec; }
-.hero-overlay h1 { font-size: clamp(32px,5vw,76px); line-height: 1.2; margin: 0; max-width: 20ch; text-shadow: 0 2px 34px rgba(0,0,0,0.55), 0 1px 8px rgba(0,0,0,0.35); animation: fadeUp 1.1s cubic-bezier(0.22,1,0.36,1) both; }
+.hero-overlay h1 { font-size: clamp(32px,5vw,76px); line-height: 1.2; margin: 0; max-width: 20ch; text-shadow: 0 1px 18px rgba(0,0,0,0.35); animation: fadeUp 1.1s cubic-bezier(0.22,1,0.36,1) both; }
 .hero-lede { font-family: var(--serif); font-style: italic; font-size: clamp(18px,1.8vw,22px); line-height: 1.6; margin: 34px 0 0; max-width: 50ch; color: rgba(246,243,236,0.92); text-wrap: pretty; text-shadow: 0 1px 16px rgba(0,0,0,0.3); animation: fadeUp 1.1s cubic-bezier(0.22,1,0.36,1) 0.25s both; }
 .hero-dates { font-family: var(--sans); font-weight: 400; font-size: 10.5px; line-height: 2.4; letter-spacing: 0.26em; text-transform: uppercase; color: rgba(246,243,236,0.85); margin-top: 38px; animation: fadeUp 1.1s cubic-bezier(0.22,1,0.36,1) 0.45s both; }
 .hero-capline { font-family: var(--sans); font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-45); padding: 18px 5vw 0; display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; text-align: center; }
@@ -234,24 +236,34 @@ h1, h2, h3 { text-transform: uppercase; font-family: var(--serif); font-weight: 
 .wide-fig img { width: 100%; aspect-ratio: 3/1; object-fit: cover; object-position: 50% 30%; display: block; }
 .wide-fig figcaption { font-family: var(--sans); font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-45); margin-top: 16px; text-align: center; padding: 0 5vw; }
 
-/* spot articles — centred RH stacks */
-.spot { border-top: 1px solid var(--rule); padding: 76px 0; display: flex; flex-direction: column; align-items: center; text-align: center; }
-.spot-fig { width: 100%; max-width: 960px; margin: 0 0 40px; }
-.spot-fig img { width: 100%; aspect-ratio: 3/2; object-fit: cover; display: block; }
+/* articles — editorial system: feature moments, alternating rows, text rows */
+.spot-feature { border-top: 1px solid var(--rule); padding: 72px 0 64px; }
+.spot-feature .spot-fig { width: 100%; max-width: none; margin: 0; }
+.spot-feature .spot-fig img { width: 100%; aspect-ratio: 21/10; object-fit: cover; display: block; }
+.spot-fig figcaption, .row-fig figcaption { font-family: var(--sans); font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-45); margin-top: 12px; }
 .spot-fig-pair .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-.spot-fig-pair .pair img { aspect-ratio: 4/3; }
-.spot-fig figcaption { font-family: var(--sans); font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-45); margin-top: 14px; }
-.spot h3 { font-size: clamp(20px,2.2vw,30px); line-height: 1.3; letter-spacing: 0.14em; margin: 0; font-weight: 400; }
-.spot-tag { font-family: var(--serif); font-style: italic; font-size: 19px; letter-spacing: 0.01em; color: var(--ink-60); margin-top: 12px; }
-.spot-body { font-family: var(--serif); font-size: 18.5px; line-height: 1.7; color: var(--ink-60); margin: 22px 0 0; max-width: 62ch; text-wrap: pretty; }
-.spot-facts { width: 100%; max-width: 520px; margin-top: 34px; text-align: left; }
+.spot-fig-pair .pair img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; }
+.feat-grid { display: grid; grid-template-columns: minmax(0,5fr) minmax(0,7fr); gap: 26px 90px; margin-top: 36px; }
+.spot-feature h3, .spot-row h3, .spot-plain h3 { font-size: clamp(20px,2.1vw,29px); line-height: 1.32; letter-spacing: 0.12em; margin: 0; font-weight: 400; }
+.spot-tag { font-family: var(--serif); font-style: italic; font-size: 18px; letter-spacing: 0.01em; color: var(--ink-60); margin-top: 10px; }
+.spot-body { font-family: var(--serif); font-size: 18.5px; line-height: 1.7; color: var(--ink-60); margin: 0 0 0; max-width: 58ch; text-wrap: pretty; }
+.spot-facts { max-width: 470px; margin-top: 28px; }
+.spot-row { display: grid; grid-template-columns: repeat(12, minmax(0,1fr)); gap: 32px 0; align-items: center; border-top: 1px solid var(--rule); padding: 64px 0; }
+.spot-row .row-fig { grid-column: 1 / span 6; margin: 0; }
+.spot-row .row-txt { grid-column: 8 / span 5; }
+.spot-row.rev .row-fig { grid-column: 7 / span 6; }
+.spot-row.rev .row-txt { grid-column: 1 / span 5; grid-row: 1; }
+.row-fig img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; }
+.row-fig.sq img { aspect-ratio: 1/1; }
+.row-txt .spot-body { margin-top: 20px; }
+.spot-plain { display: grid; grid-template-columns: minmax(0,5fr) minmax(0,7fr); gap: 24px 90px; border-top: 1px solid var(--rule); padding: 58px 0; }
 .fact-row { display: grid; grid-template-columns: 92px 1fr; gap: 14px; padding: 11px 0; border-bottom: 1px solid var(--rule-soft); font-family: var(--sans); font-size: 12.5px; font-weight: 300; line-height: 1.55; }
 .fact-row:first-child { border-top: 1px solid var(--rule-soft); }
 .fact-k { font-size: 9.5px; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-45); padding-top: 3px; }
 .fact-v { color: var(--ink-60); }
-
 /* dark variants */
 .spot-dk { border-top-color: var(--dark-rule); }
+.spot-dk figcaption { color: var(--dark-45); }
 .spot-dk .spot-tag { color: var(--dark-60); }
 .spot-dk .spot-body { color: var(--dark-60); }
 .spot-dk .spot-fig figcaption { color: var(--dark-45); }
@@ -324,6 +336,21 @@ h1, h2, h3 { text-transform: uppercase; font-family: var(--serif); font-weight: 
 .training { padding: 120px 5vw 60px; }
 .training .split { margin-bottom: 40px; }
 .run-links { display: flex; flex-direction: column; gap: 2px; align-items: flex-start; }
+.own-form form { display: flex; flex-direction: column; gap: 22px; max-width: 560px; }
+.form-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 22px; }
+.own-form label { display: flex; flex-direction: column; gap: 8px; font-family: var(--sans); font-size: 9.5px; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-45); }
+.own-form input { font-family: var(--serif); font-size: 18px; color: var(--ink); background: transparent; border: 0; border-bottom: 1px solid var(--rule); border-radius: 0; padding: 6px 0 10px; }
+.own-form input::placeholder { color: rgba(38,35,30,0.3); font-style: italic; }
+.own-form input:focus { outline: none; border-bottom-color: var(--ink); }
+.own-form button { align-self: flex-start; background: none; border: 1px solid var(--ink); color: var(--ink); padding: 14px 30px; font-family: var(--sans); font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; cursor: pointer; transition: all 0.25s; }
+.own-form button:hover { background: var(--ink); color: var(--ground); }
+.own-run { display: grid; grid-template-columns: minmax(0,5fr) minmax(0,7fr); gap: 20px 90px; border-top: 1px solid var(--rule); padding: 48px 0; }
+.own-run .own-nn { font-family: var(--sans); font-size: 10px; letter-spacing: 0.3em; color: var(--ink-45); margin-bottom: 12px; }
+.own-run .own-dist { font-family: var(--serif); font-weight: 300; font-size: 25px; font-variant-numeric: tabular-nums; margin-top: 14px; }
+.own-run .spot-body { margin-top: 16px; }
+.own-run .own-actions { margin-top: 22px; display: flex; gap: 34px; }
+.own-run .own-actions a, .own-run .own-actions button { background: none; border: 0; padding: 0 0 6px; cursor: pointer; font-family: var(--sans); font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--ink); border-bottom: 1px solid var(--ink); }
+@media (max-width: 760px) { .own-run { grid-template-columns: 1fr; gap: 10px; padding: 38px 0; } .form-grid { grid-template-columns: 1fr; } }
 .light-footnote { font-family: var(--sans); font-weight: 300; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-45); margin: 44px 0 0; text-align: center; }
 
 /* weather */
@@ -410,10 +437,14 @@ footer { border-top: 1px solid var(--rule); padding: 100px 5vw 48px; }
   .split.sub { margin-bottom: 40px; }
   .split.towel { margin: 76px 0 20px; }
 
-  .spot { padding: 52px 0; }
-  .spot-fig { margin-bottom: 28px; }
-  .spot-fig img { aspect-ratio: 4/3; }
+  .spot-feature { padding: 48px 0 44px; }
+  .spot-feature .spot-fig img { aspect-ratio: 3/2; }
+  .feat-grid { grid-template-columns: 1fr; gap: 18px; margin-top: 26px; }
+  .spot-row { display: block; padding: 46px 0; }
+  .spot-row .row-txt { margin-top: 24px; }
+  .spot-plain { grid-template-columns: 1fr; gap: 16px; padding: 44px 0; }
   .spot-body { font-size: 17.5px; }
+  .split.asym > p { margin-left: 0; }
 
   .aside { padding: 48px 0; gap: 28px; }
   .aside-label br { display: none; }
@@ -482,18 +513,19 @@ footer { border-top: 1px solid var(--rule); padding: 100px 5vw 48px; }
     <div class="chapter-meta">23 to 30 August / Camping Palafrugell</div>
   </header>
   <p class="chapter-lede pad-b" data-reveal>A week with nothing booked. The coves below are all within half an hour, and nobody has to come to any of them. Two cars means two plans: one group at the campsite pool, another snorkelling in Tamariu, everyone comparing notes over dinner.</p>
-<article class="spot" data-reveal>
+<article class="spot-feature" data-reveal>
   <figure class="spot-fig spot-fig-pair"><div class="pair"><img src="../assets/camping-cabin.jpg" alt="Camping Palafrugell" loading="lazy"><img src="../assets/camping-porch.jpg" alt="Camping Palafrugell" loading="lazy"></div><figcaption>The cabins at Camping Palafrugell (photos: the campsite)</figcaption></figure>
-  <h3>Camping Palafrugell</h3>
-  <div class="spot-tag">Base II — cabins under the pines</div>
-  <p class="spot-body">Timber cabins in the pine woods above Calella, porches and picnic tables out front, the pool at the centre of camp and the coves ten minutes away. Home for the week; everyone back for dinner.</p>
-  <div class="spot-facts">
+  <div class="feat-grid">
+    <div><h3>Camping Palafrugell</h3><div class="spot-tag">Base II — cabins under the pines</div></div>
+    <div><p class="spot-body">Timber cabins in the pine woods above Calella, porches and picnic tables out front, the pool at the centre of camp and the coves ten minutes away. Home for the week; everyone back for dinner.</p>
+<div class="spot-facts">
 <div class="fact-row"><div class="fact-k">Nights</div><div class="fact-v">23 to 30 August</div></div>
 <div class="fact-row"><div class="fact-k">Beaches</div><div class="fact-v">10 min to Calella and Llafranc</div></div>
 <div class="fact-row"><div class="fact-k">Cabins</div><div class="fact-v">Porches, picnic tables, the pool at the centre</div></div>
+</div></div>
   </div>
 </article>
-  <div class="split sub" data-reveal>
+  <div class="split asym sub" data-reveal>
     <h3>Choose the water by mood.</h3>
     <p>Hover the list. Parking is the only thing worth planning in August.</p>
   </div>
@@ -543,53 +575,48 @@ footer { border-top: 1px solid var(--rule); padding: 100px 5vw 48px; }
   </div>
   <div class="sources-line">Official access details: <a href="https://visitpalafrugell.cat/en/beaches-and-routes/" target="_blank" rel="noopener">Palafrugell</a> · <a href="https://visitbegur.cat/en/discover/beaches/" target="_blank" rel="noopener">Begur</a> · <a href="https://visitpalamos.cat/en/platja-de-castell/" target="_blank" rel="noopener">Castell</a></div>
 
-  <div class="split sub towel" data-reveal>
+  <div class="split asym sub towel" data-reveal>
     <h3>Beyond the towel.</h3>
     <p>For the days when someone wants more than sand. All optional, all beautiful.</p>
   </div>
-<article class="spot" data-reveal>
+<article class="spot-feature" data-reveal>
   <figure class="spot-fig"><img src="../assets/calella-port-bo.jpg" alt="The Camí de Ronda" loading="lazy"><figcaption>Port Bo, where the path begins</figcaption></figure>
-  <h3>The Camí de Ronda</h3>
-  <div class="spot-tag">The golden hour walk</div>
-  <p class="spot-body">The old coastguard path stitches Calella to Llafranc in twenty minutes of pines, coves and turquoise glimpses. Walk it before dinner when the light is honey and the day trippers have gone.</p>
-  <div class="spot-facts">
+  <div class="feat-grid">
+    <div><h3>The Camí de Ronda</h3><div class="spot-tag">The golden hour walk</div></div>
+    <div><p class="spot-body">The old coastguard path stitches Calella to Llafranc in twenty minutes of pines, coves and turquoise glimpses. Walk it before dinner when the light is honey and the day trippers have gone.</p>
+<div class="spot-facts">
 <div class="fact-row"><div class="fact-k">Access</div><div class="fact-v">Start at Port Bo in Calella, finish on the Llafranc promenade</div></div>
 <div class="fact-row"><div class="fact-k">Parking</div><div class="fact-v">Park once in Calella, walk both ways</div></div>
 <div class="fact-row"><div class="fact-k">Kids</div><div class="fact-v">Paved but stepped, not for pushchairs</div></div>
+</div></div>
   </div>
 </article>
-<article class="spot" data-reveal>
-  <figure class="spot-fig"><img src="../assets/llafranc.jpg" alt="Far de Sant Sebastià" loading="lazy"><figcaption>Llafranc bay, below the lighthouse</figcaption></figure>
-  <h3>Far de Sant Sebastià</h3>
-  <div class="spot-tag">The lighthouse view</div>
-  <p class="spot-body">Above Llafranc, an 18th century lighthouse, a watchtower and the whole coastline laid out below. There is a hotel terrace for a slow drink while the children inspect the tower.</p>
-  <div class="spot-facts">
+<article class="spot-row" data-reveal>
+  <figure class="row-fig"><img src="../assets/llafranc.jpg" alt="Far de Sant Sebastià" loading="lazy"><figcaption>Llafranc bay, below the lighthouse</figcaption></figure>
+  <div class="row-txt"><h3>Far de Sant Sebastià</h3><div class="spot-tag">The lighthouse view</div><p class="spot-body">Above Llafranc, an 18th century lighthouse, a watchtower and the whole coastline laid out below. There is a hotel terrace for a slow drink while the children inspect the tower.</p>
+<div class="spot-facts">
 <div class="fact-row"><div class="fact-k">Drive</div><div class="fact-v">15 min, or a steep 30 min walk up from Llafranc</div></div>
 <div class="fact-row"><div class="fact-k">Parking</div><div class="fact-v">Free area by the lighthouse</div></div>
 <div class="fact-row"><div class="fact-k">Kids</div><div class="fact-v">Open viewpoints, hold hands near edges</div></div>
-  </div>
+</div></div>
 </article>
-<article class="spot" data-reveal>
-  <figure class="spot-fig"><img src="../assets/cap-roig.jpg" alt="Jardins de Cap Roig" loading="lazy"><figcaption>The garden terraces above the sea</figcaption></figure>
-  <h3>Jardins de Cap Roig</h3>
-  <div class="spot-tag">Gardens over the sea</div>
-  <p class="spot-body">A castle, cactus terraces and sea views built by an exiled Russian colonel and his English partner. An hour or two of shaded paths, best paired with an afternoon at Castell beach below.</p>
-  <div class="spot-facts">
+<article class="spot-row rev" data-reveal>
+  <figure class="row-fig"><img src="../assets/cap-roig.jpg" alt="Jardins de Cap Roig" loading="lazy"><figcaption>The garden terraces above the sea</figcaption></figure>
+  <div class="row-txt"><h3>Jardins de Cap Roig</h3><div class="spot-tag">Gardens over the sea</div><p class="spot-body">A castle, cactus terraces and sea views built by an exiled Russian colonel and his English partner. An hour or two of shaded paths, best paired with an afternoon at Castell beach below.</p>
+<div class="spot-facts">
 <div class="fact-row"><div class="fact-k">Drive</div><div class="fact-v">10 min</div></div>
 <div class="fact-row"><div class="fact-k">Parking</div><div class="fact-v">Garden car park at the entrance</div></div>
 <div class="fact-row"><div class="fact-k">Kids</div><div class="fact-v">Let them lead a photo hunt, buy tickets ahead in August</div></div>
-  </div>
+</div></div>
 </article>
-<article class="spot" data-reveal>
-  <figure class="spot-fig"><img src="../assets/begur.jpg" alt="Begur town" loading="lazy"><figcaption>Begur under its castle crag</figcaption></figure>
-  <h3>Begur town</h3>
-  <div class="spot-tag">Evening hill town</div>
-  <p class="spot-body">A castle ruin above whitewashed lanes and Cuban-era mansions. Go up for the sunset from the castle, stay for dinner in the square while the swifts come out.</p>
-  <div class="spot-facts">
+<article class="spot-row" data-reveal>
+  <figure class="row-fig sq"><img src="../assets/begur.jpg" alt="Begur town" loading="lazy"><figcaption>Begur under its castle crag</figcaption></figure>
+  <div class="row-txt"><h3>Begur town</h3><div class="spot-tag">Evening hill town</div><p class="spot-body">A castle ruin above whitewashed lanes and Cuban-era mansions. Go up for the sunset from the castle, stay for dinner in the square while the swifts come out.</p>
+<div class="spot-facts">
 <div class="fact-row"><div class="fact-k">Drive</div><div class="fact-v">20 min</div></div>
 <div class="fact-row"><div class="fact-k">Parking</div><div class="fact-v">Signed car parks below the centre</div></div>
 <div class="fact-row"><div class="fact-k">Kids</div><div class="fact-v">The castle climb is short and worth it</div></div>
-  </div>
+</div></div>
 </article>
 </section>
 
@@ -616,159 +643,144 @@ footer { border-top: 1px solid var(--rule); padding: 100px 5vw 48px; }
       <h2>Two chairs, one table.</h2>
       <p>The campsite week is the one stretch where two adults can slip out while the other family holds the fort. Return the favour the next night.</p>
     </div>
-<article class="spot spot-dk" data-reveal>
+<article class="spot-feature spot-dk" data-reveal>
   <figure class="spot-fig"><img src="../assets/llafranc-bay.jpg" alt="Casamar, Llafranc" loading="lazy"><figcaption>Llafranc bay from the Sant Sebastià path</figcaption></figure>
-  <h3>Casamar, Llafranc</h3>
-  <div class="spot-tag">The special one</div>
-  <p class="spot-body">A Michelin-starred dining room and terrace above the bay, tasting menus built on Empordà produce. Book this one first and build the babysitting around it.</p>
-  <div class="spot-facts">
+  <div class="feat-grid">
+    <div><h3>Casamar, Llafranc</h3><div class="spot-tag">The special one</div></div>
+    <div><p class="spot-body">A Michelin-starred dining room and terrace above the bay, tasting menus built on Empordà produce. Book this one first and build the babysitting around it.</p>
+<div class="spot-facts">
 <div class="fact-row dk"><div class="fact-k">From camp</div><div class="fact-v">10 min taxi</div></div>
 <div class="fact-row dk"><div class="fact-k">Phone</div><div class="fact-v">+34 972 300 104</div></div>
 <div class="fact-row dk"><div class="fact-k">Book</div><div class="fact-v">Weeks ahead in August</div></div>
 <div class="fact-row dk"><div class="fact-k">Wear</div><div class="fact-v">Something that has not been to the beach</div></div>
+</div></div>
   </div>
 </article>
-<article class="spot spot-dk" data-reveal>
-  <figure class="spot-fig"><img src="../assets/pa-i-raim.jpg" alt="Pa i Raïm, Palafrugell" loading="lazy"><figcaption>The garden room at Pa i Raïm (photo: Visit Costa Brava)</figcaption></figure>
-  <h3>Pa i Raïm, Palafrugell</h3>
-  <div class="spot-tag">The garden table</div>
-  <p class="spot-body">In the writer Josep Pla’s old family home, five minutes from the campsite: a leafy garden courtyard, seasonal Catalan cooking, no fuss. The easiest slip-out of the week.</p>
-  <div class="spot-facts">
+<article class="spot-row spot-dk" data-reveal>
+  <figure class="row-fig"><img src="../assets/pa-i-raim.jpg" alt="Pa i Raïm, Palafrugell" loading="lazy"><figcaption>The garden room at Pa i Raïm (photo: Visit Costa Brava)</figcaption></figure>
+  <div class="row-txt"><h3>Pa i Raïm, Palafrugell</h3><div class="spot-tag">The garden table</div><p class="spot-body">In the writer Josep Pla’s old family home, five minutes from the campsite: a leafy garden courtyard, seasonal Catalan cooking, no fuss. The easiest slip-out of the week.</p>
+<div class="spot-facts">
 <div class="fact-row dk"><div class="fact-k">From camp</div><div class="fact-v">5 min</div></div>
 <div class="fact-row dk"><div class="fact-k">Book</div><div class="fact-v">A few days ahead</div></div>
 <div class="fact-row dk"><div class="fact-k">Order</div><div class="fact-v">Whatever is scrawled on the seasonal board</div></div>
-  </div>
+</div></div>
 </article>
-<article class="spot spot-dk" data-reveal>
-  <figure class="spot-fig"><img src="../assets/llafranc-evening.jpg" alt="Sunset at the lighthouse" loading="lazy"><figcaption>Evening light over Llafranc from the headland</figcaption></figure>
-  <h3>Sunset at the lighthouse</h3>
-  <div class="spot-tag">The no-booking option</div>
-  <p class="spot-body">Drinks on the Far de Sant Sebastià terrace as the coast goes pink, then a stroll down to the Llafranc promenade for a late seafood plate at whichever front-row table is free.</p>
-  <div class="spot-facts">
+<article class="spot-row spot-dk rev" data-reveal>
+  <figure class="row-fig"><img src="../assets/llafranc-evening.jpg" alt="Sunset at the lighthouse" loading="lazy"><figcaption>Evening light over Llafranc from the headland</figcaption></figure>
+  <div class="row-txt"><h3>Sunset at the lighthouse</h3><div class="spot-tag">The no-booking option</div><p class="spot-body">Drinks on the Far de Sant Sebastià terrace as the coast goes pink, then a stroll down to the Llafranc promenade for a late seafood plate at whichever front-row table is free.</p>
+<div class="spot-facts">
 <div class="fact-row dk"><div class="fact-k">From camp</div><div class="fact-v">15 min</div></div>
 <div class="fact-row dk"><div class="fact-k">Book</div><div class="fact-v">Nothing, that is the point</div></div>
 <div class="fact-row dk"><div class="fact-k">Timing</div><div class="fact-v">Arrive an hour before sunset</div></div>
-  </div>
+</div></div>
 </article>
-<article class="spot spot-dk" data-reveal>
-  <figure class="spot-fig"><img src="../assets/clara-begur.jpg" alt="Clara, at Hotel Aiguaclara, Begur" loading="lazy"><figcaption>Clara, under the pergola (photo: the hotel)</figcaption></figure>
-  <h3>Clara, at Hotel Aiguaclara, Begur</h3>
-  <div class="spot-tag">The colonial mansion</div>
-  <p class="spot-body">The restaurant in the old garden of an 1866 Cuban-era mansion in the heart of Begur: marble tables under a glass pergola, soft light, plates for the centre of the table. Climb to the castle for the last light, then walk down to the table.</p>
-  <div class="spot-facts">
+<article class="spot-row spot-dk" data-reveal>
+  <figure class="row-fig sq"><img src="../assets/clara-begur.jpg" alt="Clara, at Hotel Aiguaclara, Begur" loading="lazy"><figcaption>Clara, under the pergola (photo: the hotel)</figcaption></figure>
+  <div class="row-txt"><h3>Clara, at Hotel Aiguaclara, Begur</h3><div class="spot-tag">The colonial mansion</div><p class="spot-body">The restaurant in the old garden of an 1866 Cuban-era mansion in the heart of Begur: marble tables under a glass pergola, soft light, plates for the centre of the table. Climb to the castle for the last light, then walk down to the table.</p>
+<div class="spot-facts">
 <div class="fact-row dk"><div class="fact-k">From camp</div><div class="fact-v">20 min taxi</div></div>
 <div class="fact-row dk"><div class="fact-k">Book</div><div class="fact-v">+34 613 04 55 04</div></div>
 <div class="fact-row dk"><div class="fact-k">Timing</div><div class="fact-v">Castle at sunset, table for 21:00</div></div>
-  </div>
+</div></div>
 </article>
     <p class="dark-footnote">Menus and opening days shift with the season. Book a few days ahead in August and confirm before setting out.</p>
   </div>
 </section>
 
 <section class="wrap lunches">
-  <div class="split" data-reveal>
+  <div class="split asym" data-reveal>
     <h2>Long lunches, children welcome.</h2>
     <p>Terraces that absorb a table of ten, sandy feet and all. Feed the children early, then let the adults settle in over the rice.</p>
   </div>
-<article class="spot" data-reveal>
+<article class="spot-feature" data-reveal>
   <figure class="spot-fig"><img src="../assets/toc-al-mar.jpg" alt="Toc al Mar, Aiguablava" loading="lazy"><figcaption>The table on the sand at Toc al Mar (photo: the restaurant)</figcaption></figure>
-  <h3>Toc al Mar, Aiguablava</h3>
-  <div class="spot-tag">Feet in the sand</div>
-  <p class="spot-body">Grilled fish and paella straight off the beach at Aiguablava, tables on the sand, children drifting between courses and the water. The definition of a long lunch.</p>
-  <div class="spot-facts">
+  <div class="feat-grid">
+    <div><h3>Toc al Mar, Aiguablava</h3><div class="spot-tag">Feet in the sand</div></div>
+    <div><p class="spot-body">Grilled fish and paella straight off the beach at Aiguablava, tables on the sand, children drifting between courses and the water. The definition of a long lunch.</p>
+<div class="spot-facts">
 <div class="fact-row"><div class="fact-k">Drive</div><div class="fact-v">25 to 30 min</div></div>
 <div class="fact-row"><div class="fact-k">Phone</div><div class="fact-v">+34 972 113 232</div></div>
 <div class="fact-row"><div class="fact-k">Book</div><div class="fact-v">Essential for ten in August</div></div>
+</div></div>
   </div>
 </article>
-<article class="spot" data-reveal>
-  <figure class="spot-fig"><img src="../assets/aiguablava-hotel.jpg" alt="Hotel Aigua Blava terrace" loading="lazy"><figcaption>The cove below the terrace</figcaption></figure>
-  <h3>Hotel Aigua Blava terrace</h3>
-  <div class="spot-tag">The clifftop classic</div>
-  <p class="spot-body">The old Costa Brava hotel above the same cove, pines and white balustrades over impossible water. Long lunch on the terrace while the children count boats below.</p>
-  <div class="spot-facts">
+<article class="spot-row" data-reveal>
+  <figure class="row-fig"><img src="../assets/aiguablava-hotel.jpg" alt="Hotel Aigua Blava terrace" loading="lazy"><figcaption>The cove below the terrace</figcaption></figure>
+  <div class="row-txt"><h3>Hotel Aigua Blava terrace</h3><div class="spot-tag">The clifftop classic</div><p class="spot-body">The old Costa Brava hotel above the same cove, pines and white balustrades over impossible water. Long lunch on the terrace while the children count boats below.</p>
+<div class="spot-facts">
 <div class="fact-row"><div class="fact-k">Drive</div><div class="fact-v">25 to 30 min</div></div>
 <div class="fact-row"><div class="fact-k">Parking</div><div class="fact-v">Hotel car park</div></div>
 <div class="fact-row"><div class="fact-k">Book</div><div class="fact-v">Ask for the sea-facing end of the terrace</div></div>
-  </div>
+</div></div>
 </article>
-<article class="spot" data-reveal>
-  <figure class="spot-fig"><img src="../assets/el-far.jpg" alt="El Far, Sant Sebastià" loading="lazy"><figcaption>The lighthouse above the lunch terrace</figcaption></figure>
-  <h3>El Far, Sant Sebastià</h3>
-  <div class="spot-tag">Lunch beside the lighthouse</div>
-  <p class="spot-body">The hotel beside the lighthouse serves rice dishes and Empordà wine with the best table view on this stretch of coast. Works equally as a mid-walk stop or a destination in itself.</p>
-  <div class="spot-facts">
+<article class="spot-row rev" data-reveal>
+  <figure class="row-fig"><img src="../assets/el-far.jpg" alt="El Far, Sant Sebastià" loading="lazy"><figcaption>The lighthouse above the lunch terrace</figcaption></figure>
+  <div class="row-txt"><h3>El Far, Sant Sebastià</h3><div class="spot-tag">Lunch beside the lighthouse</div><p class="spot-body">The hotel beside the lighthouse serves rice dishes and Empordà wine with the best table view on this stretch of coast. Works equally as a mid-walk stop or a destination in itself.</p>
+<div class="spot-facts">
 <div class="fact-row"><div class="fact-k">Drive</div><div class="fact-v">15 min</div></div>
 <div class="fact-row"><div class="fact-k">Parking</div><div class="fact-v">Free area by the lighthouse</div></div>
 <div class="fact-row"><div class="fact-k">Book</div><div class="fact-v">Terrace tables go first</div></div>
-  </div>
+</div></div>
 </article>
-<article class="spot" data-reveal>
-  <figure class="spot-fig"><img src="../assets/calella-port-bo.jpg" alt="Tragamar, Calella" loading="lazy"><figcaption>El Canadell, below the terrace</figcaption></figure>
-  <h3>Tragamar, Calella</h3>
-  <div class="spot-tag">On the Canadell sand</div>
-  <p class="spot-body">Rice and grilled fish directly on El Canadell beach. The children finish first and go back to the sand in full view while the adults stay for another bottle of white.</p>
-  <div class="spot-facts">
+<article class="spot-row" data-reveal>
+  <figure class="row-fig sq"><img src="../assets/calella-port-bo.jpg" alt="Tragamar, Calella" loading="lazy"><figcaption>El Canadell, below the terrace</figcaption></figure>
+  <div class="row-txt"><h3>Tragamar, Calella</h3><div class="spot-tag">On the Canadell sand</div><p class="spot-body">Rice and grilled fish directly on El Canadell beach. The children finish first and go back to the sand in full view while the adults stay for another bottle of white.</p>
+<div class="spot-facts">
 <div class="fact-row"><div class="fact-k">Drive</div><div class="fact-v">About 10 min</div></div>
 <div class="fact-row"><div class="fact-k">Parking</div><div class="fact-v">Upper Calella car parks</div></div>
 <div class="fact-row"><div class="fact-k">Book</div><div class="fact-v">Ask for a front-line table for ten</div></div>
-  </div>
+</div></div>
 </article>
 </section>
 
 <section id="beachdinners" class="wrap lunches">
-  <div class="split" data-reveal>
+  <div class="split asym" data-reveal>
     <h2>Dinner on the sand.</h2>
     <p>The evening shift: the adults at one long table, the children barefoot on the beach in front of it. Order slowly, stay for the last light.</p>
   </div>
-<article class="spot" data-reveal>
+<article class="spot-feature" data-reveal>
   <figure class="spot-fig"><img src="../assets/bella-lola.jpg" alt="La Bella Lola, Port Bo" loading="lazy"><figcaption>Port Bo and the vaults (photo: Costa Brava Tourism)</figcaption></figure>
-  <h3>La Bella Lola, Port Bo</h3>
-  <div class="spot-tag">Tables by the vaults, kids on the sand</div>
-  <p class="spot-body">The old havaneres taverna behind Port Bo: rice, grilled fish and a cremat under the arches while the children own the beach ten metres away. The long table can see every splash.</p>
-  <div class="spot-facts">
+  <div class="feat-grid">
+    <div><h3>La Bella Lola, Port Bo</h3><div class="spot-tag">Tables by the vaults, kids on the sand</div></div>
+    <div><p class="spot-body">The old havaneres taverna behind Port Bo: rice, grilled fish and a cremat under the arches while the children own the beach ten metres away. The long table can see every splash.</p>
+<div class="spot-facts">
 <div class="fact-row"><div class="fact-k">Drive</div><div class="fact-v">About 10 min</div></div>
 <div class="fact-row"><div class="fact-k">Book</div><div class="fact-v">Front-line tables go early, ask for 20:30</div></div>
 <div class="fact-row"><div class="fact-k">Kids</div><div class="fact-v">Sand in full view, take a torch for after dark</div></div>
+</div></div>
   </div>
 </article>
-<article class="spot" data-reveal>
-  <figure class="spot-fig"><img src="../assets/llafranc-front-row.jpg" alt="The Llafranc front row" loading="lazy"><figcaption>The front row at Hotel Llevant (photo: the hotel)</figcaption></figure>
-  <h3>The Llafranc front row</h3>
-  <div class="spot-tag">Promenade tables, town sand</div>
-  <p class="spot-body">The promenade restaurants face the calmest sand of the week, Llevant and Terramar holding the front line. Feed the children early, release them to the beach, and let the adult courses arrive at their own pace.</p>
-  <div class="spot-facts">
+<article class="spot-row" data-reveal>
+  <figure class="row-fig"><img src="../assets/llafranc-front-row.jpg" alt="The Llafranc front row" loading="lazy"><figcaption>The front row at Hotel Llevant (photo: the hotel)</figcaption></figure>
+  <div class="row-txt"><h3>The Llafranc front row</h3><div class="spot-tag">Promenade tables, town sand</div><p class="spot-body">The promenade restaurants face the calmest sand of the week, Llevant and Terramar holding the front line. Feed the children early, release them to the beach, and let the adult courses arrive at their own pace.</p>
+<div class="spot-facts">
 <div class="fact-row"><div class="fact-k">Drive</div><div class="fact-v">10 min</div></div>
 <div class="fact-row"><div class="fact-k">Book</div><div class="fact-v">Ask for the promenade side</div></div>
 <div class="fact-row"><div class="fact-k">Kids</div><div class="fact-v">Flat, lit and held by the bay</div></div>
-  </div>
+</div></div>
 </article>
-<article class="spot" data-reveal>
-  <figure class="spot-fig"><img src="../assets/tragamar.jpg" alt="Tragamar, after seven" loading="lazy"><figcaption>Tragamar’s tables on El Canadell (photo: caperleaves.nl)</figcaption></figure>
-  <h3>Tragamar, after seven</h3>
-  <div class="spot-tag">The Canadell evening shift</div>
-  <p class="spot-body">The lunch spot works twice as hard at dinner: the same front-line tables on El Canadell, softer light, emptier sand. The children go back to the beach between courses without leaving sight of the table.</p>
-  <div class="spot-facts">
+<article class="spot-row rev" data-reveal>
+  <figure class="row-fig"><img src="../assets/tragamar.jpg" alt="Tragamar, after seven" loading="lazy"><figcaption>Tragamar’s tables on El Canadell (photo: caperleaves.nl)</figcaption></figure>
+  <div class="row-txt"><h3>Tragamar, after seven</h3><div class="spot-tag">The Canadell evening shift</div><p class="spot-body">The lunch spot works twice as hard at dinner: the same front-line tables on El Canadell, softer light, emptier sand. The children go back to the beach between courses without leaving sight of the table.</p>
+<div class="spot-facts">
 <div class="fact-row"><div class="fact-k">Drive</div><div class="fact-v">About 10 min</div></div>
 <div class="fact-row"><div class="fact-k">Book</div><div class="fact-v">A front-line table, evenings fill fast in August</div></div>
-<div class="fact-row"><div class="fact-k">Kids</div><div class="fact-v">The sand is the crèche</div></div>
-  </div>
+<div class="fact-row"><div class="fact-k">Kids</div><div class="fact-v">On the sand in front of the table</div></div>
+</div></div>
 </article>
-<article class="spot" data-reveal>
-  <figure class="spot-fig"><img src="../assets/campsite-pool.jpg" alt="The campsite terrace" loading="lazy"><figcaption>The pool at the centre of camp (photo: the campsite)</figcaption></figure>
-  <h3>The campsite terrace</h3>
-  <div class="spot-tag">The zero-logistics night</div>
-  <p class="spot-body">Some evenings the best restaurant is the one downhill from the cabins: the campsite terrace with the playground alongside. No car seats, no bookings, and bedtime is a five minute walk uphill.</p>
-  <div class="spot-facts">
+<article class="spot-row" data-reveal>
+  <figure class="row-fig sq"><img src="../assets/campsite-pool.jpg" alt="The campsite terrace" loading="lazy"><figcaption>The pool at the centre of camp (photo: the campsite)</figcaption></figure>
+  <div class="row-txt"><h3>The campsite terrace</h3><div class="spot-tag">The zero-logistics night</div><p class="spot-body">Some evenings the best restaurant is the one downhill from the cabins: the campsite terrace with the playground alongside. No car seats, no bookings, and bedtime is a five minute walk uphill.</p>
+<div class="spot-facts">
 <div class="fact-row"><div class="fact-k">Walk</div><div class="fact-v">2 min from the cabins</div></div>
 <div class="fact-row"><div class="fact-k">Book</div><div class="fact-v">No</div></div>
 <div class="fact-row"><div class="fact-k">Kids</div><div class="fact-v">Playground and pool alongside</div></div>
-  </div>
+</div></div>
 </article>
 </section>
 
 <section id="running" class="wrap running">
-  <div class="split" data-reveal>
+  <div class="split asym" data-reveal>
     <h2>The runner’s pages.</h2>
     <p>Three routes from the gate of Camping Palafrugell, one per training intent. Distances are map-measured; treat them as ±5% and calibrate on the first run. August sunrise is around 07:05.</p>
   </div>
@@ -859,74 +871,82 @@ footer { border-top: 1px solid var(--rule); padding: 100px 5vw 48px; }
         </div>
       </div>
     </article>
+  <div id="own-runs"></div>
+  <article class="spot-plain own-form" data-reveal>
+    <div><h3>Add your own route</h3><div class="spot-tag">Saved on this phone, for whoever runs</div></div>
+    <div>
+      <form id="run-form" autocomplete="off">
+        <div class="form-grid">
+          <label>Name<input name="name" required maxlength="60" placeholder="The dawn cove loop"></label>
+          <label>Distance<input name="dist" maxlength="14" placeholder="8.4 km"></label>
+        </div>
+        <label>Notes<input name="notes" maxlength="160" placeholder="Waypoints, surface, where the water is"></label>
+        <label>Link<input name="link" type="url" maxlength="300" placeholder="https://www.strava.com/routes/…"></label>
+        <button type="submit">Save route</button>
+      </form>
+    </div>
+  </article>
   <p class="light-footnote">Trace each route on Strava or Komoot before day one; the lanes are unsigned and the coastal path has unfenced drops. August heat builds fast after 09:00.</p>
 </section>
 
 <section id="training" class="wrap training">
-  <div class="split" data-reveal>
+  <div class="split asym" data-reveal>
     <h2>The Hyrox block.</h2>
     <p>Race season starts six weeks after the flight home. Nothing here needs a box: the campsite gym holds the erg and the iron, the coast holds everything else. One quality session a day, done before the beach fills.</p>
   </div>
-<article class="spot" data-reveal>
+<article class="spot-feature" data-reveal>
   <figure class="spot-fig"><img src="../assets/camping-gym.jpg" alt="The campsite gym" loading="lazy"><figcaption>The gym at the campsite (photo: the campsite)</figcaption></figure>
-  <h3>The campsite gym</h3>
-  <div class="spot-tag">The erg and the iron</div>
-  <p class="spot-body">A proper indoor gym beside the pool: a Concept2 rower, bikes, benches, cable stacks and free weights. Enough for the strength that sand cannot give you, and the RowErg metres the race demands.</p>
-  <div class="spot-facts">
+  <div class="feat-grid">
+    <div><h3>The campsite gym</h3><div class="spot-tag">The erg and the iron</div></div>
+    <div><p class="spot-body">A proper indoor gym beside the pool: a Concept2 rower, bikes, benches, cable stacks and free weights. Enough for the strength that sand cannot give you, and the RowErg metres the race demands.</p>
+<div class="spot-facts">
 <div class="fact-row"><div class="fact-k">Where</div><div class="fact-v">Centre of camp, beside the pool</div></div>
 <div class="fact-row"><div class="fact-k">Kit</div><div class="fact-v">Rower, bikes, benches, stacks, free weights</div></div>
 <div class="fact-row"><div class="fact-k">Session</div><div class="fact-v">8 × 500 m on the erg off 90 s, wall-sit between</div></div>
+</div></div>
   </div>
 </article>
-<article class="spot" data-reveal>
-  <figure class="spot-fig"><img src="../assets/platja-de-pals.jpg" alt="Sand work, Platja de Pals" loading="lazy"><figcaption>Platja de Pals, the morning gym</figcaption></figure>
-  <h3>Sand work, Platja de Pals</h3>
-  <div class="spot-tag">The sled that is not a sled</div>
-  <p class="spot-body">Three kilometres of soft sand and firm shoreline. Burpee broad jumps, walking lunges and loaded carries up the dune line hit the same legs the sleds will. Go before 09:00, finish in the sea.</p>
-  <div class="spot-facts">
+<article class="spot-row" data-reveal>
+  <figure class="row-fig"><img src="../assets/platja-de-pals.jpg" alt="Sand work, Platja de Pals" loading="lazy"><figcaption>Platja de Pals, the morning gym</figcaption></figure>
+  <div class="row-txt"><h3>Sand work, Platja de Pals</h3><div class="spot-tag">The sled that is not a sled</div><p class="spot-body">Three kilometres of soft sand and firm shoreline. Burpee broad jumps, walking lunges and loaded carries up the dune line hit the same legs the sleds will. Go before 09:00, finish in the sea.</p>
+<div class="spot-facts">
 <div class="fact-row"><div class="fact-k">Drive</div><div class="fact-v">10 min</div></div>
 <div class="fact-row"><div class="fact-k">Bring</div><div class="fact-v">Two filled 20 L water carriers for farmers carry</div></div>
 <div class="fact-row"><div class="fact-k">Session</div><div class="fact-v">4 rounds: 400 m soft sand, 20 burpee broad jumps, 40 m lunge</div></div>
-  </div>
+</div></div>
 </article>
-<article class="spot" data-reveal>
-  <figure class="spot-fig"><img src="../assets/el-far.jpg" alt="The lighthouse steps" loading="lazy"><figcaption>The lighthouse above the steps</figcaption></figure>
-  <h3>The lighthouse steps</h3>
-  <div class="spot-tag">Legs under fatigue</div>
-  <p class="spot-body">The climb from Llafranc to the Far de Sant Sebastià is the compromised-running station of this coast: run up on tired legs, walk down, repeat while the bay turns gold below.</p>
-  <div class="spot-facts">
+<article class="spot-row rev" data-reveal>
+  <figure class="row-fig"><img src="../assets/el-far.jpg" alt="The lighthouse steps" loading="lazy"><figcaption>The lighthouse above the steps</figcaption></figure>
+  <div class="row-txt"><h3>The lighthouse steps</h3><div class="spot-tag">Legs under fatigue</div><p class="spot-body">The climb from Llafranc to the Far de Sant Sebastià is the compromised-running station of this coast: run up on tired legs, walk down, repeat while the bay turns gold below.</p>
+<div class="spot-facts">
 <div class="fact-row"><div class="fact-k">Drive</div><div class="fact-v">15 min, or run there via the Camí de Ronda</div></div>
 <div class="fact-row"><div class="fact-k">Surface</div><div class="fact-v">Stone steps and paved ramps, 8 to 12%</div></div>
 <div class="fact-row"><div class="fact-k">Session</div><div class="fact-v">6 × 90 s uphill hard, walk-down recovery</div></div>
-  </div>
+</div></div>
 </article>
-<article class="spot" data-reveal>
-  
-  <h3>The brick from the gate</h3>
-  <div class="spot-tag">Compromised running</div>
-  <p class="spot-body">Hyrox is running on legs that would rather not. Use the flat lane kilometre outside the campsite as the run leg, the picnic table row as the station: alternate until the legs stop arguing.</p>
-  <div class="spot-facts">
+<article class="spot-plain" data-reveal>
+  <div><h3>The brick from the gate</h3><div class="spot-tag">Compromised running</div></div>
+  <div><p class="spot-body">Hyrox is running on legs that would rather not. Use the flat lane kilometre outside the campsite as the run leg, the picnic table row as the station: alternate until the legs stop arguing.</p>
+<div class="spot-facts">
 <div class="fact-row"><div class="fact-k">Loop</div><div class="fact-v">1 km out-and-back on the Llofriu lane</div></div>
 <div class="fact-row"><div class="fact-k">Stations</div><div class="fact-v">20 walking lunges, 15 burpees, 40 m carry at the gate</div></div>
 <div class="fact-row"><div class="fact-k">Session</div><div class="fact-v">5 rounds, race pace on the runs, no rest at the table</div></div>
-  </div>
+</div></div>
 </article>
-<article class="spot" data-reveal>
-  <figure class="spot-fig"><img src="../assets/tamariu.jpg" alt="Recovery in Tamariu" loading="lazy"><figcaption>Tamariu, the recovery pool</figcaption></figure>
-  <h3>Recovery in Tamariu</h3>
-  <div class="spot-tag">The cold plunge with a view</div>
-  <p class="spot-body">The flush-out: an easy swim along the rock line of the cove, shoulders loose, heart rate low. The buddy rule applies; the beer after is part of the protocol.</p>
-  <div class="spot-facts">
+<article class="spot-row" data-reveal>
+  <figure class="row-fig sq"><img src="../assets/tamariu.jpg" alt="Recovery in Tamariu" loading="lazy"><figcaption>Tamariu, the recovery pool</figcaption></figure>
+  <div class="row-txt"><h3>Recovery in Tamariu</h3><div class="spot-tag">The cold plunge with a view</div><p class="spot-body">The flush-out: an easy swim along the rock line of the cove, shoulders loose, heart rate low. The buddy rule applies; the slow lunch after is the reward.</p>
+<div class="spot-facts">
 <div class="fact-row"><div class="fact-k">Drive</div><div class="fact-v">15 to 20 min</div></div>
 <div class="fact-row"><div class="fact-k">Session</div><div class="fact-v">15 to 20 min easy swim, stay inside the buoy line</div></div>
 <div class="fact-row"><div class="fact-k">Pair with</div><div class="fact-v">A long lunch, see above</div></div>
-  </div>
+</div></div>
 </article>
   <p class="light-footnote">Gym opening hours vary through August, check at reception on day one. Sand and stair sessions belong before 09:00; the heat after is for the towel.</p>
 </section>
 
 <section id="weather" class="wrap weather-sec">
-  <div class="split" data-reveal>
+  <div class="split asym" data-reveal>
     <h2>The next ten days.</h2>
     <p>Live for the Palafrugell coast, refreshed every time the page opens: morning, afternoon and night from the blended European forecast models.</p>
   </div>
@@ -935,7 +955,7 @@ footer { border-top: 1px solid var(--rule); padding: 100px 5vw 48px; }
     <div></div><div>Morning</div><div>Afternoon</div><div>Night</div>
   </div>
   <div id="weather-days" class="wx-days"><div class="wx-loading">Reading the sky…</div></div>
-  <p class="light-footnote">Forecast: Open-Meteo best-match model blend. Beyond day seven, treat it as a mood, not a promise.</p>
+  <p class="light-footnote">Forecast: Open-Meteo best-match model blend. Beyond day seven the models drift; check again nearer the time.</p>
 </section>
 
 <section id="trip-map" class="dark-section trip-map">
@@ -1061,8 +1081,8 @@ footer { border-top: 1px solid var(--rule); padding: 100px 5vw 48px; }
     document.querySelectorAll('[data-reveal]').forEach(function (el) {
       if (el.getBoundingClientRect().top < innerHeight * 0.9) return;
       el.style.opacity = '0';
-      el.style.transform = 'translateY(28px)';
-      el.style.transition = 'opacity 0.9s cubic-bezier(0.22,1,0.36,1), transform 0.9s cubic-bezier(0.22,1,0.36,1)';
+      el.style.transform = 'translateY(14px)';
+      el.style.transition = 'opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1)';
       io.observe(el);
     });
   }
@@ -1182,6 +1202,59 @@ footer { border-top: 1px solid var(--rule); padding: 100px 5vw 48px; }
       if (t != null) document.getElementById('wx-sea').textContent = 'Sea temperature today · ' + Math.round(t) + '°';
     })
     .catch(function () {});
+})();
+</script>
+<script>
+(function () {
+  var wrap = document.getElementById('own-runs');
+  var form = document.getElementById('run-form');
+  if (!wrap || !form) return;
+  var KEY = 'cat26-own-runs';
+  function load() { try { return JSON.parse(localStorage.getItem(KEY)) || []; } catch (e) { return []; } }
+  function store(list) { try { localStorage.setItem(KEY, JSON.stringify(list)); } catch (e) {} }
+  function el(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text) n.textContent = text;
+    return n;
+  }
+  function render() {
+    wrap.innerHTML = '';
+    load().forEach(function (r, i) {
+      var art = el('article', 'own-run');
+      var left = el('div');
+      left.appendChild(el('div', 'own-nn', '0' + (i + 4)));
+      var h = el('h3', null, r.name); left.appendChild(h);
+      left.appendChild(el('div', 'spot-tag', 'Added on this phone'));
+      if (r.dist) left.appendChild(el('div', 'own-dist', r.dist));
+      var right = el('div');
+      if (r.notes) right.appendChild(el('p', 'spot-body', r.notes));
+      var actions = el('div', 'own-actions');
+      if (r.link && /^https?:\/\//.test(r.link)) {
+        var a = el('a', null, 'Open route ↗');
+        a.href = r.link; a.target = '_blank'; a.rel = 'noopener';
+        actions.appendChild(a);
+      }
+      var del = el('button', null, 'Remove');
+      del.type = 'button';
+      del.addEventListener('click', function () {
+        var list = load(); list.splice(i, 1); store(list); render();
+      });
+      actions.appendChild(del);
+      right.appendChild(actions);
+      art.appendChild(left); art.appendChild(right);
+      wrap.appendChild(art);
+    });
+  }
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var f = new FormData(form);
+    var r = { name: (f.get('name') || '').trim(), dist: (f.get('dist') || '').trim(),
+              notes: (f.get('notes') || '').trim(), link: (f.get('link') || '').trim() };
+    if (!r.name) return;
+    var list = load(); list.push(r); store(list); render(); form.reset();
+  });
+  render();
 })();
 </script>
 </body>
