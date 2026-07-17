@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#fbf9f4">
 <meta name="description" content="A week among the coves from Camping Palafrugell — 23 to 30 August 2026.">
+<link rel="stylesheet" href="../assets/leaflet/leaflet.css">
 <title>Catalonia 2026 · The campsite week</title>
 <style>
 /* latin-ext */
@@ -400,7 +401,9 @@ h1, h2, h3 { text-transform: uppercase; font-family: var(--serif); font-weight: 
 .map-dir { display: block; margin-top: 8px; font-size: 9px; letter-spacing: 0.22em; color: var(--dark-text); border: 0; }
 .map-dir:hover { opacity: 0.7; }
 .map-panel { flex: 1 1 480px; min-width: 320px; position: sticky; top: 120px; }
-.map-panel svg { width: 100%; height: auto; max-height: 74vh; display: block; }
+#drive-map { width: 100%; height: 540px; border: 1px solid var(--dark-rule); background: #efece5; z-index: 0; }
+#drive-map .leaflet-tooltip { font-family: var(--sans); font-size: 11px; letter-spacing: 0.06em; }
+.map-fallback { font-family: var(--serif); font-style: italic; font-size: 17px; color: var(--dark-45); padding: 44px 0; }
 .sea-label { font-family: var(--serif); font-style: italic; font-size: 20px; }
 .map-lbl { font-family: var(--sans); font-size: 10px; letter-spacing: 0.08em; }
 .map-lbl-sm { font-family: var(--sans); font-size: 9px; letter-spacing: 0.06em; }
@@ -481,6 +484,7 @@ footer { border-top: 1px solid var(--rule); padding: 100px 5vw 48px; }
   .map-cols { gap: 44px; }
   .map-row { grid-template-columns: minmax(0,1fr) 104px; gap: 12px; }
   .map-panel { position: static; min-width: 0; flex: 1 1 100%; }
+  #drive-map { height: 380px; }
 
   footer { padding: 64px 5vw 36px; }
   .foot-nav { gap: 44px; }
@@ -1071,24 +1075,8 @@ footer { border-top: 1px solid var(--rule); padding: 100px 5vw 48px; }
       </div>
       </div>
       <div class="map-panel">
-        <svg viewBox="0 0 620 720" aria-label="Sketch map of the trip area">
-          <text x="500" y="480" class="sea-label" fill="rgba(242,237,227,0.28)" text-anchor="middle" transform="rotate(-64 500 480)">Mar Mediterrània</text>
-          <path d="M150,620 Q240,380 452,252" fill="none" stroke="rgba(242,237,227,0.25)" stroke-width="1.5" stroke-dasharray="2 7"></path>
-          <path d="M452,252 Q464,294 462,336" fill="none" stroke="rgba(242,237,227,0.25)" stroke-width="1.5" stroke-dasharray="2 7"></path>
-          <path id="map-seg" d="" fill="none" stroke="#d8b183" stroke-width="2.5"></path>
-          <circle cx="150" cy="620" r="4.5" fill="#f2ede3"></circle><text x="150" y="648" class="map-lbl" fill="rgba(242,237,227,0.65)" text-anchor="middle">Barcelona</text>
-          <circle cx="452" cy="252" r="4.5" fill="#f2ede3"></circle><text x="440" y="248" class="map-lbl" fill="rgba(242,237,227,0.65)" text-anchor="end">Pals</text>
-          <circle cx="488" cy="238" r="3" fill="rgba(242,237,227,0.6)"></circle><text x="500" y="242" class="map-lbl-sm" fill="rgba(242,237,227,0.45)">Platja de Pals</text>
-          <circle cx="414" cy="230" r="3" fill="rgba(242,237,227,0.6)"></circle><text x="402" y="226" class="map-lbl-sm" fill="rgba(242,237,227,0.45)" text-anchor="end">Peratallada</text>
-          <circle cx="478" cy="186" r="3" fill="rgba(242,237,227,0.6)"></circle><text x="478" y="170" class="map-lbl-sm" fill="rgba(242,237,227,0.45)" text-anchor="middle">L’Estartit</text>
-          <circle cx="330" cy="250" r="3" fill="rgba(242,237,227,0.6)"></circle><text x="330" y="272" class="map-lbl-sm" fill="rgba(242,237,227,0.45)" text-anchor="middle">Girona</text>
-          <circle cx="298" cy="168" r="3" fill="rgba(242,237,227,0.6)"></circle><text x="298" y="152" class="map-lbl-sm" fill="rgba(242,237,227,0.45)" text-anchor="middle">Banyoles</text>
-          <circle cx="462" cy="336" r="4.5" fill="#f2ede3"></circle><text x="452" y="360" class="map-lbl" fill="rgba(242,237,227,0.65)" text-anchor="end">Camping Palafrugell</text>
-          <circle cx="496" cy="349" r="3" fill="rgba(242,237,227,0.6)"></circle><text x="508" y="353" class="map-lbl-sm" fill="rgba(242,237,227,0.45)">Calella</text>
-          <circle cx="506" cy="318" r="3" fill="rgba(242,237,227,0.6)"></circle><text x="518" y="322" class="map-lbl-sm" fill="rgba(242,237,227,0.45)">Llafranc</text>
-          <circle id="map-dot" cx="452" cy="252" r="6" fill="#d8b183"></circle>
-          <circle id="map-pulse" cx="452" cy="252" r="10" fill="none" stroke="#d8b183" stroke-width="1.5"></circle>
-        </svg>
+        <div id="drive-map" aria-label="Road map of the trip area"></div>
+        <div class="map-fallback" id="map-fallback" hidden>The live road map runs on the website edition.</div>
         <div class="map-active">
           <div class="map-active-name" id="map-active-name"></div>
           <div class="map-active-drive" id="map-active-drive"></div>
@@ -1137,7 +1125,7 @@ footer { border-top: 1px solid var(--rule); padding: 100px 5vw 48px; }
 (function () {
   var BEACHES = [{"name": "Llafranc", "tag": "Best all-rounder", "note": "Promenade, sand, restaurants and calm water in one place. The default when nobody can decide.", "img": "llafranc"}, {"name": "Tamariu", "tag": "Best snorkel", "note": "A compact pine-backed cove with clear water along the rocks. One adult on shore, buddies in the water.", "img": "tamariu"}, {"name": "Aiguablava", "tag": "Most spectacular", "note": "The postcard: turquoise water, red rocks, green pines. Access closes when the car park fills.", "img": "aiguablava"}, {"name": "Sa Riera", "tag": "Best for space", "note": "Begur\u2019s biggest cove. Room to spread out, showers and food close by.", "img": "sa-riera"}, {"name": "Platja de Castell", "tag": "Best wild day", "note": "Undeveloped sand between headlands with a fishermen\u2019s hut at one end. Bring everything, there is little to buy.", "img": "castell"}, {"name": "El Canadell", "tag": "Easiest fallback", "note": "Calella\u2019s gentle town beach. Low effort, high charm, ice cream within reach.", "img": "calella-port-bo"}, {"name": "Illa Roja", "tag": "The adventurous swim", "note": "A wild red-rock cove reached on foot along the coast path. Naturist in parts, stunning in all of it. For whoever fancies the walk.", "img": "sa-riera"}];
   var BEACH_IMGS = {"llafranc": "../assets/llafranc.jpg", "tamariu": "../assets/tamariu.jpg", "aiguablava": "../assets/aiguablava.jpg", "sa-riera": "../assets/sa-riera.jpg", "castell": "../assets/castell.jpg", "calella-port-bo": "../assets/calella-port-bo.jpg"};
-  var MAP = [{"key": "camp", "base": "camp", "name": "Camping Palafrugell", "drive": "BCN \u2192 camp / 1 h 45 to 2 h"}, {"key": "calella", "base": "camp", "name": "Calella & El Canadell", "drive": "10 min"}, {"key": "llafranc", "base": "camp", "name": "Llafranc", "drive": "10 min"}, {"key": "tamariu", "base": "camp", "name": "Tamariu", "drive": "15 to 20 min"}, {"key": "aiguablava", "base": "camp", "name": "Aiguablava", "drive": "25 to 30 min"}, {"key": "sariera", "base": "camp", "name": "Sa Riera & Illa Roja", "drive": "25 to 30 min"}, {"key": "castell", "base": "camp", "name": "Platja de Castell", "drive": "About 20 min"}];
+  var MAP = [{"key": "camp", "base": "camp", "name": "Camping Palafrugell", "drive": "BCN \u2192 camp / 1 h 45 to 2 h", "ll": [41.8945, 3.165]}, {"key": "calella", "base": "camp", "name": "Calella & El Canadell", "drive": "10 min", "ll": [41.888, 3.181]}, {"key": "llafranc", "base": "camp", "name": "Llafranc", "drive": "10 min", "ll": [41.893, 3.194]}, {"key": "tamariu", "base": "camp", "name": "Tamariu", "drive": "15 to 20 min", "ll": [41.918, 3.207]}, {"key": "aiguablava", "base": "camp", "name": "Aiguablava", "drive": "25 to 30 min", "ll": [41.9346, 3.2163]}, {"key": "sariera", "base": "camp", "name": "Sa Riera & Illa Roja", "drive": "25 to 30 min", "ll": [41.9673, 3.2093]}, {"key": "castell", "base": "camp", "name": "Platja de Castell", "drive": "About 20 min", "ll": [41.8623, 3.1421]}];
   var PTS = {"bcn": [150, 620], "pals": [452, 252], "platjapals": [488, 238], "peratallada": [414, 230], "estartit": [478, 186], "girona": [330, 250], "banyoles": [298, 168], "camp": [462, 336], "calella": [496, 349], "llafranc": [506, 318], "tamariu": [512, 294], "aiguablava": [518, 270], "sariera": [510, 246], "castell": [458, 398]};
   var FROM_BCN = true;
 
@@ -1184,38 +1172,59 @@ footer { border-top: 1px solid var(--rule); padding: 100px 5vw 48px; }
     });
   });
 
-  // Trip map
-  function seg(a, b) {
-    if (a === b) return '';
-    var p1 = PTS[a], p2 = PTS[b];
-    var mx = (p1[0] + p2[0]) / 2, my = (p1[1] + p2[1]) / 2;
-    var dx = p2[0] - p1[0], dy = p2[1] - p1[1];
-    return 'M' + p1[0] + ',' + p1[1] + ' Q' + (mx - dy * 0.14) + ',' + (my + dx * 0.14) + ' ' + p2[0] + ',' + p2[1];
-  }
+  // Trip map — a real road map for drivers; tap a row or a pin
+  var LIVE_MAP = true;
   var mapRows = document.querySelectorAll('.map-row');
-  var mapSeg = document.getElementById('map-seg');
-  var mapDot = document.getElementById('map-dot');
-  var mapPulse = document.getElementById('map-pulse');
   var mapName = document.getElementById('map-active-name');
   var mapDrive = document.getElementById('map-active-drive');
+  var driveMap = null, markers = [];
   function setPlace(i) {
-    var d = MAP[i], pt = PTS[d.key];
+    var d = MAP[i];
     mapRows.forEach(function (r, j) { r.classList.toggle('is-active', j === i); });
-    mapSeg.setAttribute('d', d.key === d.base ? (d.key === 'pals' ? seg('bcn', 'pals') : (FROM_BCN ? seg('bcn', 'camp') : seg('pals', 'camp'))) : seg(d.base, d.key));
-    mapDot.setAttribute('cx', pt[0]); mapDot.setAttribute('cy', pt[1]);
-    mapPulse.setAttribute('cx', pt[0]); mapPulse.setAttribute('cy', pt[1]);
     mapName.textContent = d.name;
     mapDrive.textContent = d.drive;
+    if (driveMap) {
+      markers.forEach(function (m, j) {
+        m.setStyle({ fillColor: j === i ? '#a9895a' : '#26231e', radius: j === i ? 9 : 6, fillOpacity: j === i ? 1 : 0.75 });
+      });
+      driveMap.panTo(d.ll, { animate: true });
+      markers[i].openTooltip();
+    }
   }
   mapRows.forEach(function (r) {
     var i = +r.dataset.place;
-    r.addEventListener('mouseenter', function () { setPlace(i); });
-    r.addEventListener('click', function () { setPlace(i); });
+    r.addEventListener('click', function (e) { if (!e.target.closest('a')) setPlace(i); });
     r.addEventListener('keydown', function (e) {
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setPlace(i); }
     });
   });
-  setPlace(0);
+  function initMap() {
+    var el = document.getElementById('drive-map');
+    var fb = document.getElementById('map-fallback');
+    if (!LIVE_MAP || !window.L || !el) {
+      if (el) el.hidden = true;
+      if (fb) fb.hidden = false;
+      setPlace(0);
+      return;
+    }
+    driveMap = L.map(el, { scrollWheelZoom: false });
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 17, attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(driveMap);
+    var bounds = [];
+    MAP.forEach(function (d, i) {
+      var m = L.circleMarker(d.ll, { radius: 6, color: '#f7f4ee', weight: 1.5, fillColor: '#26231e', fillOpacity: 0.75 })
+        .addTo(driveMap)
+        .bindTooltip(d.name, { direction: 'top', offset: [0, -8] });
+      m.on('click', function () { setPlace(i); });
+      markers.push(m);
+      bounds.push(d.ll);
+    });
+    driveMap.fitBounds(bounds, { padding: [34, 34] });
+    setPlace(0);
+  }
+  if (document.readyState === 'complete') initMap();
+  else window.addEventListener('load', initMap);
 })();
 </script>
 <script>
@@ -1341,5 +1350,6 @@ footer { border-top: 1px solid var(--rule); padding: 100px 5vw 48px; }
   render();
 })();
 </script>
+<script src="../assets/leaflet/leaflet.js"></script>
 </body>
 </html>
