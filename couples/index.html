@@ -262,6 +262,9 @@ h1, h2, h3 { text-transform: uppercase; font-family: var(--serif); font-weight: 
 /* magma aside */
 .aside-wrap { padding: 40px 5vw; }
 .aside { border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding: 70px 0; display: flex; flex-wrap: wrap; gap: 44px 100px; align-items: start; }
+.aside-fig { flex-basis: 100%; margin: 0 0 12px; }
+.aside-fig img { width: 100%; aspect-ratio: 5/2; object-fit: cover; display: block; }
+.aside-fig figcaption { font-family: var(--sans); font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-45); margin-top: 12px; }
 .aside-label { flex: 0 0 160px; line-height: 2.1; }
 .aside-main { flex: 1 1 380px; min-width: 0; }
 .aside-main h2 { font-size: clamp(24px,2.8vw,38px); line-height: 1.24; margin: 0 0 22px; }
@@ -558,6 +561,7 @@ footer { border-top: 1px solid var(--rule); padding: 100px 5vw 48px; }
 
 <section class="wrap aside-wrap">
   <div class="aside" data-reveal>
+    <figure class="aside-fig"><img src="assets/magma.jpg" alt="The thermal pools at Magma" loading="lazy"><figcaption>The thermal pools at Magma (photo: Magma)</figcaption></figure>
     <div class="aside-label">The rainy<br>day card</div>
     <div class="aside-main">
       <h2>Magma, Santa Coloma de Farners</h2>
@@ -709,7 +713,7 @@ footer { border-top: 1px solid var(--rule); padding: 100px 5vw 48px; }
   </div>
 </article>
 <article class="spot spot-dk" data-reveal>
-  
+  <figure class="spot-fig"><img src="assets/pa-i-raim.jpg" alt="Pa i Raïm, Palafrugell" loading="lazy"><figcaption>The garden room at Pa i Raïm (photo: Visit Costa Brava)</figcaption></figure>
   <h3>Pa i Raïm, Palafrugell</h3>
   <div class="spot-tag">The garden table</div>
   <p class="spot-body">In the writer Josep Pla’s old family home, five minutes from the campsite: a leafy garden courtyard, seasonal Catalan cooking, no fuss. The easiest slip-out of the week.</p>
@@ -813,7 +817,7 @@ footer { border-top: 1px solid var(--rule); padding: 100px 5vw 48px; }
     <p>The evening shift: the adults at one long table, the children barefoot on the beach in front of it. Order slowly, stay for the last light.</p>
   </div>
 <article class="spot" data-reveal>
-  <figure class="spot-fig"><img src="assets/calella-port-bo.jpg" alt="La Bella Lola, Port Bo" loading="lazy"><figcaption>Port Bo, the front garden</figcaption></figure>
+  <figure class="spot-fig"><img src="assets/bella-lola.jpg" alt="La Bella Lola, Port Bo" loading="lazy"><figcaption>Port Bo and the vaults (photo: Costa Brava Tourism)</figcaption></figure>
   <h3>La Bella Lola, Port Bo</h3>
   <div class="spot-tag">Tables by the vaults, kids on the sand</div>
   <p class="spot-body">The old havaneres taverna behind Port Bo: rice, grilled fish and a cremat under the arches while the children own the beach ten metres away. The long table can see every splash.</p>
@@ -824,7 +828,7 @@ footer { border-top: 1px solid var(--rule); padding: 100px 5vw 48px; }
   </div>
 </article>
 <article class="spot" data-reveal>
-  <figure class="spot-fig"><img src="assets/llafranc.jpg" alt="The Llafranc front row" loading="lazy"><figcaption>Llafranc, the promenade and its sand</figcaption></figure>
+  <figure class="spot-fig"><img src="assets/llafranc-front-row.jpg" alt="The Llafranc front row" loading="lazy"><figcaption>The front row at Hotel Llevant (photo: the hotel)</figcaption></figure>
   <h3>The Llafranc front row</h3>
   <div class="spot-tag">Promenade tables, town sand</div>
   <p class="spot-body">The promenade restaurants face the calmest sand of the week, Llevant and Terramar holding the front line. Feed the children early, release them to the beach, and let the adult courses arrive at their own pace.</p>
@@ -835,7 +839,7 @@ footer { border-top: 1px solid var(--rule); padding: 100px 5vw 48px; }
   </div>
 </article>
 <article class="spot" data-reveal>
-  <figure class="spot-fig"><img src="assets/calella-port-bo.jpg" alt="Tragamar, after seven" loading="lazy"><figcaption>El Canadell, below the terrace</figcaption></figure>
+  <figure class="spot-fig"><img src="assets/tragamar.jpg" alt="Tragamar, after seven" loading="lazy"><figcaption>Tragamar’s tables on El Canadell (photo: caperleaves.nl)</figcaption></figure>
   <h3>Tragamar, after seven</h3>
   <div class="spot-tag">The Canadell evening shift</div>
   <p class="spot-body">The lunch spot works twice as hard at dinner: the same front-line tables on El Canadell, softer light, emptier sand. The children go back to the beach between courses without leaving sight of the table.</p>
@@ -846,7 +850,7 @@ footer { border-top: 1px solid var(--rule); padding: 100px 5vw 48px; }
   </div>
 </article>
 <article class="spot" data-reveal>
-  
+  <figure class="spot-fig"><img src="assets/campsite-pool.jpg" alt="The campsite terrace" loading="lazy"><figcaption>The pool at the centre of camp (photo: the campsite)</figcaption></figure>
   <h3>The campsite terrace</h3>
   <div class="spot-tag">The zero-logistics night</div>
   <p class="spot-body">Some evenings the best restaurant is the one downhill from the cabins: the campsite terrace with the playground alongside. No car seats, no bookings, and bedtime is a five minute walk uphill.</p>
@@ -1135,7 +1139,7 @@ footer { border-top: 1px solid var(--rule); padding: 100px 5vw 48px; }
       </div>
     </div>
     <div class="foot-base">
-      <div class="foot-small">Access, traffic and sea conditions change. Check local signs, lifeguard flags and opening hours on the day. Restaurant details shift seasonally, confirm before booking. Photography: Creative Commons / public domain via Wikimedia Commons.</div>
+      <div class="foot-small">Access, traffic and sea conditions change. Check local signs, lifeguard flags and opening hours on the day. Restaurant details shift seasonally, confirm before booking. Photography: Creative Commons / public domain via Wikimedia Commons; venue and tourism photographs credited in their captions.</div>
       <a href="#top" class="foot-top">Back to top ↑</a>
     </div>
   </div>
