@@ -1210,7 +1210,7 @@ h2 a:hover, h3 a:hover, .beach-name a:hover { color: var(--accent); border-color
   <div class="arr-grid" data-reveal>
     <div class="arr-card">
       <div class="arr-h">The vineyard</div>
-      <div class="arr-row"><span>Where</span><span>Bigot i del Gat, Falset (Priorat)</span></div>
+      <div class="arr-row"><span>Wine</span><span><a href="https://gnarlyvines.co.uk/products/els-bigotis-del-gat-priorat-2021" target="_blank" rel="noopener">Els Bigotís del Gat, Priorat</a></span></div>
       <div class="arr-row"><span>Whose</span><span>Estelle’s dad’s</span></div>
       <div class="arr-row"><span>When</span><span>Three nights after camping</span></div>
       <div class="arr-note">Priorat reds, steep terraced vines, and family who know where the good bottles are.</div>
@@ -1733,6 +1733,13 @@ h2 a:hover, h3 a:hover, .beach-name a:hover { color: var(--accent); border-color
     estelleandchris:{ label: 'Estelle & Chris', pals:true,  falset:true  }
   };
   var ORDER = ['lilyandmax','daisyandphil','estelleandchris','camandben'];
+  var DEFAULTS = {
+    estelleandchris: {
+      flights: 'BA \u00b7 LHR 15:15 to BCN 18:35 (Thu 20 Aug), back BCN 19:30 to LHR 20:45 (Wed 2 Sep)',
+      car: 'Budget \u00b7 Peugeot e-2008 or similar \u00b7 collect BCN Thu 20 Aug 19:30, return Wed 2 Sep 17:30',
+      tnotes: '2 Amex Platinum: pre-book the Heathrow lounges. BA Bronze: free seat selection from 7 days before.'
+    }
+  };
   var KEY = 'cat26_user';
   function getUser(){ try { return localStorage.getItem(KEY); } catch(e){ return null; } }
   function setUser(u){ try { localStorage.setItem(KEY,u); } catch(e){} }
@@ -1797,8 +1804,9 @@ h2 a:hover, h3 a:hover, .beach-name a:hover { color: var(--accent); border-color
   function loadTravel(u){
     var form = document.getElementById('travel-form'); var out = document.getElementById('travel-saved');
     if (!form || !out) return;
-    var data = {};
-    try { data = JSON.parse(localStorage.getItem(tKey(u))) || {}; } catch(e){}
+    var data = null;
+    try { data = JSON.parse(localStorage.getItem(tKey(u))); } catch(e){}
+    if (!data) data = DEFAULTS[u] || {};
     out.innerHTML = '';
     if (data.flights || data.car || data.tnotes) {
       var rows = '';
