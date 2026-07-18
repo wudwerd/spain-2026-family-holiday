@@ -540,6 +540,46 @@ a:hover { color: var(--accent); opacity: 1; }
 /* linked place names */
 h2 a, h3 a, .beach-name a { color: inherit; border-bottom: 1px solid var(--rule); padding-bottom: 1px; transition: border-color .2s, color .2s; }
 h2 a:hover, h3 a:hover, .beach-name a:hover { color: var(--accent); border-color: var(--accent); opacity: 1; }
+
+/* ===== per-family login + scoping ===== */
+.flight-form { display: none; }
+#login-gate { position: fixed; inset: 0; z-index: 200; background: var(--ground); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 40px 6vw; }
+#login-gate .lg-eyebrow { font-family: var(--sans); font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--ink-45); }
+#login-gate h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(30px,5vw,60px); letter-spacing: -0.015em; margin: 14px 0 8px; }
+#login-gate p { font-family: var(--serif); font-style: italic; font-size: 17px; color: var(--ink-60); margin: 0 0 34px; max-width: 40ch; }
+#login-gate .lg-list { display: flex; flex-direction: column; gap: 12px; width: 100%; max-width: 360px; }
+#login-gate button { font-family: var(--sans); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; padding: 18px 22px; border: 1px solid var(--ink); background: transparent; color: var(--ink); cursor: pointer; transition: all 0.2s; }
+#login-gate button:hover { background: var(--ink); color: var(--ground); }
+#login-gate .lg-note { font-family: var(--sans); font-size: 10px; letter-spacing: 0.06em; text-transform: none; color: var(--ink-45); margin-top: 26px; max-width: 44ch; font-style: normal; }
+.user-chip { font-family: var(--sans); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-60); }
+.user-chip button { background: none; border: 0; border-bottom: 1px solid var(--rule); color: inherit; font: inherit; letter-spacing: inherit; text-transform: inherit; cursor: pointer; padding: 0 0 1px; margin-left: 8px; }
+.user-chip button:hover { border-color: var(--ink); color: var(--ink); }
+.your-travel.panel { border: 1px solid var(--rule); padding: 40px 40px; background: rgba(22,33,31,0.02); max-width: 620px; }
+.your-travel .eyebrow { margin-bottom: 14px; }
+.your-travel form { display: flex; flex-direction: column; gap: 18px; margin-top: 22px; }
+.your-travel label { display: flex; flex-direction: column; gap: 7px; font-family: var(--sans); font-size: 9.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-45); }
+.your-travel input { font-family: var(--serif); font-size: 17px; color: var(--ink); background: transparent; border: 0; border-bottom: 1px solid var(--rule); padding: 6px 0 9px; }
+.your-travel input:focus { outline: none; border-bottom-color: var(--ink); }
+.your-travel button { align-self: flex-start; background: none; border: 1px solid var(--ink); color: var(--ink); padding: 13px 26px; font-family: var(--sans); font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; cursor: pointer; }
+.your-travel button:hover { background: var(--ink); color: var(--ground); }
+#travel-saved { margin-top: 8px; }
+.travel-saved-card { border-top: 1px solid var(--rule); padding-top: 18px; }
+.travel-saved-row { display: grid; grid-template-columns: 92px 1fr; gap: 14px; padding: 9px 0; border-bottom: 1px solid var(--rule-soft); font-family: var(--sans); font-weight: 300; font-size: 13px; }
+.travel-saved-row span:first-child { font-size: 9.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-45); padding-top: 3px; }
+.travel-saved-actions { margin-top: 14px; }
+.travel-saved-actions button { background: none; border: 0; border-bottom: 1px solid var(--ink); color: var(--ink); font-family: var(--sans); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; cursor: pointer; padding: 0 0 2px; }
+.falset-sec { padding: 120px 5vw 40px; }
+.falset-sec .split { margin-bottom: 36px; }
+@media (max-width: 760px) { .your-travel.panel { padding: 28px 20px; } .falset-sec { padding: 76px 5vw 24px; } }
+
+.arr-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 44px 60px; }
+.arr-card { display: flex; flex-direction: column; }
+.arr-h { font-family: var(--serif); font-weight: 400; font-size: clamp(20px,2vw,26px); letter-spacing: -0.01em; padding-bottom: 14px; border-bottom: 1px solid var(--rule); margin-bottom: 6px; }
+.arr-row { display: grid; grid-template-columns: 96px 1fr; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--rule-soft); font-family: var(--sans); font-weight: 300; font-size: 13px; line-height: 1.5; }
+.arr-row span:first-child { font-size: 9.5px; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-45); padding-top: 3px; }
+.arr-row span:last-child { color: var(--ink-60); }
+.arr-note { font-family: var(--serif); font-style: italic; font-size: 15px; color: var(--ink-45); margin-top: 16px; text-wrap: pretty; }
+@media (max-width: 900px){ .arr-grid { grid-template-columns: 1fr; gap: 34px; } }
 </style>
 <link rel="stylesheet" href="assets/trip-kit.css">
 </head>
@@ -550,11 +590,12 @@ h2 a:hover, h3 a:hover, .beach-name a:hover { color: var(--accent); border-color
   <nav>
     <a href="#travel">Travel</a>
     <a href="#packing">Packing</a>
-    <a href="#pals">Pals</a>
+    <a href="#pals" data-leg="pals" style="display:none">Pals</a>
     <a href="#coast">The coves</a>
     <a href="#datenights">Date nights</a>
     <a href="#lily">Lily super boujee</a>
     <a href="#running">Running</a>
+    <a href="#falset" data-leg="falset" style="display:none">Falset</a>
     <a href="#weather">Weather</a>
     <a href="#trip-map">Map</a>
   </nav>
@@ -576,46 +617,17 @@ h2 a:hover, h3 a:hover, .beach-name a:hover { color: var(--accent); border-color
     <p>Flights, airport lounge access, the hire car and two possible arrival airports. Everyone travels differently, so this stays useful and loose.</p>
   </div>
 
-  <div class="trip-summary-grid">
-    <article class="trip-card" data-reveal>
-      <div class="eyebrow">Chris's travel party</div>
-      <h3>British Airways · four passengers</h3>
-      <div class="spot-tag">Chris Woodward · four of us</div>
-      <div class="trip-leg">
-        <div class="trip-leg-k">Out</div>
-        <div class="trip-leg-main">LHR 15:15 → BCN 18:35<span class="trip-leg-sub">Thursday 20 August 2026 · direct · 2 h 20</span></div>
-      </div>
-      <div class="trip-leg">
-        <div class="trip-leg-k">Back</div>
-        <div class="trip-leg-main">BCN 19:30 → LHR 20:45<span class="trip-leg-sub">Wednesday 2 September 2026 · direct · 2 h 15</span></div>
-      </div>
-      <div class="trip-actions">
-        <button class="trip-text-button" id="copy-chris-travel" type="button">Copy travel details</button>
-      </div>
-      <div class="trip-alert"><strong>Two Amex Platinum cards between us.</strong> Across the two cards, all four of us have Priority Pass lounge access — each cardholder brings guests under the current terms. Children count as guests unless the lounge's own child policy says otherwise, so check the terminal, lounge and capacity in the Amex app before setting off.</div>
-    </article>
-
-    <article class="trip-card" data-reveal>
-      <div class="eyebrow">The hire car</div>
-      <h3>Peugeot e-2008, or similar</h3>
-      <div class="spot-tag">Chris Woodward driving</div>
-      <div class="trip-leg">
-        <div class="trip-leg-k">Collect</div>
-        <div class="trip-leg-main">BCN · 19:30<span class="trip-leg-sub">Thursday 20 August · after the flight lands</span></div>
-      </div>
-      <div class="trip-leg">
-        <div class="trip-leg-k">Return</div>
-        <div class="trip-leg-main">BCN · 17:30<span class="trip-leg-sub">Wednesday 2 September · two hours before take-off</span></div>
-      </div>
-      <div class="spot-facts">
-        <div class="fact-row"><div class="fact-k">Confirm</div><div class="fact-v">Terminal, collection desk and 20 August desk hours</div></div>
-        <div class="fact-row"><div class="fact-k">Card</div><div class="fact-v">Deposit, physical credit card requirement and named driver</div></div>
-        <div class="fact-row"><div class="fact-k">Cover</div><div class="fact-v">Insurance excess and anything offered at the desk</div></div>
-        <div class="fact-row"><div class="fact-k">Electric</div><div class="fact-v">Return charge level, cable, charging card/app and roadside number</div></div>
-        <div class="fact-row"><div class="fact-k">Children</div><div class="fact-v">Reserve the right child seat for Loïc, and for anyone else at or below 135 cm</div></div>
-      </div>
-      <p class="trip-card-note">At collection: photograph every panel and wheel, check the displayed charge, find the cable and make sure each child restraint fits before leaving the bay.</p>
-    </article>
+  <div class="your-travel panel" data-reveal>
+    <div class="eyebrow">Your travel</div>
+    <h3>Your flights &amp; hire car.</h3>
+    <p class="spot-tag">Saved on this phone only, nothing is uploaded or shared. Everyone fills in their own, and sees only their own.</p>
+    <form id="travel-form" autocomplete="off">
+      <label>Flights<input name="flights" maxlength="180" placeholder="BA · LHR 15:15 → BCN 18:35, back 30 Aug"></label>
+      <label>Hire car<input name="car" maxlength="160" placeholder="Company, pickup BCN 20 Aug, return 30 Aug"></label>
+      <label>Notes<input name="tnotes" maxlength="180" placeholder="Lounge access, seat numbers, anything useful"></label>
+      <button type="submit">Save my travel</button>
+    </form>
+    <div id="travel-saved"></div>
   </div>
 
   <div class="arrival-board" data-reveal>
@@ -627,7 +639,7 @@ h2 a:hover, h3 a:hover, .beach-name a:hover { color: var(--accent); border-color
       <article class="arrival-airport">
         <div class="arrival-code">BCN</div>
         <div class="arrival-name">Barcelona El Prat · south of the trip</div>
-        <p class="arrival-copy">Chris's party lands at 18:35 on 20 August and collects the car at 19:30. Allow roughly 1 h 45 to 2 h for Pals before stops and August traffic.</p>
+        <p class="arrival-copy">Whoever lands at Barcelona picks up a car and heads north, roughly 1 h 45 to 2 h to Pals, or 20-25 minutes more to the campsite, before stops and August traffic.</p>
         <div class="arrival-links"><a href="https://www.google.com/maps/dir/?api=1&amp;origin=Josep+Tarradellas+Barcelona-El+Prat+Airport&amp;destination=La+Pallissa%2C+Pals&amp;travelmode=driving" target="_blank" rel="noopener">BCN to Pals ↗</a></div>
       </article>
       <article class="arrival-airport">
@@ -653,7 +665,7 @@ h2 a:hover, h3 a:hover, .beach-name a:hover { color: var(--accent); border-color
   </div>
 </section>
 
-<section id="overview" class="wrap overview">
+<section id="overview" data-leg="pals" style="display:none" class="wrap overview">
   <div class="split asym" data-reveal>
     <h2>Two bases. No timetable.</h2>
     <p>Each base has more around it than we could ever do. Pick by mood on the day. Some go, some stay, everyone meets back for dinner.</p>
@@ -672,7 +684,7 @@ h2 a:hover, h3 a:hover, .beach-name a:hover { color: var(--accent); border-color
   </div>
 </section>
 
-<section id="pals" class="wrap chapter">
+<section id="pals" data-leg="pals" style="display:none" class="wrap chapter">
   <header class="chapter-head" data-reveal>
     <div class="chapter-nn">Chapter I</div>
     <h2>Pals &amp; the Empordà</h2>
@@ -718,7 +730,7 @@ h2 a:hover, h3 a:hover, .beach-name a:hover { color: var(--accent); border-color
 </article>
 <article class="spot-row" data-reveal>
   <figure class="row-fig"><img src="assets/peratallada.jpg" alt="Peratallada" loading="lazy"><figcaption>Peratallada, carved from one rock</figcaption></figure>
-  <div class="row-txt"><h3><a href="https://www.google.com/maps/search/?api=1&query=Peratallada%2C%20Girona" target="_blank" rel="noopener">Peratallada</a></h3><div class="spot-tag">The prettiest village in the Empordà</div><p class="spot-body">Carved out of a single outcrop of stone, moat and all. An hour covers it — go early, before the coaches and the midday crowd — then a long lunch in a courtyard. The slow morning done properly.</p>
+  <div class="row-txt"><h3><a href="https://www.google.com/maps/search/?api=1&query=Peratallada%2C%20Girona" target="_blank" rel="noopener">Peratallada</a></h3><div class="spot-tag">The prettiest village in the Empordà</div><p class="spot-body">Carved out of a single outcrop of stone, moat and all. An hour covers it, go early, before the coaches and the midday crowd, then a long lunch in a courtyard. The slow morning done properly.</p>
 <div class="spot-facts">
 <div class="fact-row"><div class="fact-k">Drive</div><div class="fact-v">15 min</div></div>
 <div class="fact-row"><div class="fact-k">Parking</div><div class="fact-v">Field car park outside the walls, small fee</div></div>
@@ -727,7 +739,7 @@ h2 a:hover, h3 a:hover, .beach-name a:hover { color: var(--accent); border-color
 </article>
 <article class="spot-row rev" data-reveal>
   <figure class="row-fig"><img src="assets/girona.jpg" alt="Girona" loading="lazy"><figcaption>The Onyar houses, Girona</figcaption></figure>
-  <div class="row-txt"><h3><a href="https://www.google.com/maps/search/?api=1&query=Girona%20old%20town" target="_blank" rel="noopener">Girona</a></h3><div class="spot-tag">The city option</div><p class="spot-body">Bridges over the Onyar, the Jewish Quarter, the cathedral steps and the best gelato of the trip. Don’t drive into the old town — park on the edge and walk in, and go early for the steps before the crowds. Easily cut short if the mood passes.</p>
+  <div class="row-txt"><h3><a href="https://www.google.com/maps/search/?api=1&query=Girona%20old%20town" target="_blank" rel="noopener">Girona</a></h3><div class="spot-tag">The city option</div><p class="spot-body">Bridges over the Onyar, the Jewish Quarter, the cathedral steps and the best gelato of the trip. Don’t drive into the old town, park on the edge and walk in, and go early for the steps before the crowds. Easily cut short if the mood passes.</p>
 <div class="spot-facts">
 <div class="fact-row"><div class="fact-k">Drive</div><div class="fact-v">45 min</div></div>
 <div class="fact-row"><div class="fact-k">Parking</div><div class="fact-v">Signed car parks outside the old quarter</div></div>
@@ -736,7 +748,7 @@ h2 a:hover, h3 a:hover, .beach-name a:hover { color: var(--accent); border-color
 </article>
 <article class="spot-row" data-reveal>
   <figure class="row-fig sq"><img src="assets/illes-medes.jpg" alt="L’Estartit &amp; the Illes Medes" loading="lazy"><figcaption>The Illes Medes off L’Estartit</figcaption></figure>
-  <div class="row-txt"><h3><a href="https://www.google.com/maps/search/?api=1&query=Illes%20Medes%2C%20L%27Estartit" target="_blank" rel="noopener">L’Estartit &amp; the Illes Medes</a></h3><div class="spot-tag">Boats over a marine reserve</div><p class="spot-body">Glass-bottom boats (Nautilus) circle the protected islands, fish visible without getting wet — the kids love it. Pick a calm, early morning: rough seas cancel the trips and turn small stomachs. The harbour town behind is flat and easy.</p>
+  <div class="row-txt"><h3><a href="https://www.google.com/maps/search/?api=1&query=Illes%20Medes%2C%20L%27Estartit" target="_blank" rel="noopener">L’Estartit &amp; the Illes Medes</a></h3><div class="spot-tag">Boats over a marine reserve</div><p class="spot-body">Glass-bottom boats (Nautilus) circle the protected islands, fish visible without getting wet, the kids love it. Pick a calm, early morning: rough seas cancel the trips and turn small stomachs. The harbour town behind is flat and easy.</p>
 <div class="spot-facts">
 <div class="fact-row"><div class="fact-k">Drive</div><div class="fact-v">25 min</div></div>
 <div class="fact-row"><div class="fact-k">Parking</div><div class="fact-v">Harbour car parks, arrive before 10 for the morning boats</div></div>
@@ -745,7 +757,7 @@ h2 a:hover, h3 a:hover, .beach-name a:hover { color: var(--accent); border-color
 </article>
 <article class="spot-row rev" data-reveal>
   <figure class="row-fig"><img src="assets/banyoles.jpg" alt="Estany de Banyoles" loading="lazy"><figcaption>Estany de Banyoles</figcaption></figure>
-  <div class="row-txt"><h3><a href="https://www.google.com/maps/search/?api=1&query=Estany%20de%20Banyoles" target="_blank" rel="noopener">Estany de Banyoles</a></h3><div class="spot-tag">Fresh water under wooded hills</div><p class="spot-body">Catalonia’s largest natural lake — genuinely warm and swimmable in the marked zones, with a flat loop path for the kids and rowing boats to hire. Easy parking if you’re there by nine. A different kind of swim if anyone tires of salt.</p>
+  <div class="row-txt"><h3><a href="https://www.google.com/maps/search/?api=1&query=Estany%20de%20Banyoles" target="_blank" rel="noopener">Estany de Banyoles</a></h3><div class="spot-tag">Fresh water under wooded hills</div><p class="spot-body">Catalonia’s largest natural lake, genuinely warm and swimmable in the marked zones, with a flat loop path for the kids and rowing boats to hire. Easy parking if you’re there by nine. A different kind of swim if anyone tires of salt.</p>
 <div class="spot-facts">
 <div class="fact-row"><div class="fact-k">Drive</div><div class="fact-v">50 to 55 min</div></div>
 <div class="fact-row"><div class="fact-k">Parking</div><div class="fact-v">East shore car parks near the bathing zones</div></div>
@@ -760,7 +772,7 @@ h2 a:hover, h3 a:hover, .beach-name a:hover { color: var(--accent); border-color
     <div class="aside-label">The rainy<br>day card</div>
     <div class="aside-main">
       <h2>Magma, Santa Coloma de Farners</h2>
-      <p>About 55 minutes inland: indoor and outdoor thermal pools, a counter-current river and a children’s area. Book a slot ahead — they sell out — and don’t expect a silent adult spa; it’s more kids’-play-park than serene, which for us is the point. Hold it for a grey day or when everyone’s tired of sand.</p>
+      <p>About 55 minutes inland: indoor and outdoor thermal pools, a counter-current river and a children’s area. Book a slot ahead, they sell out, and don’t expect a silent adult spa; it’s more kids’-play-park than serene, which for us is the point. Hold it for a grey day or when everyone’s tired of sand.</p>
       <a class="aside-link" href="https://www.magma-cat.com/en/faqs/" target="_blank" rel="noopener">Family rules and booking ↗</a>
     </div>
     <div class="aside-facts">
@@ -809,7 +821,7 @@ h2 a:hover, h3 a:hover, .beach-name a:hover { color: var(--accent); border-color
 <div class="beach-row" data-beach="2" role="button" tabindex="0" aria-label="Show Aiguablava">
       <div class="beach-nn">03</div>
       <div class="beach-main"><span class="beach-name"><a href="https://www.google.com/maps/search/?api=1&query=Platja%20de%20Aiguablava%2C%20Begur" target="_blank" rel="noopener">Aiguablava</a></span><span class="beach-tag">Most spectacular</span></div>
-      <div class="beach-drive">25 to 30 min / lot fills 9–10am</div>
+      <div class="beach-drive">25 to 30 min / lot fills 9-10am</div>
     </div>
 <div class="beach-row" data-beach="3" role="button" tabindex="0" aria-label="Show Sa Riera">
       <div class="beach-nn">04</div>
@@ -835,7 +847,7 @@ h2 a:hover, h3 a:hover, .beach-name a:hover { color: var(--accent); border-color
     <div class="beach-panel">
       <img id="beach-img" src="assets/llafranc.jpg" alt="Llafranc">
       <div class="beach-cap" id="beach-cap">Llafranc / best all-rounder</div>
-      <p class="beach-note" id="beach-note">Promenade, sand, restaurants and calm water in one place. Flat and pushchair-easy once you’re there — but there’s no beach car park, so it’s street-only and a scrum in August.</p>
+      <p class="beach-note" id="beach-note">Promenade, sand, restaurants and calm water in one place. Flat and pushchair-easy once you’re there, but there’s no beach car park, so it’s street-only and a scrum in August.</p>
     </div>
   </div>
   <div class="sources-line">Official access details: <a href="https://visitpalafrugell.cat/en/beaches-and-routes/" target="_blank" rel="noopener">Palafrugell</a> · <a href="https://visitbegur.cat/en/discover/beaches/" target="_blank" rel="noopener">Begur</a> · <a href="https://visitpalamos.cat/en/platja-de-castell/" target="_blank" rel="noopener">Castell</a></div>
@@ -867,7 +879,7 @@ h2 a:hover, h3 a:hover, .beach-name a:hover { color: var(--accent); border-color
 </article>
 <article class="spot-row rev" data-reveal>
   <figure class="row-fig"><img src="assets/cap-roig.jpg" alt="Jardins de Cap Roig" loading="lazy"><figcaption>The garden terraces above the sea</figcaption></figure>
-  <div class="row-txt"><h3><a href="https://www.google.com/maps/search/?api=1&query=Jardins%20de%20Cap%20Roig%2C%20Calella%20de%20Palafrugell" target="_blank" rel="noopener">Jardins de Cap Roig</a></h3><div class="spot-tag">Gardens over the sea</div><p class="spot-body">A castle, cactus terraces and sea views built by an exiled Russian colonel and his English partner. An hour or two — lots of steps, no café inside (bring water), and go morning or late, not midday. Pair it with Castell beach below.</p>
+  <div class="row-txt"><h3><a href="https://www.google.com/maps/search/?api=1&query=Jardins%20de%20Cap%20Roig%2C%20Calella%20de%20Palafrugell" target="_blank" rel="noopener">Jardins de Cap Roig</a></h3><div class="spot-tag">Gardens over the sea</div><p class="spot-body">A castle, cactus terraces and sea views built by an exiled Russian colonel and his English partner. An hour or two, lots of steps, no café inside (bring water), and go morning or late, not midday. Pair it with Castell beach below.</p>
 <div class="spot-facts">
 <div class="fact-row"><div class="fact-k">Drive</div><div class="fact-v">10 min</div></div>
 <div class="fact-row"><div class="fact-k">Parking</div><div class="fact-v">Garden car park at the entrance</div></div>
@@ -895,7 +907,7 @@ h2 a:hover, h3 a:hover, .beach-name a:hover { color: var(--accent); border-color
   <figure class="spot-fig"><img src="assets/llafranc-bay.jpg" alt="Casamar, Llafranc" loading="lazy"><figcaption>Llafranc bay from the Sant Sebastià path</figcaption></figure>
   <div class="feat-grid">
     <div><h3><a href="https://www.google.com/maps/search/?api=1&query=Casamar%2C%20Llafranc" target="_blank" rel="noopener">Casamar, Llafranc</a></h3><div class="spot-tag">The special one</div></div>
-    <div><p class="spot-body">A Michelin-starred dining room and terrace above the bay, tasting menus on Empordà produce. Book it first and build the babysitting around it — and for a star it’s a steal, people talk about €200 for two, with free parking at the hotel, which never happens in Llafranc.</p>
+    <div><p class="spot-body">A Michelin-starred dining room and terrace above the bay, tasting menus on Empordà produce. Book it first and build the babysitting around it, and for a star it’s a steal, people talk about €200 for two, with free parking at the hotel, which never happens in Llafranc.</p>
 <div class="spot-facts">
 <div class="fact-row dk"><div class="fact-k">From camp</div><div class="fact-v">10 min taxi</div></div>
 <div class="fact-row dk"><div class="fact-k">Phone</div><div class="fact-v">+34 972 300 104</div></div>
@@ -924,7 +936,7 @@ h2 a:hover, h3 a:hover, .beach-name a:hover { color: var(--accent); border-color
 </article>
 <article class="spot-row spot-dk" data-reveal>
   <figure class="row-fig sq"><img src="assets/clara-begur.jpg" alt="Clara, at Hotel Aiguaclara, Begur" loading="lazy"><figcaption>Clara, under the pergola (photo: the hotel)</figcaption></figure>
-  <div class="row-txt"><h3><a href="https://www.google.com/maps/search/?api=1&query=Hotel%20Aiguaclara%2C%20Begur" target="_blank" rel="noopener">Clara, at Hotel Aiguaclara, Begur</a></h3><div class="spot-tag">The colonial mansion</div><p class="spot-body">The restaurant in the old garden of an 1866 Cuban-era mansion in the heart of Begur: marble tables under a glass pergola, soft light, small plates for the middle of the table — lovely food, service that can be scattered. Climb to the castle for the last light, then walk down to the table.</p>
+  <div class="row-txt"><h3><a href="https://www.google.com/maps/search/?api=1&query=Hotel%20Aiguaclara%2C%20Begur" target="_blank" rel="noopener">Clara, at Hotel Aiguaclara, Begur</a></h3><div class="spot-tag">The colonial mansion</div><p class="spot-body">The restaurant in the old garden of an 1866 Cuban-era mansion in the heart of Begur: marble tables under a glass pergola, soft light, small plates for the middle of the table, lovely food, service that can be scattered. Climb to the castle for the last light, then walk down to the table.</p>
 <div class="spot-facts">
 <div class="fact-row dk"><div class="fact-k">From camp</div><div class="fact-v">20 min taxi</div></div>
 <div class="fact-row dk"><div class="fact-k">Book</div><div class="fact-v">+34 613 04 55 04</div></div>
@@ -945,7 +957,7 @@ h2 a:hover, h3 a:hover, .beach-name a:hover { color: var(--accent); border-color
   <figure class="spot-fig"><img src="assets/mas-de-torrent.jpg" alt="Mas de Torrent, the spa day" loading="lazy"><figcaption>The pool at Mas de Torrent (photo: the hotel)</figcaption></figure>
   <div class="feat-grid">
     <div><h3><a href="https://www.instagram.com/explore/tags/masdetorrent/" target="_blank" rel="noopener">Mas de Torrent, the spa day</a></h3><div class="spot-tag">Five stars, ten minutes inland</div></div>
-    <div><p class="spot-body">A 1751 farmhouse turned Relais &amp; Châteaux hideaway between Pals and the sea: treatment rooms in the old stables, a garden pool under the palms, lunch beneath the vines. Book the spa — it’s 15-plus, which is rather the point — and make a day of it; it’s a treat, not a base.</p>
+    <div><p class="spot-body">A 1751 farmhouse turned Relais &amp; Châteaux hideaway between Pals and the sea: treatment rooms in the old stables, a garden pool under the palms, lunch beneath the vines. Book the spa, it’s 15-plus, which is rather the point, and make a day of it; it’s a treat, not a base.</p>
 <div class="spot-facts">
 <div class="fact-row"><div class="fact-k">Drive</div><div class="fact-v">15 to 20 min</div></div>
 <div class="fact-row"><div class="fact-k">Book</div><div class="fact-v">Spa by appointment, lunch after</div></div>
@@ -970,7 +982,7 @@ h2 a:hover, h3 a:hover, .beach-name a:hover { color: var(--accent); border-color
 </article>
 <article class="spot-row" data-reveal>
   <figure class="row-fig sq"><img src="assets/la-bisbal.jpg" alt="La Bisbal, the ceramics street" loading="lazy"><figcaption>The ceramics shops of La Bisbal (photo: Catalunya Tourism)</figcaption></figure>
-  <div class="row-txt"><h3><a href="https://www.instagram.com/explore/tags/labisbaldemporda/" target="_blank" rel="noopener">La Bisbal, the ceramics street</a></h3><div class="spot-tag">Galleries, ateliers, antiques</div><p class="spot-body">The Empordà’s ceramics town — working, not pretty, marked by old kiln chimneys. Carrer de l’Aigüeta is the street to walk; park free by the Terracotta museum. Go in the morning, come back with something wrapped in paper.</p>
+  <div class="row-txt"><h3><a href="https://www.instagram.com/explore/tags/labisbaldemporda/" target="_blank" rel="noopener">La Bisbal, the ceramics street</a></h3><div class="spot-tag">Galleries, ateliers, antiques</div><p class="spot-body">The Empordà’s ceramics town, working, not pretty, marked by old kiln chimneys. Carrer de l’Aigüeta is the street to walk; park free by the Terracotta museum. Go in the morning, come back with something wrapped in paper.</p>
 <div class="spot-facts">
 <div class="fact-row"><div class="fact-k">Drive</div><div class="fact-v">25 min</div></div>
 <div class="fact-row"><div class="fact-k">Best</div><div class="fact-v">Morning, before the heat</div></div>
@@ -995,7 +1007,7 @@ h2 a:hover, h3 a:hover, .beach-name a:hover { color: var(--accent); border-color
   <figure class="spot-fig"><img src="assets/toc-al-mar.jpg" alt="Toc al Mar, Aiguablava" loading="lazy"><figcaption>The table on the sand at Toc al Mar (photo: the restaurant)</figcaption></figure>
   <div class="feat-grid">
     <div><h3><a href="https://www.google.com/maps/search/?api=1&query=Toc%20al%20Mar%2C%20Aiguablava" target="_blank" rel="noopener">Toc al Mar, Aiguablava</a></h3><div class="spot-tag">Feet in the sand</div></div>
-    <div><p class="spot-body">Grilled fish and rice on the sand at Aiguablava, feet in the cove, the kids between courses and the water. Order a rice to share and watch the whole fish — it’s sold by weight and the bill runs away if you don’t. Book days ahead; the beach parking’s paid.</p>
+    <div><p class="spot-body">Grilled fish and rice on the sand at Aiguablava, feet in the cove, the kids between courses and the water. Order a rice to share and watch the whole fish, it’s sold by weight and the bill runs away if you don’t. Book days ahead; the beach parking’s paid.</p>
 <div class="spot-facts">
 <div class="fact-row"><div class="fact-k">Drive</div><div class="fact-v">25 to 30 min</div></div>
 <div class="fact-row"><div class="fact-k">Phone</div><div class="fact-v">+34 972 113 232</div></div>
@@ -1005,7 +1017,7 @@ h2 a:hover, h3 a:hover, .beach-name a:hover { color: var(--accent); border-color
 </article>
 <article class="spot-row" data-reveal>
   <figure class="row-fig"><img src="assets/aiguablava-hotel.jpg" alt="Hotel Aigua Blava terrace" loading="lazy"><figcaption>The cove below the terrace</figcaption></figure>
-  <div class="row-txt"><h3><a href="https://www.google.com/maps/search/?api=1&query=Hotel%20Aigua%20Blava%2C%20Begur" target="_blank" rel="noopener">Hotel Aigua Blava terrace</a></h3><div class="spot-tag">The clifftop classic</div><p class="spot-body">The old Costa Brava hotel above the same cove, white balustrades over impossible water. Book the terrace by name — the poolside “La Rocalla” is a different room. Expensive, and worth it, while the kids count boats below.</p>
+  <div class="row-txt"><h3><a href="https://www.google.com/maps/search/?api=1&query=Hotel%20Aigua%20Blava%2C%20Begur" target="_blank" rel="noopener">Hotel Aigua Blava terrace</a></h3><div class="spot-tag">The clifftop classic</div><p class="spot-body">The old Costa Brava hotel above the same cove, white balustrades over impossible water. Book the terrace by name, the poolside “La Rocalla” is a different room. Expensive, and worth it, while the kids count boats below.</p>
 <div class="spot-facts">
 <div class="fact-row"><div class="fact-k">Drive</div><div class="fact-v">25 to 30 min</div></div>
 <div class="fact-row"><div class="fact-k">Parking</div><div class="fact-v">Hotel car park</div></div>
@@ -1014,7 +1026,7 @@ h2 a:hover, h3 a:hover, .beach-name a:hover { color: var(--accent); border-color
 </article>
 <article class="spot-row rev" data-reveal>
   <figure class="row-fig"><img src="assets/el-far.jpg" alt="El Far, Sant Sebastià" loading="lazy"><figcaption>The lighthouse above the lunch terrace</figcaption></figure>
-  <div class="row-txt"><h3><a href="https://www.google.com/maps/search/?api=1&query=El%20Far%20de%20Sant%20Sebasti%C3%A0%2C%20Llafranc" target="_blank" rel="noopener">El Far, Sant Sebastià</a></h3><div class="spot-tag">Lunch beside the lighthouse</div><p class="spot-body">The hotel beside the lighthouse has the best table view on this stretch of coast — which is mostly what you’re paying for; the food splits opinion. The set lunch (around €20) is the value play. Go for the view and keep expectations level.</p>
+  <div class="row-txt"><h3><a href="https://www.google.com/maps/search/?api=1&query=El%20Far%20de%20Sant%20Sebasti%C3%A0%2C%20Llafranc" target="_blank" rel="noopener">El Far, Sant Sebastià</a></h3><div class="spot-tag">Lunch beside the lighthouse</div><p class="spot-body">The hotel beside the lighthouse has the best table view on this stretch of coast, which is mostly what you’re paying for; the food splits opinion. The set lunch (around €20) is the value play. Go for the view and keep expectations level.</p>
 <div class="spot-facts">
 <div class="fact-row"><div class="fact-k">Drive</div><div class="fact-v">15 min</div></div>
 <div class="fact-row"><div class="fact-k">Parking</div><div class="fact-v">Free area by the lighthouse</div></div>
@@ -1023,7 +1035,7 @@ h2 a:hover, h3 a:hover, .beach-name a:hover { color: var(--accent); border-color
 </article>
 <article class="spot-row" data-reveal>
   <figure class="row-fig sq"><img src="assets/calella-port-bo.jpg" alt="Tragamar, Calella" loading="lazy"><figcaption>El Canadell, below the terrace</figcaption></figure>
-  <div class="row-txt"><h3><a href="https://www.google.com/maps/search/?api=1&query=Tragamar%2C%20Calella%20de%20Palafrugell" target="_blank" rel="noopener">Tragamar, Calella</a></h3><div class="spot-tag">On the Canadell sand</div><p class="spot-body">Paella and lobster rice right on El Canadell beach — a slick Grup Tragaluz place, not the fishermen’s shack it looks like. Book the terrace. The kids finish first and go back to the sand in full view.</p>
+  <div class="row-txt"><h3><a href="https://www.google.com/maps/search/?api=1&query=Tragamar%2C%20Calella%20de%20Palafrugell" target="_blank" rel="noopener">Tragamar, Calella</a></h3><div class="spot-tag">On the Canadell sand</div><p class="spot-body">Paella and lobster rice right on El Canadell beach, a slick Grup Tragaluz place, not the fishermen’s shack it looks like. Book the terrace. The kids finish first and go back to the sand in full view.</p>
 <div class="spot-facts">
 <div class="fact-row"><div class="fact-k">Drive</div><div class="fact-v">About 10 min</div></div>
 <div class="fact-row"><div class="fact-k">Parking</div><div class="fact-v">Upper Calella car parks</div></div>
@@ -1050,7 +1062,7 @@ h2 a:hover, h3 a:hover, .beach-name a:hover { color: var(--accent); border-color
   <figure class="spot-fig"><img src="assets/bella-lola.jpg" alt="La Bella Lola, Port Bo" loading="lazy"><figcaption>Port Bo and the vaults (photo: Costa Brava Tourism)</figcaption></figure>
   <div class="feat-grid">
     <div><h3><a href="https://www.google.com/maps/search/?api=1&query=La%20Bella%20Lola%2C%20Calella%20de%20Palafrugell" target="_blank" rel="noopener">La Bella Lola, Port Bo</a></h3><div class="spot-tag">Tables by the vaults, kids on the sand</div></div>
-    <div><p class="spot-body">The havaneres taverna in the arches at Port Bo — the prettiest corner of Calella. These days it’s really a drinks-and-a-view stop more than a booked dinner, and it’s changed hands before, so check it’s actually open before you count on it.</p>
+    <div><p class="spot-body">The havaneres taverna in the arches at Port Bo, the prettiest corner of Calella. These days it’s really a drinks-and-a-view stop more than a booked dinner, and it’s changed hands before, so check it’s actually open before you count on it.</p>
 <div class="fact-row"><div class="fact-k">Book</div><div class="fact-v">Front-line tables go early, ask for 20:30</div></div>
 <div class="fact-row"><div class="fact-k">Kids</div><div class="fact-v">Sand in full view, take a torch for after dark</div></div>
 </div></div>
@@ -1096,7 +1108,7 @@ h2 a:hover, h3 a:hover, .beach-name a:hover { color: var(--accent); border-color
 <div class="run-stat"><div class="run-stat-k">Surface</div><div class="run-stat-v">60% path</div></div>
 <div class="run-stat"><div class="run-stat-k">Start</div><div class="run-stat-v">06:45</div></div></div>
       <div class="run-cols">
-        <p class="run-body">Out of the gate, down the Calella road, and onto the Camí de Ronda through Port Bo to Llafranc. The climb to the Far de Sant Sebastià is the hard part — steady, steepest near the top. Turn at the lighthouse and retrace. The stone steps get slippery, and after 09:00 the path fills with walkers.</p>
+        <p class="run-body">Out of the gate, down the Calella road, and onto the Camí de Ronda through Port Bo to Llafranc. The climb to the Far de Sant Sebastià is the hard part, steady, steepest near the top. Turn at the lighthouse and retrace. The stone steps get slippery, and after 09:00 the path fills with walkers.</p>
         <div class="run-side">
           <div class="wp-label">Waypoints</div>
           <div class="wp-row"><div class="wp-km">0.0</div><div class="wp-t">Campsite gate, turn for Calella</div></div>
@@ -1187,6 +1199,29 @@ h2 a:hover, h3 a:hover, .beach-name a:hover { color: var(--accent); border-color
     </div>
   </article>
   <p class="light-footnote">Trace each route on Strava or Komoot before day one; the lanes are unsigned and the coastal path has unfenced drops. August heat builds fast after 09:00.</p>
+</section>
+
+<section id="falset" data-leg="falset" style="display:none" class="wrap falset-sec">
+  <div class="split asym" data-reveal>
+    <div class="eyebrow">Just us, after the coast</div>
+    <h2>Three days in Falset.</h2>
+    <p>Down into the Priorat once the campsite’s done, Estelle’s dad’s vineyard, the village, and a pool that’s ours for the asking, before the flight home on 2 September.</p>
+  </div>
+  <div class="arr-grid" data-reveal>
+    <div class="arr-card">
+      <div class="arr-h">The vineyard</div>
+      <div class="arr-row"><span>Where</span><span>Bigot i del Gat, Falset (Priorat)</span></div>
+      <div class="arr-row"><span>Whose</span><span>Estelle’s dad’s</span></div>
+      <div class="arr-row"><span>When</span><span>Three nights after camping</span></div>
+      <div class="arr-note">Priorat reds, steep terraced vines, and family who know where the good bottles are.</div>
+    </div>
+    <div class="arr-card">
+      <div class="arr-h">The pool</div>
+      <div class="arr-row"><span>Tickets</span><span>Free, sorted through the family</span></div>
+      <div class="arr-row"><span>Good for</span><span>Cooling the kids off between vines and village</span></div>
+    </div>
+  </div>
+  <p class="light-footnote">Falset is about two and a half hours inland from the campsite, up into the Priorat wine country.</p>
 </section>
 
 <section id="packing" class="wrap trip-kit packing-section">
@@ -1452,7 +1487,7 @@ h2 a:hover, h3 a:hover, .beach-name a:hover { color: var(--accent); border-color
 
 <script>
 (function () {
-  var BEACHES = [{"name": "Llafranc", "tag": "Best all-rounder", "note": "Promenade, sand, restaurants and calm water in one place. Flat and pushchair-easy once you’re there — but there’s no beach car park, so it’s street-only and a scrum in August.", "img": "llafranc"}, {"name": "Tamariu", "tag": "Best snorkel", "note": "A compact pine-backed cove, clear water along the rocks for snorkelling. Arrive by 9am or the tiny car park’s gone — that’s the whole game here.", "img": "tamariu"}, {"name": "Aiguablava", "tag": "Most spectacular", "note": "The postcard: fine sand, shallow calm water, rare on this coast and good for the kids. But the lot fills 9–10am and it’s a steep stepped path down — worse back up with the bags.", "img": "aiguablava"}, {"name": "Sa Riera", "tag": "Best for space", "note": "Begur\u2019s biggest cove. Room to spread out, showers and food close by. Park up the access road and walk down; the climb back up with the gear is the sting.", "img": "sa-riera"}, {"name": "Platja de Castell", "tag": "Best wild day", "note": "Undeveloped sand between headlands with a fishermen\u2019s hut at one end. Bring everything, there’s little to buy. Parking’s the easy one — a big all-day lot — but it’s a mile of dirt track and a ten-minute walk to the sand.", "img": "castell"}, {"name": "El Canadell", "tag": "Easiest fallback", "note": "Calella\u2019s gentle town beach. Low effort, ice cream within reach. Skip the road-space scrum — the multi-storey above town stays half-empty.", "img": "calella-port-bo"}, {"name": "Illa Roja", "tag": "The adventurous swim", "note": "A wild red-rock cove reached on foot along the coast path. No parking of its own: park at Sa Riera and walk the path in. It runs right along the top of the sand, and the naturists keep to the far end.", "img": "sa-riera"}];
+  var BEACHES = [{"name": "Llafranc", "tag": "Best all-rounder", "note": "Promenade, sand, restaurants and calm water in one place. Flat and pushchair-easy once you’re there, but there’s no beach car park, so it’s street-only and a scrum in August.", "img": "llafranc"}, {"name": "Tamariu", "tag": "Best snorkel", "note": "A compact pine-backed cove, clear water along the rocks for snorkelling. Arrive by 9am or the tiny car park’s gone, that’s the whole game here.", "img": "tamariu"}, {"name": "Aiguablava", "tag": "Most spectacular", "note": "The postcard: fine sand, shallow calm water, rare on this coast and good for the kids. But the lot fills 9-10am and it’s a steep stepped path down, worse back up with the bags.", "img": "aiguablava"}, {"name": "Sa Riera", "tag": "Best for space", "note": "Begur\u2019s biggest cove. Room to spread out, showers and food close by. Park up the access road and walk down; the climb back up with the gear is the sting.", "img": "sa-riera"}, {"name": "Platja de Castell", "tag": "Best wild day", "note": "Undeveloped sand between headlands with a fishermen\u2019s hut at one end. Bring everything, there’s little to buy. Parking’s the easy one, a big all-day lot, but it’s a mile of dirt track and a ten-minute walk to the sand.", "img": "castell"}, {"name": "El Canadell", "tag": "Easiest fallback", "note": "Calella\u2019s gentle town beach. Low effort, ice cream within reach. Skip the road-space scrum, the multi-storey above town stays half-empty.", "img": "calella-port-bo"}, {"name": "Illa Roja", "tag": "The adventurous swim", "note": "A wild red-rock cove reached on foot along the coast path. No parking of its own: park at Sa Riera and walk the path in. It runs right along the top of the sand, and the naturists keep to the far end.", "img": "sa-riera"}];
   var BEACH_IMGS = {"llafranc": "assets/llafranc.jpg", "tamariu": "assets/tamariu.jpg", "aiguablava": "assets/aiguablava.jpg", "sa-riera": "assets/sa-riera.jpg", "castell": "assets/castell.jpg", "calella-port-bo": "assets/calella-port-bo.jpg"};
   var MAP = [{"key": "pals", "base": "pals", "name": "La Pallissa, Pals", "drive": "BCN \u2192 Pals / 1 h 45 to 2 h", "ll": [41.9689, 3.1458]}, {"key": "platjapals", "base": "pals", "name": "Platja de Pals", "drive": "10 min", "ll": [41.9789, 3.1994]}, {"key": "peratallada", "base": "pals", "name": "Peratallada", "drive": "15 min", "ll": [41.9723, 3.0919]}, {"key": "estartit", "base": "pals", "name": "L\u2019Estartit", "drive": "25 min", "ll": [42.0546, 3.1993]}, {"key": "girona", "base": "pals", "name": "Girona", "drive": "45 min", "ll": [41.9794, 2.8214]}, {"key": "banyoles", "base": "pals", "name": "Banyoles", "drive": "50 to 55 min", "ll": [42.1246, 2.7548]}, {"key": "camp", "base": "camp", "name": "Camping Palafrugell", "drive": "Pals \u2192 camp / 20 to 25 min", "ll": [41.8945, 3.165]}, {"key": "calella", "base": "camp", "name": "Calella & El Canadell", "drive": "10 min", "ll": [41.888, 3.181]}, {"key": "llafranc", "base": "camp", "name": "Llafranc", "drive": "10 min", "ll": [41.893, 3.194]}, {"key": "tamariu", "base": "camp", "name": "Tamariu", "drive": "15 to 20 min", "ll": [41.918, 3.207]}, {"key": "aiguablava", "base": "camp", "name": "Aiguablava", "drive": "25 to 30 min", "ll": [41.9346, 3.2163]}, {"key": "sariera", "base": "camp", "name": "Sa Riera & Illa Roja", "drive": "25 to 30 min", "ll": [41.9673, 3.2093]}, {"key": "castell", "base": "camp", "name": "Platja de Castell", "drive": "About 20 min", "ll": [41.8623, 3.1421]}];
   var PTS = {"bcn": [150, 620], "pals": [452, 252], "platjapals": [488, 238], "peratallada": [414, 230], "estartit": [478, 186], "girona": [330, 250], "banyoles": [298, 168], "camp": [462, 336], "calella": [496, 349], "llafranc": [506, 318], "tamariu": [512, 294], "aiguablava": [518, 270], "sariera": [510, 246], "castell": [458, 398]};
@@ -1691,26 +1726,105 @@ h2 a:hover, h3 a:hover, .beach-name a:hover { color: var(--accent); border-color
 
 <script>
 (function () {
-  var btn = document.getElementById('copy-chris-travel');
-  if (!btn) return;
-  var details = [
-    'Catalonia 2026 — travel',
-    'British Airways · four of us · Chris Woodward',
-    'Out: LHR 15:15 → BCN 18:35, Thu 20 Aug 2026 (direct, 2 h 20)',
-    'Back: BCN 19:30 → LHR 20:45, Wed 2 Sep 2026 (direct, 2 h 15)',
-    'Hire car: Peugeot e-2008 or similar',
-    'Collect BCN Thu 20 Aug 19:30 · return BCN Wed 2 Sep 17:30'
-  ].join('\n');
-  var label = btn.textContent;
-  btn.addEventListener('click', function () {
-    function done() { btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = label; }, 1800); }
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(details).then(done, function () {});
-    } else {
-      var t = document.createElement('textarea'); t.value = details; document.body.appendChild(t);
-      t.select(); try { document.execCommand('copy'); } catch (e) {} document.body.removeChild(t); done();
+  var USERS = {
+    lilyandmax:     { label: 'Lily & Max',      pals:false, falset:false },
+    camandben:      { label: 'Cam & Ben',       pals:false, falset:false },
+    daisyandphil:   { label: 'Daisy & Phil',    pals:true,  falset:false },
+    estelleandchris:{ label: 'Estelle & Chris', pals:true,  falset:true  }
+  };
+  var ORDER = ['lilyandmax','daisyandphil','estelleandchris','camandben'];
+  var KEY = 'cat26_user';
+  function getUser(){ try { return localStorage.getItem(KEY); } catch(e){ return null; } }
+  function setUser(u){ try { localStorage.setItem(KEY,u); } catch(e){} }
+  function clearUser(){ try { localStorage.removeItem(KEY); } catch(e){} }
+
+  var HERO_CAMP = {
+    h1: 'A week among the coves, loosely held.',
+    lede: 'A week at Camping Palafrugell with nothing booked. Everything is weather and whim, and everyone meets back for dinner.',
+    dates: '23 Aug · check in, Camping Palafrugell<br>30 Aug · fly home from Barcelona'
+  };
+  var heroEls = {
+    h1: document.querySelector('.hero-overlay h1'),
+    lede: document.querySelector('.hero-lede'),
+    dates: document.querySelector('.hero-dates')
+  };
+  var heroFull = heroEls.h1 ? { h1: heroEls.h1.innerHTML, lede: heroEls.lede.innerHTML, dates: heroEls.dates.innerHTML } : null;
+
+  function show(sel, on){ document.querySelectorAll(sel).forEach(function(el){ el.style.display = on ? '' : 'none'; }); }
+
+  function applyScope(u){
+    var s = USERS[u]; if(!s) return;
+    show('[data-leg="pals"]', s.pals);
+    show('[data-leg="falset"]', s.falset);
+    if (heroFull) {
+      var src = s.pals ? heroFull : HERO_CAMP;
+      heroEls.h1.innerHTML = src.h1; heroEls.lede.innerHTML = src.lede; heroEls.dates.innerHTML = src.dates;
     }
+    renderChip(u);
+    loadTravel(u);
+  }
+
+  function renderChip(u){
+    var brand = document.querySelector('.site-head .brand');
+    if (!brand) return;
+    var chip = document.getElementById('user-chip');
+    if (!chip) {
+      chip = document.createElement('span'); chip.id = 'user-chip'; chip.className = 'user-chip';
+      brand.parentNode.insertBefore(chip, brand.nextSibling);
+    }
+    chip.innerHTML = USERS[u].label + ' <button type="button" id="switch-user">switch</button>';
+    document.getElementById('switch-user').addEventListener('click', function(){ clearUser(); openGate(); });
+  }
+
+  function openGate(){
+    var g = document.getElementById('login-gate');
+    if (g) { g.style.display = 'flex'; return; }
+    g = document.createElement('div'); g.id = 'login-gate';
+    var btns = ORDER.map(function(u){ return '<button type="button" data-u="'+u+'">'+USERS[u].label+'</button>'; }).join('');
+    g.innerHTML = '<div class="lg-eyebrow">Catalonia 2026</div>'
+      + '<h1>Who’s this?</h1>'
+      + '<p>Pick your name and you’ll see just your part of the trip.</p>'
+      + '<div class="lg-list">' + btns + '</div>'
+      + '<div class="lg-note">No password, this just tailors the page to your leg. Flight and car details you add are saved only on this phone, never uploaded.</div>';
+    document.body.appendChild(g);
+    g.querySelectorAll('button[data-u]').forEach(function(b){
+      b.addEventListener('click', function(){ var u=b.dataset.u; setUser(u); g.style.display='none'; applyScope(u); });
+    });
+  }
+
+  // per-user travel (on-device)
+  function tKey(u){ return 'cat26_travel_' + u; }
+  function loadTravel(u){
+    var form = document.getElementById('travel-form'); var out = document.getElementById('travel-saved');
+    if (!form || !out) return;
+    var data = {};
+    try { data = JSON.parse(localStorage.getItem(tKey(u))) || {}; } catch(e){}
+    out.innerHTML = '';
+    if (data.flights || data.car || data.tnotes) {
+      var rows = '';
+      if (data.flights) rows += '<div class="travel-saved-row"><span>Flights</span><span>'+esc(data.flights)+'</span></div>';
+      if (data.car) rows += '<div class="travel-saved-row"><span>Hire car</span><span>'+esc(data.car)+'</span></div>';
+      if (data.tnotes) rows += '<div class="travel-saved-row"><span>Notes</span><span>'+esc(data.tnotes)+'</span></div>';
+      out.innerHTML = '<div class="travel-saved-card">'+rows+'<div class="travel-saved-actions"><button type="button" id="travel-edit">Edit</button></div></div>';
+      form.style.display = 'none';
+      document.getElementById('travel-edit').addEventListener('click', function(){ form.style.display=''; out.innerHTML=''; form.flights.value=data.flights||''; form.car.value=data.car||''; form.tnotes.value=data.tnotes||''; });
+    } else {
+      form.style.display = '';
+      form.reset();
+    }
+  }
+  function esc(s){ var d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+  var tform = document.getElementById('travel-form');
+  if (tform) tform.addEventListener('submit', function(e){
+    e.preventDefault();
+    var u = getUser(); if(!u) return;
+    var data = { flights: tform.flights.value.trim(), car: tform.car.value.trim(), tnotes: tform.tnotes.value.trim() };
+    try { localStorage.setItem(tKey(u), JSON.stringify(data)); } catch(err){}
+    loadTravel(u);
   });
+
+  var u = getUser();
+  if (u && USERS[u]) { applyScope(u); } else { openGate(); }
 })();
 </script>
 </body>
