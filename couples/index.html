@@ -623,7 +623,7 @@ h2 a:hover, h3 a:hover, .beach-name a:hover { color: var(--accent); border-color
     <p class="spot-tag">Saved on this phone only, nothing is uploaded or shared. Everyone fills in their own, and sees only their own.</p>
     <form id="travel-form" autocomplete="off">
       <label>Flights<input name="flights" maxlength="180" placeholder="Airline, route and times, out and back"></label>
-      <label>Hire car<input name="car" maxlength="160" placeholder="Company, pickup BCN 20 Aug, return 30 Aug"></label>
+      <label>Hire car<input name="car" maxlength="160" placeholder="Company, pickup and return, BCN"></label>
       <label>Notes<input name="tnotes" maxlength="180" placeholder="Lounge access, seat numbers, anything useful"></label>
       <button type="submit">Save my travel</button>
     </form>
@@ -1750,6 +1750,10 @@ h2 a:hover, h3 a:hover, .beach-name a:hover { color: var(--accent); border-color
     lede: 'A week at Camping Palafrugell with nothing booked. Everything is weather and whim.',
     dates: '23 Aug · check in, Camping Palafrugell<br>30 Aug · fly home from Barcelona'
   };
+  var HERO_FALSET = {
+    lede: 'Three nights in Pals, a week among the coves, then three more in the Priorat. Three appointments hold the shape. Everything else is weather and whim.',
+    dates: '20 Aug · land, drive to Pals<br>23 Aug · down to Camping Palafrugell<br>30 Aug · on to Falset, the vineyard<br>2 Sep · fly home from Barcelona'
+  };
   var heroEls = {
     h1: document.querySelector('.hero-overlay h1'),
     lede: document.querySelector('.hero-lede'),
@@ -1764,9 +1768,11 @@ h2 a:hover, h3 a:hover, .beach-name a:hover { color: var(--accent); border-color
     show('[data-leg="pals"]', s.pals);
     show('[data-leg="falset"]', s.falset);
     if (heroFull) {
-      var src = s.pals ? heroFull : HERO_CAMP;
-      heroEls.h1.innerHTML = src.h1; heroEls.lede.innerHTML = src.lede; heroEls.dates.innerHTML = src.dates;
+      var src = s.falset ? HERO_FALSET : (s.pals ? heroFull : HERO_CAMP);
+      heroEls.h1.innerHTML = src.h1 || heroFull.h1; heroEls.lede.innerHTML = src.lede; heroEls.dates.innerHTML = src.dates;
     }
+    var footSpan = document.querySelector('.foot-title span');
+    if (footSpan) footSpan.innerHTML = s.falset ? '20 August to 2 September 2026.' : (s.pals ? '20 to 30 August 2026.' : '23 to 30 August 2026.');
     renderChip(u);
     loadTravel(u);
   }
