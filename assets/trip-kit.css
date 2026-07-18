@@ -19,7 +19,7 @@
 .trip-card .fact-row { grid-template-columns: 118px 1fr; }
 .trip-alert { margin-top: 22px; padding: 17px 19px; border-left: 2px solid #a9895a; background: rgba(169, 137, 90, 0.08); font-family: var(--sans); font-weight: 300; font-size: 12px; line-height: 1.65; color: var(--ink-60); }
 
-.arrival-board { margin: -20px 0 80px; padding: 40px 0 0; border-top: 1px solid var(--rule); }
+.arrival-board { margin: 56px 0 80px; padding: 40px 0 0; border-top: 1px solid var(--rule); }
 .arrival-board-head { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 24px 70px; align-items: baseline; }
 .arrival-board h3 { font-size: clamp(24px, 3vw, 40px); margin: 0; }
 .arrival-board-head p { font-family: var(--serif); font-size: 18px; line-height: 1.65; color: var(--ink-60); margin: 0; max-width: 55ch; }

@@ -546,7 +546,7 @@ h2 a:hover, h3 a:hover, .beach-name a:hover { color: var(--accent); border-color
 .flight-form { display: none; }
 /* type rebalance: sans reads, serif leads, mono only carries data */
 .hero-dates, .beach-drive, .beach-cap, .map-drive, .map-active-drive, .fact-k, .wp-label, .run-stat-k, .wx-day, .wx-rain, .wx-sea { font-family: var(--mono); }
-.spot-body, .beach-note, .run-body, .aside-main p, .split > p { font-family: var(--sans); font-weight: 300; font-style: normal; font-size: 15.5px; line-height: 1.78; color: rgba(22,33,31,0.8); }
+.spot-body, .beach-note, .run-body, .aside-main p, .split > p { font-family: var(--sans); font-weight: 400; font-style: normal; font-size: 15.5px; line-height: 1.78; color: rgba(22,33,31,0.85); }
 .own-form input, .your-travel input { font-family: var(--sans); font-weight: 400; font-size: 15px; }
 .own-form label, .your-travel label { font-size: 10.5px; letter-spacing: 0.12em; }
 .site-head nav { font-size: 12px; letter-spacing: 0.1em; color: rgba(22,33,31,0.82); }
@@ -649,13 +649,13 @@ h2 a:hover, h3 a:hover, .beach-name a:hover { color: var(--accent); border-color
         <div class="arrival-code">BCN</div>
         <div class="arrival-name">Barcelona El Prat · south of the trip</div>
         <p class="arrival-copy">Whoever lands at Barcelona picks up a car and heads north, roughly 1 h 45 to 2 h to Pals, or 20-25 minutes more to the campsite, before stops and August traffic.</p>
-        <div class="arrival-links"><a href="https://www.google.com/maps/dir/?api=1&amp;origin=Josep+Tarradellas+Barcelona-El+Prat+Airport&amp;destination=La+Pallissa%2C+Pals&amp;travelmode=driving" target="_blank" rel="noopener">BCN to Pals ↗</a></div>
+        <div class="arrival-links"><a data-leg="pals" style="display:none" href="https://www.google.com/maps/dir/?api=1&amp;origin=Josep+Tarradellas+Barcelona-El+Prat+Airport&amp;destination=La+Pallissa%2C+Pals&amp;travelmode=driving" target="_blank" rel="noopener">BCN to Pals ↗</a><a href="https://www.google.com/maps/dir/?api=1&amp;origin=Josep+Tarradellas+Barcelona-El+Prat+Airport&amp;destination=Camping+Calella+de+Palafrugell&amp;travelmode=driving" target="_blank" rel="noopener">BCN to camp ↗</a></div>
       </article>
       <article class="arrival-airport">
         <div class="arrival-code">GRO</div>
         <div class="arrival-name">Girona Costa Brava · the closer arrival</div>
         <p class="arrival-copy">Best for the people flying into Girona. Each family books its own car for its own landing time; use the live route on the day rather than promising a fixed August drive time.</p>
-        <div class="arrival-links"><a href="https://www.google.com/maps/dir/?api=1&amp;origin=Girona-Costa+Brava+Airport&amp;destination=La+Pallissa%2C+Pals&amp;travelmode=driving" target="_blank" rel="noopener">GRO to Pals ↗</a><a href="https://www.google.com/maps/dir/?api=1&amp;origin=Girona-Costa+Brava+Airport&amp;destination=Camping+Calella+de+Palafrugell&amp;travelmode=driving" target="_blank" rel="noopener">GRO to camp ↗</a></div>
+        <div class="arrival-links"><a data-leg="pals" style="display:none" href="https://www.google.com/maps/dir/?api=1&amp;origin=Girona-Costa+Brava+Airport&amp;destination=La+Pallissa%2C+Pals&amp;travelmode=driving" target="_blank" rel="noopener">GRO to Pals ↗</a><a href="https://www.google.com/maps/dir/?api=1&amp;origin=Girona-Costa+Brava+Airport&amp;destination=Camping+Calella+de+Palafrugell&amp;travelmode=driving" target="_blank" rel="noopener">GRO to camp ↗</a></div>
       </article>
     </div>
   </div>
@@ -1288,6 +1288,7 @@ h2 a:hover, h3 a:hover, .beach-name a:hover { color: var(--accent); border-color
         <label class="pack-item"><input type="checkbox" data-pack-key="wetbag"><span>One wet bag or carrier for swimsuits</span></label>
         <label class="pack-item"><input type="checkbox" data-pack-key="snorkel"><span>A couple of masks/snorkels, only if they will be used</span></label>
         <label class="pack-item"><input type="checkbox" data-pack-key="power"><span>Power bank and car charging cable for phones</span></label>
+        <label class="pack-item"><input type="checkbox" data-pack-key="speaker"><span>The speaker, charged. Every evening needs a soundtrack</span></label>
         <label class="pack-item"><input type="checkbox" data-pack-key="laundry"><span>Small laundry bag and a few washing capsules</span></label>
         <label class="pack-item"><input type="checkbox" data-pack-key="cards"><span>Driving licence, physical payment card and a backup card</span></label>
         <label class="pack-item"><input type="checkbox" data-pack-key="prioritypass"><span>Amex Platinum, enrolled Priority Pass and lounge app/login</span></label>
@@ -1315,7 +1316,7 @@ h2 a:hover, h3 a:hover, .beach-name a:hover { color: var(--accent); border-color
 
   <div class="leave-home" data-reveal>
     <div class="leave-home-k">Leave at home</div>
-    <div class="leave-home-v">Windbreaks, beach tents, trolleys, folding-chair villages, giant coolers, speakers and booze in the suitcase. Also leave any oil, product or substance that is unlabelled, controlled or legally unclear. Spain applies severe penalties to illegal drugs, including when travelling through airports.</div>
+    <div class="leave-home-v">Windbreaks, beach tents, trolleys, folding-chair villages, giant coolers and booze in the suitcase. Also leave any oil, product or substance that is unlabelled, controlled or legally unclear. Spain applies severe penalties to illegal drugs, including when travelling through airports.</div>
   </div>
 
   <div class="flight-board">
@@ -1390,28 +1391,28 @@ h2 a:hover, h3 a:hover, .beach-name a:hover { color: var(--accent); border-color
     </div>
     <div class="map-cols">
       <div class="map-list">
-<div class="map-header">Base I / Pals</div>
-<div class="map-row is-active" data-place="0" role="button" tabindex="0" aria-label="Show drive to La Pallissa, Pals">
+<div class="map-header" data-leg="pals" style="display:none">Base I / Pals</div>
+<div class="map-row is-active" data-place="0" data-leg="pals" style="display:none" role="button" tabindex="0" aria-label="Show drive to La Pallissa, Pals">
         <div><div class="map-name">La Pallissa, Pals</div><div class="map-note">Base I, three nights</div></div>
         <div class="map-drive">BCN → Pals / 1 h 45 to 2 h<a class="map-dir" href="https://www.google.com/maps/dir/?api=1&amp;origin=Josep+Tarradellas+Barcelona-El+Prat+Airport&amp;destination=La+Pallissa%2C+Pals&amp;travelmode=driving" target="_blank" rel="noopener" aria-label="Driving directions to La Pallissa, Pals">Directions ↗</a></div>
       </div>
-<div class="map-row" data-place="1" role="button" tabindex="0" aria-label="Show drive to Platja de Pals">
+<div class="map-row" data-place="1" data-leg="pals" style="display:none" role="button" tabindex="0" aria-label="Show drive to Platja de Pals">
         <div><div class="map-name">Platja de Pals</div><div class="map-note">Dune-backed sand</div></div>
         <div class="map-drive">10 min<a class="map-dir" href="https://www.google.com/maps/dir/?api=1&amp;origin=La+Pallissa%2C+Pals&amp;destination=Platja+de+Pals&amp;travelmode=driving" target="_blank" rel="noopener" aria-label="Driving directions to Platja de Pals">Directions ↗</a></div>
       </div>
-<div class="map-row" data-place="2" role="button" tabindex="0" aria-label="Show drive to Peratallada">
+<div class="map-row" data-place="2" data-leg="pals" style="display:none" role="button" tabindex="0" aria-label="Show drive to Peratallada">
         <div><div class="map-name">Peratallada</div><div class="map-note">Medieval village lunch</div></div>
         <div class="map-drive">15 min<a class="map-dir" href="https://www.google.com/maps/dir/?api=1&amp;origin=La+Pallissa%2C+Pals&amp;destination=Peratallada&amp;travelmode=driving" target="_blank" rel="noopener" aria-label="Driving directions to Peratallada">Directions ↗</a></div>
       </div>
-<div class="map-row" data-place="3" role="button" tabindex="0" aria-label="Show drive to L’Estartit">
+<div class="map-row" data-place="3" data-leg="pals" style="display:none" role="button" tabindex="0" aria-label="Show drive to L’Estartit">
         <div><div class="map-name">L’Estartit</div><div class="map-note">Illes Medes boats</div></div>
         <div class="map-drive">25 min<a class="map-dir" href="https://www.google.com/maps/dir/?api=1&amp;origin=La+Pallissa%2C+Pals&amp;destination=L%27Estartit&amp;travelmode=driving" target="_blank" rel="noopener" aria-label="Driving directions to L’Estartit">Directions ↗</a></div>
       </div>
-<div class="map-row" data-place="4" role="button" tabindex="0" aria-label="Show drive to Girona">
+<div class="map-row" data-place="4" data-leg="pals" style="display:none" role="button" tabindex="0" aria-label="Show drive to Girona">
         <div><div class="map-name">Girona</div><div class="map-note">The city option</div></div>
         <div class="map-drive">45 min<a class="map-dir" href="https://www.google.com/maps/dir/?api=1&amp;origin=La+Pallissa%2C+Pals&amp;destination=Girona&amp;travelmode=driving" target="_blank" rel="noopener" aria-label="Driving directions to Girona">Directions ↗</a></div>
       </div>
-<div class="map-row" data-place="5" role="button" tabindex="0" aria-label="Show drive to Banyoles">
+<div class="map-row" data-place="5" data-leg="pals" style="display:none" role="button" tabindex="0" aria-label="Show drive to Banyoles">
         <div><div class="map-name">Banyoles</div><div class="map-note">Lake swimming</div></div>
         <div class="map-drive">50 to 55 min<a class="map-dir" href="https://www.google.com/maps/dir/?api=1&amp;origin=La+Pallissa%2C+Pals&amp;destination=Estany+de+Banyoles&amp;travelmode=driving" target="_blank" rel="noopener" aria-label="Driving directions to Banyoles">Directions ↗</a></div>
       </div>
@@ -1501,6 +1502,10 @@ h2 a:hover, h3 a:hover, .beach-name a:hover { color: var(--accent); border-color
   var MAP = [{"key": "pals", "base": "pals", "name": "La Pallissa, Pals", "drive": "BCN \u2192 Pals / 1 h 45 to 2 h", "ll": [41.9689, 3.1458]}, {"key": "platjapals", "base": "pals", "name": "Platja de Pals", "drive": "10 min", "ll": [41.9789, 3.1994]}, {"key": "peratallada", "base": "pals", "name": "Peratallada", "drive": "15 min", "ll": [41.9723, 3.0919]}, {"key": "estartit", "base": "pals", "name": "L\u2019Estartit", "drive": "25 min", "ll": [42.0546, 3.1993]}, {"key": "girona", "base": "pals", "name": "Girona", "drive": "45 min", "ll": [41.9794, 2.8214]}, {"key": "banyoles", "base": "pals", "name": "Banyoles", "drive": "50 to 55 min", "ll": [42.1246, 2.7548]}, {"key": "camp", "base": "camp", "name": "Camping Palafrugell", "drive": "Pals \u2192 camp / 20 to 25 min", "ll": [41.8945, 3.165]}, {"key": "calella", "base": "camp", "name": "Calella & El Canadell", "drive": "10 min", "ll": [41.888, 3.181]}, {"key": "llafranc", "base": "camp", "name": "Llafranc", "drive": "10 min", "ll": [41.893, 3.194]}, {"key": "tamariu", "base": "camp", "name": "Tamariu", "drive": "15 to 20 min", "ll": [41.918, 3.207]}, {"key": "aiguablava", "base": "camp", "name": "Aiguablava", "drive": "25 to 30 min", "ll": [41.9346, 3.2163]}, {"key": "sariera", "base": "camp", "name": "Sa Riera & Illa Roja", "drive": "25 to 30 min", "ll": [41.9673, 3.2093]}, {"key": "castell", "base": "camp", "name": "Platja de Castell", "drive": "About 20 min", "ll": [41.8623, 3.1421]}];
   var PTS = {"bcn": [150, 620], "pals": [452, 252], "platjapals": [488, 238], "peratallada": [414, 230], "estartit": [478, 186], "girona": [330, 250], "banyoles": [298, 168], "camp": [462, 336], "calella": [496, 349], "llafranc": [506, 318], "tamariu": [512, 294], "aiguablava": [518, 270], "sariera": [510, 246], "castell": [458, 398]};
   var FROM_BCN = false;
+  var _u = null; try { _u = localStorage.getItem('cat26_user'); } catch (e) {}
+  var CAMP_ONLY = (_u === 'lilyandmax' || _u === 'camandben');
+  var START = CAMP_ONLY ? 6 : 0;
+  if (CAMP_ONLY) MAP[6].drive = 'BCN \u2192 camp / about 2 h';
 
   // Scroll reveals, matching the original easing; skipped for reduced motion.
   var motionOK = !matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1514,12 +1519,19 @@ h2 a:hover, h3 a:hover, .beach-name a:hover { color: var(--accent); border-color
         }
       });
     }, { rootMargin: '0px 0px -8% 0px' });
+    var pending = [];
     document.querySelectorAll('[data-reveal]').forEach(function (el) {
       if (el.getBoundingClientRect().top < innerHeight * 0.9) return;
       el.style.opacity = '0';
-      el.style.transform = 'translateY(14px)';
-      el.style.transition = 'opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1)';
+      el.style.transform = 'translateY(10px)';
+      el.style.transition = 'opacity 0.35s ease-out, transform 0.35s ease-out';
+      pending.push(el);
       io.observe(el);
+    });
+    document.addEventListener('click', function (e) {
+      if (!e.target.closest('a[href^="#"]')) return;
+      pending.forEach(function (el) { el.style.transition = 'none'; el.style.opacity = '1'; el.style.transform = 'none'; io.unobserve(el); });
+      pending.length = 0;
     });
   }
 
@@ -1548,6 +1560,22 @@ h2 a:hover, h3 a:hover, .beach-name a:hover { color: var(--accent); border-color
   // Trip map: a real road map for drivers; tap a row or a pin
   var LIVE_MAP = true;
   var mapRows = document.querySelectorAll('.map-row');
+  if (CAMP_ONLY) {
+    var campRow = document.querySelector('.map-row[data-place="6"]');
+    if (campRow) {
+      var cd = campRow.querySelector('.map-drive');
+      var ca = cd && cd.querySelector('.map-dir');
+      if (cd && ca) {
+        cd.childNodes[0].nodeValue = 'BCN \u2192 camp / about 2 h';
+        ca.href = 'https://www.google.com/maps/dir/?api=1&origin=Josep+Tarradellas+Barcelona-El+Prat+Airport&destination=Camping+Calella+de+Palafrugell&travelmode=driving';
+      }
+      var cn = campRow.querySelector('.map-note');
+      if (cn) cn.textContent = 'Base, seven nights';
+    }
+    document.querySelectorAll('.map-header').forEach(function (hd) {
+      if (/coves/i.test(hd.textContent)) hd.textContent = 'From the campsite';
+    });
+  }
   var mapName = document.getElementById('map-active-name');
   var mapDrive = document.getElementById('map-active-drive');
   var driveMap = null, markers = [];
@@ -1577,7 +1605,7 @@ h2 a:hover, h3 a:hover, .beach-name a:hover { color: var(--accent); border-color
     if (!LIVE_MAP || !window.L || !el) {
       if (el) el.hidden = true;
       if (fb) fb.hidden = false;
-      setPlace(0);
+      setPlace(START);
       return;
     }
     driveMap = L.map(el, { scrollWheelZoom: false });
@@ -1590,11 +1618,12 @@ h2 a:hover, h3 a:hover, .beach-name a:hover { color: var(--accent); border-color
         .addTo(driveMap)
         .bindTooltip(d.name, { direction: 'top', offset: [0, -8] });
       m.on('click', function () { setPlace(i); });
+      if (CAMP_ONLY && d.base === 'pals') { m.setStyle({ radius: 0, fillOpacity: 0, opacity: 0 }); m.unbindTooltip(); m.off('click'); }
       markers.push(m);
-      bounds.push(d.ll);
+      if (!(CAMP_ONLY && d.base === 'pals')) bounds.push(d.ll);
     });
     driveMap.fitBounds(bounds, { padding: [34, 34] });
-    setPlace(0);
+    setPlace(START);
   }
   if (document.readyState === 'complete') initMap();
   else window.addEventListener('load', initMap);
