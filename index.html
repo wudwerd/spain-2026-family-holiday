@@ -577,6 +577,11 @@ html, body { overflow-x: clip; }
 .your-travel input:focus { outline: none; border-bottom-color: var(--ink); }
 .your-travel button { align-self: flex-start; background: none; border: 1px solid var(--ink); color: var(--ink); padding: 13px 26px; font-family: var(--sans); font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; cursor: pointer; }
 .your-travel button:hover { background: var(--ink); color: var(--ground); }
+.ba-fill { display: flex; flex-wrap: wrap; gap: 12px; align-items: baseline; padding-bottom: 6px; border-bottom: 1px solid var(--rule-soft); }
+.ba-fill input { flex: 1 1 200px; }
+.ba-fill button { padding: 10px 20px; }
+.ba-fill-out { flex-basis: 100%; font-family: var(--sans); font-size: 12.5px; color: var(--ink-60); min-height: 0; }
+.ba-fill-out a { border-bottom: 1px solid var(--rule); }
 #travel-saved { margin-top: 8px; }
 .travel-saved-card { border-top: 1px solid var(--rule); padding-top: 18px; }
 .travel-saved-row { display: grid; grid-template-columns: 92px 1fr; gap: 14px; padding: 9px 0; border-bottom: 1px solid var(--rule-soft); font-family: var(--sans); font-weight: 300; font-size: 13px; }
@@ -637,6 +642,11 @@ html, body { overflow-x: clip; }
     <h3>Your flights &amp; hire car.</h3>
     <p class="spot-tag">Saved on this phone only, nothing is uploaded or shared. Everyone fills in their own, and sees only their own.</p>
     <form id="travel-form" autocomplete="off">
+      <div class="ba-fill">
+        <input id="ba-flight" maxlength="8" placeholder="On BA? Flight number, e.g. BA478">
+        <button type="button" id="ba-fill-go">Fill</button>
+        <div class="ba-fill-out" id="ba-fill-out"></div>
+      </div>
       <label>Flights<input name="flights" maxlength="180" placeholder="Airline, route and times, out and back"></label>
       <label>Hire car<input name="car" maxlength="160" placeholder="Company, pickup and return, BCN"></label>
       <label>Notes<input name="tnotes" maxlength="180" placeholder="Seat numbers, terminal, anything useful"></label>
@@ -1853,6 +1863,29 @@ html, body { overflow-x: clip; }
 
   // per-user travel (on-device)
   function tKey(u){ return 'cat26_travel_' + u; }
+  var BA_KNOWN = [
+    [472, 489, 'Heathrow T5'],
+    [2702, 2799, 'Gatwick'],
+    [3270, 3299, 'London City']
+  ];
+  function baFill(){
+    var inp = document.getElementById('ba-flight');
+    var out = document.getElementById('ba-fill-out');
+    if (!inp || !out) return;
+    var m = (inp.value || '').toUpperCase().replace(/\s+/g, '').match(/^(?:BA)?(\d{2,4})$/);
+    if (!m) { out.textContent = 'Type it like BA478 and press Fill.'; return; }
+    var n = +m[1], port = '';
+    for (var i = 0; i < BA_KNOWN.length; i++) { if (n >= BA_KNOWN[i][0] && n <= BA_KNOWN[i][1]) { port = BA_KNOWN[i][2]; break; } }
+    var f = document.querySelector('#travel-form input[name="flights"]');
+    if (f) { f.value = 'BA' + n + (port ? ' \u00b7 ' + port + ' and Barcelona T1' : '') + ' \u00b7 '; f.focus(); }
+    out.innerHTML = 'Times for this flight, scheduled and live: <a href="https://www.flightradar24.com/data/flights/ba' + n + '" target="_blank" rel="noopener">BA' + n + ' \u2197</a>. Add them to the card, then save.' + (port ? '' : ' That number is not one of the usual Barcelona routes, double-check it.');
+  }
+  var baBtn = document.getElementById('ba-fill-go');
+  if (baBtn) {
+    baBtn.addEventListener('click', baFill);
+    var baInp = document.getElementById('ba-flight');
+    if (baInp) baInp.addEventListener('keydown', function(e){ if (e.key === 'Enter') { e.preventDefault(); baFill(); } });
+  }
   function loadTravel(u){
     var form = document.getElementById('travel-form'); var out = document.getElementById('travel-saved');
     if (!form || !out) return;
