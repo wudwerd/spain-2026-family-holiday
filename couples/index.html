@@ -629,7 +629,7 @@ html, body { overflow-x: clip; }
 <section id="travel" class="wrap trip-kit travel-hub">
   <div class="split asym" data-reveal>
     <h2>The useful bit, before take-off.</h2>
-    <p>Flights, airport lounge access, the hire car and two possible arrival airports. Everyone travels differently; note yours and glance at the rest.</p>
+    <p>Flights, the hire car and two possible arrival airports. Everyone travels differently; note yours and glance at the rest.</p>
   </div>
 
   <div class="your-travel panel" data-reveal>
@@ -639,7 +639,7 @@ html, body { overflow-x: clip; }
     <form id="travel-form" autocomplete="off">
       <label>Flights<input name="flights" maxlength="180" placeholder="Airline, route and times, out and back"></label>
       <label>Hire car<input name="car" maxlength="160" placeholder="Company, pickup and return, BCN"></label>
-      <label>Notes<input name="tnotes" maxlength="180" placeholder="Lounge access, seat numbers, anything useful"></label>
+      <label>Notes<input name="tnotes" maxlength="180" placeholder="Seat numbers, terminal, anything useful"></label>
       <button type="submit">Save my travel</button>
     </form>
     <div id="travel-saved"></div>
@@ -666,7 +666,7 @@ html, body { overflow-x: clip; }
     </div>
   </div>
 
-  <div class="lounge-feature" data-reveal>
+  <div class="lounge-feature" data-leg="lounge" style="display:none" data-reveal>
     <div class="split sub">
       <div class="eyebrow">For those with access</div>
       <h3>The holiday starts in the lounge.</h3>
@@ -1297,7 +1297,7 @@ html, body { overflow-x: clip; }
         <label class="pack-item"><input type="checkbox" data-pack-key="speaker"><span>The speaker, charged. Every evening needs a soundtrack</span></label>
         <label class="pack-item"><input type="checkbox" data-pack-key="laundry"><span>Small laundry bag and a few washing capsules</span></label>
         <label class="pack-item"><input type="checkbox" data-pack-key="cards"><span>Driving licence, physical payment card and a backup card</span></label>
-        <label class="pack-item"><input type="checkbox" data-pack-key="prioritypass"><span>Amex Platinum, enrolled Priority Pass and lounge app/login</span></label>
+        <label class="pack-item" data-leg="lounge" style="display:none"><input type="checkbox" data-pack-key="prioritypass"><span>Amex Platinum, enrolled Priority Pass and lounge app/login</span></label>
       </div>
     </fieldset>
 
@@ -1371,7 +1371,7 @@ html, body { overflow-x: clip; }
     <a href="https://www.gov.uk/foreign-travel-advice/spain/safety-and-security" target="_blank" rel="noopener">Spain travel and driving advice ↗</a>
     <a href="https://www.dgt.es/muevete-con-seguridad/viaja-seguro/con-ninos/" target="_blank" rel="noopener">Spanish child-seat guidance ↗</a>
     <a href="https://www.gov.uk/foreign-travel-advice/spain/health" target="_blank" rel="noopener">GHIC and healthcare ↗</a>
-    <a href="https://www.americanexpress.com/en-gb/travel/lounges/the-platinum-card/" target="_blank" rel="noopener">Amex Platinum lounge finder ↗</a>
+    <a data-leg="lounge" style="display:none" href="https://www.americanexpress.com/en-gb/travel/lounges/the-platinum-card/" target="_blank" rel="noopener">Amex Platinum lounge finder ↗</a>
   </div>
 </section>
 
@@ -1774,7 +1774,7 @@ html, body { overflow-x: clip; }
     lilyandmax:     { label: 'Lily & Max',      pals:false, falset:false },
     camandben:      { label: 'Cam & Ben',       pals:false, falset:false },
     daisyandphil:   { label: 'Daisy & Phil',    pals:true,  falset:false },
-    estelleandchris:{ label: 'Estelle & Chris', pals:true,  falset:true  }
+    estelleandchris:{ label: 'Estelle & Chris', pals:true,  falset:true, lounge:true }
   };
   var ORDER = ['lilyandmax','daisyandphil','estelleandchris','camandben'];
   var DEFAULTS = {
@@ -1812,6 +1812,7 @@ html, body { overflow-x: clip; }
     var s = USERS[u]; if(!s) return;
     show('[data-leg="pals"]', s.pals);
     show('[data-leg="falset"]', s.falset);
+    show('[data-leg="lounge"]', !!s.lounge);
     if (heroFull) {
       var src = s.falset ? HERO_FALSET : (s.pals ? heroFull : HERO_CAMP);
       heroEls.h1.innerHTML = src.h1 || heroFull.h1; heroEls.lede.innerHTML = src.lede; heroEls.dates.innerHTML = src.dates;
