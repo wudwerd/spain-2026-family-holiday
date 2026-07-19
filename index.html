@@ -545,6 +545,12 @@ h2 a:hover, h3 a:hover, .beach-name a:hover { color: var(--accent); border-color
 /* ===== per-family login + scoping ===== */
 .flight-form { display: none; }
 /* type rebalance: sans reads, serif leads, mono only carries data */
+html, body { overflow-x: clip; }
+.light-footnote, .dark-footnote, .sources-line { font-family: var(--sans); font-weight: 400; font-size: 13px; letter-spacing: 0.01em; text-transform: none; max-width: 62ch; margin-left: auto; margin-right: auto; }
+.light-footnote, .sources-line { color: var(--ink-60); }
+.dark-footnote { color: var(--dark-60); }
+.packing-local, .flight-privacy { font-size: 12.5px; letter-spacing: 0.02em; color: var(--ink-60); }
+.your-travel input::placeholder, .own-form input::placeholder { font-family: var(--sans); font-style: normal; font-weight: 400; color: rgba(22,33,31,0.52); opacity: 1; }
 .hero-dates, .beach-drive, .beach-cap, .map-drive, .map-active-drive, .fact-k, .wp-label, .run-stat-k, .wx-day, .wx-rain, .wx-sea { font-family: var(--mono); }
 .spot-body, .beach-note, .run-body, .aside-main p, .split > p { font-family: var(--sans); font-weight: 400; font-style: normal; font-size: 15.5px; line-height: 1.78; color: rgba(22,33,31,0.85); }
 .own-form input, .your-travel input { font-family: var(--sans); font-weight: 400; font-size: 15px; }
