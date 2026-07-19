@@ -1,0 +1,20 @@
+{
+ "name": "Catalonia 2026",
+ "short_name": "Catalonia 26",
+ "start_url": ".",
+ "display": "standalone",
+ "background_color": "#e8e7e0",
+ "theme_color": "#e8e7e0",
+ "icons": [
+  {
+   "src": "assets/icon-192.png",
+   "sizes": "192x192",
+   "type": "image/png"
+  },
+  {
+   "src": "assets/icon-512.png",
+   "sizes": "512x512",
+   "type": "image/png"
+  }
+ ]
+}

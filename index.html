@@ -6,6 +6,11 @@
 <meta name="theme-color" content="#fbf9f4">
 <meta name="description" content="Pals, the coves, the campsite week and the runner's pages. Family notes for Catalonia, August 2026.">
 <link rel="stylesheet" href="assets/leaflet/leaflet.css">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#e8e7e0">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <title>Catalonia 2026 · Family notes</title>
 <style>
 /* latin-ext */
@@ -551,6 +556,24 @@ html, body { overflow-x: clip; }
 .dark-footnote { color: var(--dark-60); }
 .packing-local, .flight-privacy { font-size: 12.5px; letter-spacing: 0.02em; color: var(--ink-60); }
 .your-travel input::placeholder, .own-form input::placeholder { font-family: var(--sans); font-style: normal; font-weight: 400; color: rgba(22,33,31,0.52); opacity: 1; }
+.today-sec { padding-top: 34px; padding-bottom: 0; }
+.today-card { border: 1px solid var(--rule); background: rgba(22,33,31,0.02); padding: 26px 30px; max-width: 720px; margin: 0 auto; }
+.today-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px 26px; }
+.today-line { font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; color: var(--ink); }
+.today-tips { list-style: none; margin: 14px 0 0; padding: 0; }
+.today-tips li { font-family: var(--sans); font-weight: 400; font-size: 14.5px; line-height: 1.6; color: rgba(22,33,31,0.85); padding: 7px 0; border-top: 1px solid var(--rule-soft); }
+.today-tips li:first-child { border-top: 0; }
+.today-foot { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px 22px; margin-top: 14px; }
+.today-share, .wa-share, .ics-add { background: none; border: 0; border-bottom: 1px solid var(--ink); color: var(--ink); font-family: var(--sans); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; cursor: pointer; padding: 0 0 3px; }
+.today-note { font-family: var(--sans); font-size: 11.5px; color: var(--ink-45); }
+.cal-row { margin-top: 18px; }
+.bookings-sec { padding-top: 40px; }
+.book-list { max-width: 860px; }
+.book-row { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px 30px; padding: 16px 0; border-top: 1px solid var(--rule-soft); }
+.book-row:first-child { border-top: 0; }
+.book-row .pack-item { flex: 1 1 420px; }
+.book-links { display: flex; gap: 22px; font-family: var(--sans); font-size: 12px; }
+.book-links a { border-bottom: 1px solid var(--rule); padding-bottom: 2px; white-space: nowrap; }
 .hero-dates, .beach-drive, .beach-cap, .map-drive, .map-active-drive, .fact-k, .wp-label, .run-stat-k, .wx-day, .wx-rain, .wx-sea { font-family: var(--mono); }
 .spot-body, .beach-note, .run-body, .aside-main p, .split > p { font-family: var(--sans); font-weight: 400; font-style: normal; font-size: 15.5px; line-height: 1.78; color: rgba(22,33,31,0.85); }
 .own-form input, .your-travel input { font-family: var(--sans); font-weight: 400; font-size: 15px; }
@@ -632,6 +655,53 @@ html, body { overflow-x: clip; }
 </section>
 <div class="hero-capline"><span>Calella de Palafrugell, ten minutes from the campsite</span><span>41.8865° N, 3.1810° E</span></div>
 
+<section id="today" class="wrap today-sec" hidden>
+  <div class="today-card">
+    <div class="today-head">
+      <div class="eyebrow">Today</div>
+      <div class="today-line" id="today-line"></div>
+    </div>
+    <ul class="today-tips" id="today-tips"></ul>
+    <div class="today-foot">
+      <button type="button" class="today-share" id="today-share">Send to the group chat</button>
+      <span class="today-note" id="today-note"></span>
+    </div>
+  </div>
+</section>
+
+<section id="bookings" class="wrap bookings-sec">
+  <div class="split asym" data-reveal>
+    <h2>Book these before they matter.</h2>
+    <p>The handful of things that actually sell out. Tick them off as they land; phone numbers dial on tap. Whoever books, post the confirmation in the group chat.</p>
+  </div>
+  <div class="book-list" data-reveal>
+    <div class="book-row" data-book="casamar">
+      <label class="pack-item"><input type="checkbox" data-book-key="casamar"><span><strong>Casamar, Llafranc.</strong> The Michelin date night. Book before we fly; the terrace goes first. Closed Mon and Tue.</span></label>
+      <div class="book-links"><a href="tel:+34972300104">972 300 104</a><a href="https://module.lafourchette.com/en_GB/module/76149-b057c" target="_blank" rel="noopener">Book online ↗</a></div>
+    </div>
+    <div class="book-row" data-book="tocalmar">
+      <label class="pack-item"><input type="checkbox" data-book-key="tocalmar"><span><strong>Toc al Mar, Aiguablava.</strong> The long beach lunch. Book several days ahead in August.</span></label>
+      <div class="book-links"><a href="tel:+34972113232">972 11 32 32</a><a href="https://tocalmar.myrestoo.net/en/reservar" target="_blank" rel="noopener">Book online ↗</a></div>
+    </div>
+    <div class="book-row" data-leg="pals" style="display:none" data-book="sapunta">
+      <label class="pack-item"><input type="checkbox" data-book-key="sapunta"><span><strong>Sa Punta, Platja de Pals.</strong> The Pals lunch. Bookings answered slowly, so phone.</span></label>
+      <div class="book-links"><a href="tel:+34972636410">972 636 410</a><a href="https://widget.thefork.com/en/c88e5ffb-0e0b-4965-8e17-7ff91caf90ee" target="_blank" rel="noopener">Book online ↗</a></div>
+    </div>
+    <div class="book-row" data-book="magma">
+      <label class="pack-item"><input type="checkbox" data-book-key="magma"><span><strong>Magma, Santa Coloma.</strong> The rainy-day card. Slots sell out in August; book when the forecast turns.</span></label>
+      <div class="book-links"><a href="tel:+34972843535">972 843 535</a><a href="https://www.magma-cat.com/en/buy-ticket-magma/" target="_blank" rel="noopener">Buy tickets ↗</a></div>
+    </div>
+    <div class="book-row" data-book="nautilus">
+      <label class="pack-item"><input type="checkbox" data-book-key="nautilus"><span><strong>Nautilus boats, L'Estartit.</strong> Book the first calm morning, the night before.</span></label>
+      <div class="book-links"><a href="tel:+34972751489">972 751 489</a><a href="https://booking.nautilus.es/" target="_blank" rel="noopener">Book online ↗</a></div>
+    </div>
+  </div>
+  <div class="today-foot" data-reveal>
+    <button type="button" class="wa-share" id="book-share">Send what is still unbooked</button>
+    <span class="today-note">Cap Roig is off the list: the 2026 festival ends 18 August, before we arrive.</span>
+  </div>
+</section>
+
 <section id="travel" class="wrap trip-kit travel-hub">
   <div class="split asym" data-reveal>
     <h2>The useful bit, before take-off.</h2>
@@ -654,6 +724,7 @@ html, body { overflow-x: clip; }
       <button type="submit">Save my travel</button>
     </form>
     <div id="travel-saved"></div>
+    <div class="cal-row"><a class="ics-add" id="cal-ics" download="catalonia-2026.ics" href="#">Add the trip dates to your calendar</a></div>
   </div>
 
   <div class="arrival-board" data-reveal>
@@ -870,6 +941,7 @@ html, body { overflow-x: clip; }
       <p class="beach-note" id="beach-note">Promenade, sand, restaurants and calm water in one place. Flat and pushchair-easy once you’re there, but there’s no beach car park, so it’s street-only and a scrum in August.</p>
     </div>
   </div>
+  <div class="sources-line">Flags and jellyfish today: <a href="https://interior.gencat.cat/ca/arees_dactuacio/proteccio_civil/estatplatges/" target="_blank" rel="noopener">Estat de les platges ↗</a> · Sea state: <a href="https://www.meteo.cat/prediccio/platges/palafrugell-de-llafranc" target="_blank" rel="noopener">Llafranc</a> · <a href="https://www.meteo.cat/prediccio/platges/palafrugell-de-tamariu" target="_blank" rel="noopener">Tamariu</a> · <a href="https://www.meteo.cat/prediccio/platges/begur-daiguablava" target="_blank" rel="noopener">Aiguablava</a></div>
   <div class="sources-line">Official access details: <a href="https://visitpalafrugell.cat/en/beaches-and-routes/" target="_blank" rel="noopener">Palafrugell</a> · <a href="https://visitbegur.cat/en/discover/beaches/" target="_blank" rel="noopener">Begur</a> · <a href="https://visitpalamos.cat/en/platja-de-castell/" target="_blank" rel="noopener">Castell</a></div>
 
   <div class="split asym sub towel" data-reveal>
@@ -982,10 +1054,10 @@ html, body { overflow-x: clip; }
 </article>
 <article class="spot-row" data-reveal>
   <figure class="row-fig"><img src="assets/lily-caproig.jpg" alt="A night at Cap Roig" loading="lazy"><figcaption>The gardens at Cap Roig (photo: Visit Costa Brava)</figcaption></figure>
-  <div class="row-txt"><h3><a href="https://www.instagram.com/explore/tags/caproig/" target="_blank" rel="noopener">A night at Cap Roig</a></h3><div class="spot-tag">Concerts in the gardens</div><p class="spot-body">Each summer the Cap Roig Festival stages its concerts in the castle gardens above the sea. An evening that starts with cava on the terraces and ends under the pines with the coast lit below.</p>
+  <div class="row-txt"><h3><a href="https://www.instagram.com/explore/tags/caproig/" target="_blank" rel="noopener">A night at Cap Roig</a></h3><div class="spot-tag">Concerts in the gardens</div><p class="spot-body">The festival in the castle gardens is the famous night out here, but the 2026 run ends on 18 August, two days before we land. This one waits for another year; the gardens are still worth a daytime wander.</p>
 <div class="spot-facts">
 <div class="fact-row"><div class="fact-k">Drive</div><div class="fact-v">10 min</div></div>
-<div class="fact-row"><div class="fact-k">Book</div><div class="fact-v">Check the August programme early, good seats go first</div></div>
+<div class="fact-row"><div class="fact-k">2026</div><div class="fact-v">Concerts finished 18 Aug, gardens open in the day</div></div>
 </div></div>
 </article>
 <article class="spot-row rev" data-reveal>
@@ -1332,7 +1404,7 @@ html, body { overflow-x: clip; }
     </fieldset>
   </div>
   <div class="packing-tools">
-    <div class="packing-local">Ticked items are remembered on this phone only.</div>
+    <div class="packing-local">Ticked items are remembered on this phone only. The whole page works offline once it has loaded; add it to your home screen before flying.</div>
     <button class="trip-reset" id="packing-reset" type="button">Reset list</button>
   </div>
 
@@ -1403,6 +1475,39 @@ html, body { overflow-x: clip; }
   </div>
   <div id="weather-days" class="wx-days"><div class="wx-loading">Reading the sky…</div></div>
   <p class="light-footnote">Forecast: Open-Meteo best-match model blend. Beyond day seven the models drift; check again nearer the time.</p>
+</section>
+
+<section id="help" class="wrap help-sec">
+  <div class="split asym" data-reveal>
+    <h2>If something goes wrong.</h2>
+    <p>The screen to know before you need it. It works offline; numbers dial on tap.</p>
+  </div>
+  <div class="arr-grid" data-reveal>
+    <div class="arr-card">
+      <div class="arr-h">Emergencies</div>
+      <div class="arr-row"><span>Anything urgent</span><span><a href="tel:112">112</a>, one number for police, fire, ambulance; English spoken</span></div>
+      <div class="arr-row"><span>Health advice</span><span><a href="tel:061">061</a>, Salut Respon, 24 h nurse and doctor line</span></div>
+      <div class="arr-row"><span>Medical centre</span><span>CAP de Palafrugell, Carrer d'Àngel Guimerà 6 · <a href="tel:+34972610607">972 610 607</a>, urgències 24 h</span></div>
+    </div>
+    <div class="arr-card">
+      <div class="arr-h">Pharmacies</div>
+      <div class="arr-row"><span>Calella</span><span>Farmàcia Pou Juanola, C. Pirroig 23 · <a href="tel:+34972615859">972 615 859</a></span></div>
+      <div class="arr-row"><span>Llafranc</span><span>Farmàcia Mendieta, C. Francesc de Blanes 44 · <a href="tel:+34972302770">972 302 770</a></span></div>
+      <div class="arr-note">Summer hours run to about 9pm; the door sign lists the on-duty (de guàrdia) rota.</div>
+    </div>
+    <div class="arr-card">
+      <div class="arr-h">Taxis</div>
+      <div class="arr-row"><span>Taxi Claus</span><span><a href="tel:+34663731841">663 731 841</a></span></div>
+      <div class="arr-row"><span>Masca Taxi</span><span><a href="tel:+34972301123">972 301 123</a> / <a href="tel:+34659936772">659 936 772</a></span></div>
+      <div class="arr-note">Book the ride home before dinner, not after it. Taxis around Llafranc at 11pm are scarce.</div>
+    </div>
+    <div class="arr-card">
+      <div class="arr-h">For the taxi driver</div>
+      <div class="arr-row"><span>Say</span><span>Càmping Calella de Palafrugell, Carrer de Fuerteventura, Calella de Palafrugell</span></div>
+      <div class="arr-row"><span>Campsite</span><span><a href="tel:+34972615116">972 615 116</a></span></div>
+      <div class="arr-note">Once the hire cars are collected, add each plate to your travel notes above so it is on the phone.</div>
+    </div>
+  </div>
 </section>
 
 <section id="trip-map" class="dark-section trip-map">
@@ -1797,6 +1902,88 @@ html, body { overflow-x: clip; }
 
 <script>
 (function () {
+  if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js').catch(function () {}); }
+
+  window.cat26Share = function (text) {
+    if (navigator.share) { navigator.share({ text: text }).catch(function () {}); return; }
+    window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank', 'noopener');
+  };
+
+  document.querySelectorAll('[data-book-key]').forEach(function (cb) {
+    var k = 'cat26_book_' + cb.getAttribute('data-book-key');
+    try { cb.checked = localStorage.getItem(k) === '1'; } catch (e) {}
+    cb.addEventListener('change', function () { try { localStorage.setItem(k, cb.checked ? '1' : '0'); } catch (e) {} });
+  });
+  var bookShare = document.getElementById('book-share');
+  if (bookShare) bookShare.addEventListener('click', function () {
+    var left = [];
+    document.querySelectorAll('.book-row').forEach(function (r) {
+      if (getComputedStyle(r).display === 'none') return;
+      var cb = r.querySelector('[data-book-key]');
+      if (cb && !cb.checked) {
+        var name = r.querySelector('strong').textContent.replace(/\.$/, '');
+        var tel = r.querySelector('.book-links a[href^="tel:"]');
+        left.push(name + (tel ? ' (' + tel.textContent + ')' : ''));
+      }
+    });
+    cat26Share(left.length ? 'Still to book for Catalonia: ' + left.join('; ') + '. Whoever books one, post the confirmation here.' : 'Everything on the booking list is done.');
+  });
+
+  var sec = document.getElementById('today');
+  var lineEl = document.getElementById('today-line');
+  var tipsEl = document.getElementById('today-tips');
+  var noteEl = document.getElementById('today-note');
+  if (!sec || !window.fetch) return;
+  var WXW = {0:'clear',1:'clear',2:'sun and cloud',3:'overcast',45:'fog',48:'fog',51:'drizzle',53:'drizzle',55:'drizzle',61:'light rain',63:'rain',65:'heavy rain',80:'showers',81:'showers',82:'heavy showers',95:'storms',96:'storms',99:'storms'};
+  function madridNow() {
+    var s = new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Madrid', hour: 'numeric', minute: 'numeric', hour12: false, weekday: 'short', day: 'numeric', month: 'short' }).formatToParts(new Date());
+    var o = {}; s.forEach(function (x) { o[x.type] = x.value; });
+    return o;
+  }
+  function render(d, stale) {
+    var now = madridNow();
+    var hour = +now.hour + (+now.minute) / 60;
+    var tmax = Math.round(d.daily.temperature_2m_max[0]);
+    var pmax = d.daily.precipitation_probability_max[0];
+    var code = d.daily.weather_code[0];
+    var sunset = (d.daily.sunset[0] || '').slice(11, 16);
+    lineEl.textContent = now.weekday + ' ' + now.day + ' ' + now.month + ' \u00b7 ' + tmax + '\u00b0 ' + (WXW[code] || 'changeable') + (sunset ? ' \u00b7 sunset ' + sunset : '');
+    var tips = [];
+    var trip = new Date() >= new Date('2026-08-19T00:00:00Z') && new Date() <= new Date('2026-09-03T00:00:00Z');
+    if (!trip) {
+      var days = Math.ceil((new Date('2026-08-20T00:00:00Z') - new Date()) / 86400000);
+      if (days > 0) tips.push(days + ' days until Barcelona. The booking list below is the pre-trip job.');
+    }
+    if (pmax >= 50 || code >= 61) {
+      tips.push('Rain about: this is the Magma day. Book a slot before everyone else has the same idea.');
+    } else if (tmax >= 28) {
+      tips.push('Hot one. Tamariu early for the snorkel, or the boat if the sea stays calm.');
+    } else {
+      tips.push('Fine beach day. Pick one before the car parks decide for you.');
+    }
+    if (trip && hour >= 9.5 && hour < 17) {
+      tips.push('Past half nine: assume Tamariu and Aiguablava parking has gone. El Canadell\u2019s multi-storey always has space.');
+    }
+    tipsEl.innerHTML = tips.map(function (t) { return '<li>' + t + '</li>'; }).join('');
+    noteEl.textContent = stale ? 'Saved forecast from earlier, no signal right now.' : '';
+    sec.hidden = false;
+    var sh = document.getElementById('today-share');
+    if (sh) sh.onclick = function () { cat26Share('Today in Calella: ' + lineEl.textContent + '. ' + tips.join(' ')); };
+  }
+  var URL_WX = 'https://api.open-meteo.com/v1/forecast?latitude=41.8945&longitude=3.1650&daily=sunset,temperature_2m_max,precipitation_probability_max,weather_code&forecast_days=1&timezone=Europe%2FMadrid';
+  fetch(URL_WX).then(function (r) { return r.json(); }).then(function (d) {
+    try { localStorage.setItem('cat26_wx', JSON.stringify({ t: Date.now(), d: d })); } catch (e) {}
+    render(d, false);
+  }).catch(function () {
+    try {
+      var c = JSON.parse(localStorage.getItem('cat26_wx'));
+      if (c && Date.now() - c.t < 43200000) render(c.d, true);
+    } catch (e) {}
+  });
+})();
+</script>
+<script>
+(function () {
   var USERS = {
     lilyandmax:     { label: 'Lily & Max',      pals:false, falset:false },
     camandben:      { label: 'Cam & Ben',       pals:false, falset:false },
@@ -1848,6 +2035,8 @@ html, body { overflow-x: clip; }
     if (footSpan) footSpan.innerHTML = s.falset ? '20 August to 2 September 2026.' : (s.pals ? '20 to 30 August 2026.' : '23 to 30 August 2026.');
     renderChip(u);
     loadTravel(u);
+    var cal = document.getElementById('cal-ics');
+    if (cal) cal.href = 'data:text/calendar;charset=utf-8,' + encodeURIComponent(icsFor(s));
   }
 
   function renderChip(u){
@@ -1915,10 +2104,17 @@ html, body { overflow-x: clip; }
       if (data.flights) rows += '<div class="travel-saved-row"><span>Flights</span><span>'+esc(data.flights)+'</span></div>';
       if (data.car) rows += '<div class="travel-saved-row"><span>Hire car</span><span>'+esc(data.car)+'</span></div>';
       if (data.tnotes) rows += '<div class="travel-saved-row"><span>Notes</span><span>'+esc(data.tnotes)+'</span></div>';
-      out.innerHTML = '<div class="travel-saved-card">'+rows+'<div class="travel-saved-actions"><button type="button" id="travel-edit">Edit</button><button type="button" id="travel-remove">Remove</button></div></div>';
+      out.innerHTML = '<div class="travel-saved-card">'+rows+'<div class="travel-saved-actions"><button type="button" id="travel-edit">Edit</button><button type="button" id="travel-share">Share</button><button type="button" id="travel-remove">Remove</button></div></div>';
       form.style.display = 'none';
       document.getElementById('travel-edit').addEventListener('click', function(){ form.style.display=''; out.innerHTML=''; form.flights.value=data.flights||''; form.car.value=data.car||''; form.tnotes.value=data.tnotes||''; });
       document.getElementById('travel-remove').addEventListener('click', function(){ try { localStorage.setItem(tKey(u), '{}'); } catch(err){} loadTravel(u); });
+      document.getElementById('travel-share').addEventListener('click', function(){
+        var parts = [];
+        if (data.flights) parts.push('Flights: ' + data.flights);
+        if (data.car) parts.push('Car: ' + data.car);
+        if (data.tnotes) parts.push(data.tnotes);
+        if (window.cat26Share) cat26Share(USERS[u].label + ' travel. ' + parts.join('. '));
+      });
     } else {
       form.style.display = '';
       form.reset();
@@ -1934,6 +2130,20 @@ html, body { overflow-x: clip; }
     loadTravel(u);
   });
 
+  function icsFor(s) {
+    var ev = [];
+    if (s.pals) ev.push(['20260820', '20260821', 'Fly to Barcelona, drive to Pals']);
+    ev.push(['20260823', '20260824', s.pals ? 'Move down to Camping Calella de Palafrugell' : 'Check in, Camping Calella de Palafrugell']);
+    if (s.falset) { ev.push(['20260830', '20260831', 'Drive to Falset, the vineyard']); ev.push(['20260902', '20260903', 'Fly home from Barcelona']); }
+    else ev.push(['20260830', '20260831', 'Fly home from Barcelona']);
+    var lines = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//catalonia2026//EN'];
+    ev.forEach(function (e, i) {
+      lines.push('BEGIN:VEVENT', 'UID:cat26-' + i + '@catalonia2026', 'DTSTAMP:20260719T000000Z',
+        'DTSTART;VALUE=DATE:' + e[0], 'DTEND;VALUE=DATE:' + e[1], 'SUMMARY:' + e[2], 'END:VEVENT');
+    });
+    lines.push('END:VCALENDAR');
+    return lines.join('\r\n');
+  }
   var u = getUser();
   if (u && USERS[u]) {
     applyScope(u);
