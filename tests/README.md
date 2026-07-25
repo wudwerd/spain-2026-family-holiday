@@ -35,6 +35,7 @@ BASE=https://wudwerd.github.io/spain-2026-family-holiday ./run.sh
 | `before.mjs` | Before-you-fly countdown and the outstanding list |
 | `deeplink.mjs` | `#you-docs` and friends open the right tab |
 | `pk.mjs` | Packing list survives, no orphaned flight board |
+| `jelly.mjs` | Jellyfish panel: the live feed, a stubbed bloom, and a dead feed |
 
 ## Notes
 
@@ -48,3 +49,8 @@ Two things the suite cannot check:
   network. The tests cover everything downstream of it: parsing, repair, check
   digits, and the failure paths.
 - **Real devices.** Everything runs in headless Chromium.
+
+`jelly.mjs` pulls the live beach log with `curl` and hands it to the page,
+because headless Chromium often has no outbound route where the tests run. If
+`curl` cannot reach the Generalitat either, that leg is skipped and the stubbed
+ones still run.

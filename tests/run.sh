@@ -27,7 +27,7 @@ fi
 
 export BASE
 pass=0; fail=0
-for t in mrzunit real split bk camui backup before deeplink pk durability; do
+for t in mrzunit real split bk camui backup before deeplink pk durability jelly; do
   [ -f "$t.mjs" ] || continue
   printf '\n=== %s ===\n' "$t"
   if node "$t.mjs"; then pass=$((pass+1)); else fail=$((fail+1)); echo "  ^ FAILED"; fi

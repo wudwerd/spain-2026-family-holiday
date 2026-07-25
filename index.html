@@ -388,12 +388,39 @@ h1, h2, h3 { text-transform: uppercase; font-family: var(--serif); font-weight: 
 .wx-temp { font-family: var(--serif); font-weight: 300; font-size: 25px; font-variant-numeric: tabular-nums; }
 .wx-word { font-family: var(--serif); font-style: italic; font-size: 15px; color: var(--ink-60); margin-top: 2px; }
 .wx-rain { font-family: var(--sans); font-weight: 300; font-size: 9.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-45); margin-top: 3px; }
+/* jellyfish */
+.jf-intro { margin: 74px 0 26px; }
+.jf-head { display: grid; grid-template-columns: minmax(88px,150px) 1fr auto; gap: 10px 22px; padding: 0 0 12px; font-family: var(--sans); font-size: 9.5px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--ink-45); max-width: 980px; margin: 0 auto; }
+.jf-head[hidden] { display: none; }
+.jf-rows { max-width: 980px; margin: 0 auto; border-bottom: 1px solid var(--rule); }
+.jf-row { display: grid; grid-template-columns: minmax(88px,150px) 1fr auto; gap: 10px 22px; align-items: center; padding: 15px 0; border-top: 1px solid var(--rule-soft); }
+.jf-row:first-child { border-top: 1px solid var(--rule); }
+.jf-beach { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-60); }
+.jf-word { font-family: var(--serif); font-size: 17px; }
+.jf-word.is-none { font-style: italic; color: var(--ink-45); }
+.jf-word.is-clear { color: var(--ink-60); }
+.jf-word.is-bad { color: #a8341f; }
+.jf-meta { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-45); margin-top: 3px; }
+.jf-strip { display: flex; gap: 3px; }
+.jf-dot { width: 7px; height: 7px; border-radius: 50%; border: 1px solid var(--rule); background: none; flex: none; }
+.jf-dot.is-clear { background: var(--rule); border-color: var(--rule); }
+.jf-dot.is-mild { background: #d8a13c; border-color: #d8a13c; }
+.jf-dot.is-bad { background: #a8341f; border-color: #a8341f; }
+.jf-key { max-width: 980px; margin: 14px auto 0; display: flex; flex-wrap: wrap; gap: 6px 20px; font-family: var(--sans); font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-45); }
+.jf-key span { display: inline-flex; align-items: center; gap: 6px; }
+.jf-key i { width: 7px; height: 7px; border-radius: 50%; border: 1px solid var(--rule); flex: none; }
 @media (max-width: 760px) {
   .weather-sec { padding: 76px 5vw 40px; }
   .wx-head { grid-template-columns: 54px 1fr 1fr 1fr; gap: 8px 10px; }
   .wx-row { grid-template-columns: 54px 1fr 1fr 1fr; gap: 8px 10px; }
   .wx-temp { font-size: 20px; }
   .wx-word { font-size: 13px; }
+  .jf-head { grid-template-columns: 1fr auto; gap: 8px 10px; }
+  .jf-head div:first-child { display: none; }
+  .jf-row { grid-template-columns: 1fr auto; gap: 4px 10px; align-items: start; }
+  .jf-beach { grid-column: 1 / -1; }
+  .jf-word { font-size: 15px; }
+  .jf-strip { padding-top: 4px; }
 }
 
 /* trip map */
@@ -1056,7 +1083,7 @@ html, body { overflow-x: clip; }
       <p class="beach-note" id="beach-note">Promenade, sand, restaurants and calm water in one place. Flat and pushchair-easy once you’re there, but there’s no beach car park, so it’s street-only and a scrum in August.</p>
     </div>
   </div>
-  <div class="sources-line">Flags and jellyfish today: <a href="https://interior.gencat.cat/ca/arees_dactuacio/proteccio_civil/estatplatges/" target="_blank" rel="noopener">Estat de les platges ↗</a> · Sea state: <a href="https://www.meteo.cat/prediccio/platges/palafrugell-de-llafranc" target="_blank" rel="noopener">Llafranc</a> · <a href="https://www.meteo.cat/prediccio/platges/palafrugell-de-tamariu" target="_blank" rel="noopener">Tamariu</a> · <a href="https://www.meteo.cat/prediccio/platges/begur-daiguablava" target="_blank" rel="noopener">Aiguablava</a></div>
+  <div class="sources-line">Jellyfish, beach by beach: <a href="#jellyfish">today and the last fortnight</a> · Flags: <a href="https://interior.gencat.cat/ca/arees_dactuacio/proteccio_civil/estatplatges/" target="_blank" rel="noopener">Estat de les platges ↗</a> · Sea state: <a href="https://www.meteo.cat/prediccio/platges/palafrugell-de-llafranc" target="_blank" rel="noopener">Llafranc</a> · <a href="https://www.meteo.cat/prediccio/platges/palafrugell-de-tamariu" target="_blank" rel="noopener">Tamariu</a> · <a href="https://www.meteo.cat/prediccio/platges/begur-daiguablava" target="_blank" rel="noopener">Aiguablava</a></div>
   <div class="sources-line">Official access details: <a href="https://visitpalafrugell.cat/en/beaches-and-routes/" target="_blank" rel="noopener">Palafrugell</a> · <a href="https://visitbegur.cat/en/discover/beaches/" target="_blank" rel="noopener">Begur</a> · <a href="https://visitpalamos.cat/en/platja-de-castell/" target="_blank" rel="noopener">Castell</a></div>
 
   <div class="split asym sub towel" data-reveal>
@@ -1454,6 +1481,22 @@ html, body { overflow-x: clip; }
   </div>
   <div id="weather-days" class="wx-days"><div class="wx-loading">Reading the sky…</div></div>
   <p class="light-footnote">Forecast: Open-Meteo best-match model blend. Beyond day seven the models drift; check again nearer the time.</p>
+
+  <div class="split asym jf-intro" id="jellyfish" data-reveal>
+    <h2>Jellyfish.</h2>
+    <p>What the lifeguards logged on each beach, and the fortnight behind it. Nobody forecasts jellyfish, so the fortnight is the nearest thing to one: a bloom that has sat on a beach all week will probably still be there tomorrow, and a clear run of dots means clear.</p>
+  </div>
+  <div class="jf-head" id="jf-head" hidden>
+    <div></div><div>Latest report</div><div>Last 14 days</div>
+  </div>
+  <div id="jf-rows" class="jf-rows"><div class="wx-loading">Reading the beach log…</div></div>
+  <div class="jf-key">
+    <span><i class="jf-dot is-clear"></i>Nothing</span>
+    <span><i class="jf-dot is-mild"></i>Harmless or mild</span>
+    <span><i class="jf-dot is-bad"></i>Stings</span>
+    <span><i class="jf-dot"></i>No report</span>
+  </div>
+  <p class="light-footnote">Lifeguard reports from <a href="https://interior.gencat.cat/ca/arees_dactuacio/proteccio_civil/estatplatges/" target="_blank" rel="noopener">Estat de les platges</a>, Generalitat de Catalunya. Staffed beaches only, so Illa Roja never appears, and no report is not the same as no jellyfish.</p>
 </section>
 
 <section id="help" class="wrap help-sec">
@@ -1872,6 +1915,7 @@ html, body { overflow-x: clip; }
 <script src="assets/trip-kit.js"></script>
 <script src="assets/trip-data.js"></script>
 <script src="assets/you.js"></script>
+<script src="assets/jelly.js" defer></script>
 <script src="assets/leaflet/leaflet.js"></script>
 
 <script>
