@@ -9,6 +9,8 @@
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#e8e7e0">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="180x180" href="assets/apple-touch-icon.png">
+<link rel="icon" href="favicon.ico" sizes="any">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <title>Catalonia 2026 · Family notes</title>
@@ -265,7 +267,7 @@ h1, h2, h3 { text-transform: uppercase; font-family: var(--serif); font-weight: 
 .spot-plain { display: grid; grid-template-columns: minmax(0,5fr) minmax(0,7fr); gap: 24px 90px; border-top: 1px solid var(--rule); padding: 58px 0; }
 .fact-row { display: grid; grid-template-columns: 92px 1fr; gap: 14px; padding: 11px 0; border-bottom: 1px solid var(--rule-soft); font-family: var(--sans); font-size: 12.5px; font-weight: 300; line-height: 1.55; }
 .fact-row:first-child { border-top: 1px solid var(--rule-soft); }
-.fact-k { font-size: 9.5px; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-45); padding-top: 3px; }
+.fact-k { font-size: 10px; font-weight: 400; letter-spacing: 0.11em; text-transform: uppercase; color: var(--ink-45); padding-top: 3px; }
 .fact-v { color: var(--ink-60); }
 /* dark variants */
 .spot-dk { border-top-color: var(--dark-rule); }
@@ -305,7 +307,7 @@ h1, h2, h3 { text-transform: uppercase; font-family: var(--serif); font-weight: 
 .beach-drive { font-family: var(--sans); font-weight: 300; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-45); text-align: right; line-height: 1.8; }
 .beach-panel { flex: 0 1 360px; min-width: 280px; position: sticky; top: 130px; }
 .beach-panel img { width: 100%; aspect-ratio: 4/5; object-fit: cover; display: block; }
-.beach-cap { font-family: var(--sans); font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-45); margin-top: 14px; }
+.beach-cap { font-family: var(--sans); font-size: 10px; letter-spacing: 0.11em; text-transform: uppercase; color: var(--ink-45); margin-top: 14px; }
 .beach-note { font-family: var(--serif); font-size: 17px; line-height: 1.65; color: var(--ink-60); margin: 12px 0 0; text-wrap: pretty; }
 .sources-line { margin-top: 52px; font-family: var(--sans); font-weight: 300; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-45); text-align: center; }
 .sources-line a { border-bottom: 1px solid var(--rule); padding-bottom: 2px; }
@@ -537,7 +539,7 @@ h1, h2, h3 { text-transform: none; font-weight: 400; letter-spacing: -0.015em; }
 .index-name, .beach-name, .map-name { text-transform: none; letter-spacing: -0.01em; }
 .foot-title { text-transform: none; letter-spacing: -0.005em; }
 .spot-feature h3, .spot-row h3, .spot-plain h3, .run-head h3, .arr-h, .trip-card h3, .arrival-name, .arrival-board-head h3, .lounge-feature h3 { text-transform: none; letter-spacing: -0.01em; }
-.eyebrow, .chapter-nn, .aside-label, .wp-label, .run-stat-k, .foot-label, .map-header { letter-spacing: 0.2em; }
+.eyebrow, .chapter-nn, .aside-label, .wp-label, .run-stat-k, .foot-label, .map-header { letter-spacing: 0.11em; }
 .site-head nav { letter-spacing: 0.15em; }
 .lily-sec .eyebrow, .lily-sec .fact-k { color: var(--ink-45); }
 .lily-sec .spot-tag { color: var(--ink-60); }
@@ -548,7 +550,6 @@ h2 a, h3 a, .beach-name a { color: inherit; border-bottom: 1px solid var(--rule)
 h2 a:hover, h3 a:hover, .beach-name a:hover { color: var(--accent); border-color: var(--accent); opacity: 1; }
 
 /* ===== per-family login + scoping ===== */
-.flight-form { display: none; }
 /* type rebalance: sans reads, serif leads, mono only carries data */
 html, body { overflow-x: clip; }
 .light-footnote, .dark-footnote, .sources-line { font-family: var(--sans); font-weight: 400; font-size: 13px; letter-spacing: 0.01em; text-transform: none; max-width: 62ch; margin-left: auto; margin-right: auto; }
@@ -574,7 +575,8 @@ html, body { overflow-x: clip; }
 .book-row .pack-item { flex: 1 1 420px; }
 .book-links { display: flex; gap: 22px; font-family: var(--sans); font-size: 12px; }
 .book-links a { border-bottom: 1px solid var(--rule); padding-bottom: 2px; white-space: nowrap; }
-.hero-dates, .beach-drive, .beach-cap, .map-drive, .map-active-drive, .fact-k, .wp-label, .run-stat-k, .wx-day, .wx-rain, .wx-sea { font-family: var(--mono); }
+.hero-dates, .map-drive, .map-active-drive, .wx-day, .wx-rain, .wx-sea { font-family: var(--mono); }
+.beach-drive, .beach-cap, .fact-k, .wp-label, .run-stat-k { font-family: var(--sans); }
 .spot-body, .beach-note, .run-body, .aside-main p, .split > p { font-family: var(--sans); font-weight: 400; font-style: normal; font-size: 15.5px; line-height: 1.78; color: rgba(22,33,31,0.85); }
 .own-form input, .your-travel input { font-family: var(--sans); font-weight: 400; font-size: 15px; }
 .own-form label, .your-travel label { font-size: 10.5px; letter-spacing: 0.12em; }
@@ -612,6 +614,7 @@ html, body { overflow-x: clip; }
 .travel-saved-row span:first-child { font-size: 9.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-45); padding-top: 3px; }
 .travel-saved-actions { margin-top: 14px; }
 .travel-saved-actions button { background: none; border: 0; border-bottom: 1px solid var(--ink); color: var(--ink); font-family: var(--sans); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; cursor: pointer; padding: 0 0 2px; }
+.travel-saved-actions .travel-docs-link { border-bottom: 1px solid var(--ink); color: var(--ink); font-family: var(--sans); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; text-decoration: none; }
 .falset-sec { padding: 120px 5vw 40px; }
 .falset-sec .split { margin-bottom: 36px; }
 @media (max-width: 760px) { .your-travel.panel { padding: 28px 20px; } .falset-sec { padding: 76px 5vw 24px; } }
@@ -620,12 +623,13 @@ html, body { overflow-x: clip; }
 .arr-card { display: flex; flex-direction: column; }
 .arr-h { font-family: var(--serif); font-weight: 400; font-size: clamp(20px,2vw,26px); letter-spacing: -0.01em; padding-bottom: 14px; border-bottom: 1px solid var(--rule); margin-bottom: 6px; }
 .arr-row { display: grid; grid-template-columns: 96px 1fr; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--rule-soft); font-family: var(--sans); font-weight: 300; font-size: 13px; line-height: 1.5; }
-.arr-row span:first-child { font-size: 9.5px; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-45); padding-top: 3px; }
+.arr-row span:first-child { font-size: 10px; font-weight: 400; letter-spacing: 0.11em; text-transform: uppercase; color: var(--ink-45); padding-top: 3px; }
 .arr-row span:last-child { color: var(--ink-60); }
 .arr-note { font-family: var(--serif); font-style: italic; font-size: 15px; color: var(--ink-45); margin-top: 16px; text-wrap: pretty; }
 @media (max-width: 900px){ .arr-grid { grid-template-columns: 1fr; gap: 34px; } }
 </style>
 <link rel="stylesheet" href="assets/trip-kit.css">
+<link rel="stylesheet" href="assets/you.css">
 </head>
 <body>
 <a class="skip" href="#travel">Skip to travel and packing</a>
@@ -633,6 +637,7 @@ html, body { overflow-x: clip; }
   <a href="#top" class="brand">Catalonia 2026</a>
   <nav>
     <a href="#travel">Travel</a>
+    <a href="#you">Yours</a>
     <a href="#packing">Packing</a>
     <a href="#pals" data-leg="pals" style="display:none">Pals</a>
     <a href="#coast">The coves</a>
@@ -648,12 +653,26 @@ html, body { overflow-x: clip; }
 <section id="top" class="hero-full">
   <img class="hero-bg" src="assets/calella-port-bo.jpg" alt="White houses and clear water at Calella de Palafrugell">
   <div class="hero-overlay">
-    <h1>Ten days in Catalonia, loosely held.</h1>
-    <p class="hero-lede">Ten of us, 20 to 30 August. Three nights in Pals, then a week among the coves. Three appointments hold the shape. Everything else is weather and whim.</p>
+    <h1>Ten days in Catalonia.</h1>
+    <p class="hero-lede">Ten of us, 20 to 30 August. Three nights in Pals, then a week among the coves. Three things are booked. The rest we decide on the day.</p>
     <div class="hero-dates">20 Aug · land, drive to Pals<br>23 Aug · down to Camping Palafrugell<br>30 Aug · fly home from Barcelona</div>
   </div>
 </section>
 <div class="hero-capline"><span>Calella de Palafrugell, ten minutes from the campsite</span><span>41.8865° N, 3.1810° E</span></div>
+
+<section id="before" class="wrap today-sec" hidden>
+  <div class="today-card">
+    <div class="today-head">
+      <div class="eyebrow">Before you fly</div>
+      <div class="today-line" id="before-line"></div>
+    </div>
+    <ul class="today-tips" id="before-list"></ul>
+    <div class="today-foot">
+      <button type="button" class="today-share" id="before-share">Send what is outstanding</button>
+      <span class="today-note" id="before-note"></span>
+    </div>
+  </div>
+</section>
 
 <section id="today" class="wrap today-sec" hidden>
   <div class="today-card">
@@ -668,6 +687,68 @@ html, body { overflow-x: clip; }
     </div>
   </div>
 </section>
+
+<section id="travel" class="wrap trip-kit travel-hub">
+  <div class="split asym" data-reveal>
+    <h2>The useful bit, before take-off.</h2>
+    <p>Flights, the hire car and two possible arrival airports. Everyone travels differently; note yours and glance at the rest.</p>
+  </div>
+
+  <div class="your-travel panel" data-reveal>
+    <div class="eyebrow">Your travel</div>
+    <h3>Your flights &amp; hire car.</h3>
+    <p class="spot-tag">Saved on this phone only, nothing is uploaded or shared. Everyone fills in their own, and sees only their own.</p>
+    <form id="travel-form" autocomplete="off">
+      <div class="ba-fill">
+        <input id="ba-flight" maxlength="8" placeholder="On BA? Flight number, e.g. BA478">
+        <button type="button" id="ba-fill-go">Fill</button>
+        <div class="ba-fill-out" id="ba-fill-out"></div>
+      </div>
+      <label>Flights<input name="flights" maxlength="180" placeholder="Airline, route and times, out and back"></label>
+      <label>Hire car<input name="car" maxlength="160" placeholder="Company, pickup and return, BCN"></label>
+      <label>Notes<input name="tnotes" maxlength="180" placeholder="Seat numbers, terminal, anything useful"></label>
+      <button type="submit">Save my travel</button>
+    </form>
+    <div id="travel-saved"></div>
+    <div class="cal-row"><a class="ics-add" id="cal-ics" download="catalonia-2026.ics" href="#">Add the trip dates to your calendar</a></div>
+  </div>
+
+  <div class="arrival-board" data-reveal>
+    <div class="arrival-board-head">
+      <h3>Two airports.</h3>
+      <p>Not everyone is on the same flight, and every family has its own hire car. Note who lands where and when, then everyone moves at their own pace.</p>
+    </div>
+    <div class="arrival-grid">
+      <article class="arrival-airport">
+        <div class="arrival-code">BCN</div>
+        <div class="arrival-name">Barcelona El Prat · south of the trip</div>
+        <p class="arrival-copy">Whoever lands at Barcelona picks up a car and heads north, roughly 1 h 45 to 2 h to Pals, or 20-25 minutes more to the campsite, before stops and August traffic.</p>
+        <div class="arrival-links"><a data-leg="pals" style="display:none" href="https://www.google.com/maps/dir/?api=1&amp;origin=Josep+Tarradellas+Barcelona-El+Prat+Airport&amp;destination=La+Pallissa%2C+Pals&amp;travelmode=driving" target="_blank" rel="noopener">BCN to Pals ↗</a><a href="https://www.google.com/maps/dir/?api=1&amp;origin=Josep+Tarradellas+Barcelona-El+Prat+Airport&amp;destination=Camping+Calella+de+Palafrugell&amp;travelmode=driving" target="_blank" rel="noopener">BCN to camp ↗</a></div>
+      </article>
+      <article class="arrival-airport">
+        <div class="arrival-code">GRO</div>
+        <div class="arrival-name">Girona Costa Brava · the closer arrival</div>
+        <p class="arrival-copy">Best for the people flying into Girona. Each family books its own car for its own landing time; use the live route on the day rather than promising a fixed August drive time.</p>
+        <div class="arrival-links"><a data-leg="pals" style="display:none" href="https://www.google.com/maps/dir/?api=1&amp;origin=Girona-Costa+Brava+Airport&amp;destination=La+Pallissa%2C+Pals&amp;travelmode=driving" target="_blank" rel="noopener">GRO to Pals ↗</a><a href="https://www.google.com/maps/dir/?api=1&amp;origin=Girona-Costa+Brava+Airport&amp;destination=Camping+Calella+de+Palafrugell&amp;travelmode=driving" target="_blank" rel="noopener">GRO to camp ↗</a></div>
+      </article>
+    </div>
+  </div>
+
+  <div class="lounge-feature" data-leg="lounge" style="display:none" data-reveal>
+    <div class="split sub">
+      <div class="eyebrow">For those with access</div>
+      <h3>Breakfast before the gate.</h3>
+      <p>Breakfast or a first glass at Heathrow, and somewhere to sit at Barcelona on the way home.</p>
+    </div>
+    <div class="lounge-grid">
+      <figure class="lounge-figure"><img src="assets/lounge-lhr.jpg" alt="Illustrative view of a calm Heathrow airport lounge overlooking the runway" loading="lazy"><figcaption>London Heathrow · lounge access depends on terminal and card</figcaption></figure>
+      <figure class="lounge-figure"><img src="assets/lounge-bcn.jpg" alt="Illustrative view of a sunlit Barcelona airport lounge overlooking the runway" loading="lazy"><figcaption>Barcelona El Prat · check the departure terminal first</figcaption></figure>
+    </div>
+    <p class="lounge-note">Illustrative lounge views. The actual lounge, guest allowance, child policy, opening hours and availability depend on the terminal and access programme; check the <a href="https://www.americanexpress.com/en-gb/benefits/lounge-collection/" target="_blank" rel="noopener">Amex Lounge Finder</a> before travel.</p>
+  </div>
+</section>
+
+<section id="you" class="wrap you-sec" hidden></section>
 
 <section id="bookings" class="wrap bookings-sec">
   <div class="split asym" data-reveal>
@@ -702,63 +783,97 @@ html, body { overflow-x: clip; }
   </div>
 </section>
 
-<section id="travel" class="wrap trip-kit travel-hub">
+<section id="packing" class="wrap trip-kit packing-section">
   <div class="split asym" data-reveal>
-    <h2>The useful bit, before take-off.</h2>
-    <p>Flights, the hire car and two possible arrival airports. Everyone travels differently; note yours and glance at the rest.</p>
+    <h2>Pack light.</h2>
+    <p>The one-bag beach rule, the packing list and a private-on-this-phone flight card for anyone who wants to copy useful details into the group chat.</p>
+  </div>
+  <div class="split sub" data-reveal>
+    <div class="eyebrow">How the days tend to go</div>
+    <h3>Decide after coffee.</h3>
+    <p>A few habits describe us. None of them tells anyone where they have to be.</p>
+  </div>
+  <div class="rhythm-grid" data-reveal>
+    <article class="rhythm-note"><div class="eyebrow">Move, if you want</div><h3>The early people</h3><p>Phil is the 05:30, 15 to 29 km runner. Estelle is more likely to head out around 08:00 for 5 km. Anyone else might train at about 08:30. Once they are back, the clock has finished its work.</p></article>
+    <article class="rhythm-note"><div class="eyebrow">Beach, not all day</div><h3>Pick by mood</h3><p>Pool, cove, walk or nothing. A towel each, one small bag, children in the sea and lunch when everyone gets hungry.</p></article>
+    <article class="rhythm-note"><div class="eyebrow">Children first</div><h3>Then the long table</h3><p>Feed the children at the campsite when it suits, then let them play within sight on the sand while the adults take their time over something delicious.</p></article>
+    <article class="rhythm-note"><div class="eyebrow">Once or twice</div><h3>Stay in</h3><p>Spag bol, salad and cold bottles at the campsite. The rest of the time, follow the appetite and eat out.</p></article>
   </div>
 
-  <div class="your-travel panel" data-reveal>
-    <div class="eyebrow">Your travel</div>
-    <h3>Your flights &amp; hire car.</h3>
-    <p class="spot-tag">Saved on this phone only, nothing is uploaded or shared. Everyone fills in their own, and sees only their own.</p>
-    <form id="travel-form" autocomplete="off">
-      <div class="ba-fill">
-        <input id="ba-flight" maxlength="8" placeholder="On BA? Flight number, e.g. BA478">
-        <button type="button" id="ba-fill-go">Fill</button>
-        <div class="ba-fill-out" id="ba-fill-out"></div>
+  <div class="beach-manifesto" data-reveal>
+    <h3>The local beach rule.</h3>
+    <div class="beach-manifesto-copy">
+      <p><strong>A towel, a bag, the children. Done.</strong> No windbreak, tent, trolley, chair village or festival-grade encampment. Loïc's armbands come every time, but they are a swimming aid, not a substitute for an adult staying within arm's reach.</p>
+    </div>
+  </div>
+
+  <div class="packing-head" data-reveal>
+    <h3>The list.</h3>
+    <div class="packing-progress" id="packing-progress" aria-live="polite"></div>
+  </div>
+  <div class="pack-grid" data-reveal>
+    <fieldset class="pack-group">
+      <legend>Each person</legend>
+      <div class="pack-list">
+        <label class="pack-item"><input type="checkbox" data-pack-key="passport"><span>Passport, plus a photo stored securely on the phone</span></label>
+        <label class="pack-item"><input type="checkbox" data-pack-key="ghic"><span>GHIC/EHIC and travel-insurance details</span></label>
+        <label class="pack-item"><input type="checkbox" data-pack-key="swimwear"><span>Two swimsuits, so one can be wet</span></label>
+        <label class="pack-item"><input type="checkbox" data-pack-key="towel"><span>One quick-dry or ordinary beach towel</span></label>
+        <label class="pack-item"><input type="checkbox" data-pack-key="shoes"><span>Sandals plus trainers that can walk or run</span></label>
+        <label class="pack-item"><input type="checkbox" data-pack-key="dinner"><span>One good dinner outfit; repeat without apology</span></label>
+        <label class="pack-item"><input type="checkbox" data-pack-key="clothes"><span>Light clothes, underwear and one thin evening layer</span></label>
+        <label class="pack-item"><input type="checkbox" data-pack-key="sunwear"><span>Hat, sunglasses and a refillable water bottle</span></label>
+        <label class="pack-item"><input type="checkbox" data-pack-key="tech"><span>Phone charger, plug adaptor and headphones</span></label>
+        <label class="pack-item"><input type="checkbox" data-pack-key="medicines"><span>Personal medicines in original labelled packaging</span></label>
       </div>
-      <label>Flights<input name="flights" maxlength="180" placeholder="Airline, route and times, out and back"></label>
-      <label>Hire car<input name="car" maxlength="160" placeholder="Company, pickup and return, BCN"></label>
-      <label>Notes<input name="tnotes" maxlength="180" placeholder="Seat numbers, terminal, anything useful"></label>
-      <button type="submit">Save my travel</button>
-    </form>
-    <div id="travel-saved"></div>
-    <div class="cal-row"><a class="ics-add" id="cal-ics" download="catalonia-2026.ics" href="#">Add the trip dates to your calendar</a></div>
+    </fieldset>
+
+    <fieldset class="pack-group">
+      <legend>One shared bag</legend>
+      <div class="pack-list">
+        <label class="pack-item"><input type="checkbox" data-pack-key="armbands"><span>Loïc's armbands. Check the fit before day one</span></label>
+        <label class="pack-item"><input type="checkbox" data-pack-key="spf"><span>High-SPF sun cream, face SPF and aftersun</span></label>
+        <label class="pack-item"><input type="checkbox" data-pack-key="firstaid"><span>Small first-aid kit, plasters and children's pain relief</span></label>
+        <label class="pack-item"><input type="checkbox" data-pack-key="mosquito"><span>Mosquito repellent and bite cream</span></label>
+        <label class="pack-item"><input type="checkbox" data-pack-key="wetbag"><span>One wet bag or carrier for swimsuits</span></label>
+        <label class="pack-item"><input type="checkbox" data-pack-key="snorkel"><span>A couple of masks/snorkels, only if they will be used</span></label>
+        <label class="pack-item"><input type="checkbox" data-pack-key="power"><span>Power bank and car charging cable for phones</span></label>
+        <label class="pack-item"><input type="checkbox" data-pack-key="speaker"><span>The speaker, charged. Every evening needs a soundtrack</span></label>
+        <label class="pack-item"><input type="checkbox" data-pack-key="laundry"><span>Small laundry bag and a few washing capsules</span></label>
+        <label class="pack-item"><input type="checkbox" data-pack-key="cards"><span>Driving licence, physical payment card and a backup card</span></label>
+        <label class="pack-item" data-leg="lounge" style="display:none"><input type="checkbox" data-pack-key="prioritypass"><span>Amex Platinum, enrolled Priority Pass and lounge app/login</span></label>
+      </div>
+    </fieldset>
+
+    <fieldset class="pack-group">
+      <legend>First supermarket run</legend>
+      <div class="pack-list">
+        <label class="pack-item"><input type="checkbox" data-pack-key="booze"><span>Wine, beer, cava, spirits, mixers and plenty of ice</span></label>
+        <label class="pack-item"><input type="checkbox" data-pack-key="water"><span>Cold water and easy soft drinks</span></label>
+        <label class="pack-item"><input type="checkbox" data-pack-key="breakfast"><span>Coffee, milk, yoghurt, fruit, bread and breakfast things</span></label>
+        <label class="pack-item"><input type="checkbox" data-pack-key="kidfood"><span>Simple early suppers and beach snacks for the children</span></label>
+        <label class="pack-item"><input type="checkbox" data-pack-key="bolognese"><span>One or two spag-bol nights: pasta, mince, tomatoes, onions, garlic, parmesan</span></label>
+        <label class="pack-item"><input type="checkbox" data-pack-key="salad"><span>Salad, garlic bread and something good to drink with it</span></label>
+        <label class="pack-item"><input type="checkbox" data-pack-key="house"><span>Bin bags, kitchen roll, washing-up liquid and dishwasher tablets</span></label>
+        <label class="pack-item"><input type="checkbox" data-pack-key="topup"><span>Stop there. This is a first run, not provisions for a siege</span></label>
+      </div>
+    </fieldset>
+  </div>
+  <div class="packing-tools">
+    <div class="packing-local">Ticked items are remembered on this phone only. The whole page works offline once it has loaded; add it to your home screen before flying.</div>
+    <button class="trip-reset" id="packing-reset" type="button">Reset list</button>
   </div>
 
-  <div class="arrival-board" data-reveal>
-    <div class="arrival-board-head">
-      <h3>Two airports. Many versions.</h3>
-      <p>Not everyone is on the same flight, and every family has its own hire car. Note who lands where and when, then everyone moves at their own pace.</p>
-    </div>
-    <div class="arrival-grid">
-      <article class="arrival-airport">
-        <div class="arrival-code">BCN</div>
-        <div class="arrival-name">Barcelona El Prat · south of the trip</div>
-        <p class="arrival-copy">Whoever lands at Barcelona picks up a car and heads north, roughly 1 h 45 to 2 h to Pals, or 20-25 minutes more to the campsite, before stops and August traffic.</p>
-        <div class="arrival-links"><a data-leg="pals" style="display:none" href="https://www.google.com/maps/dir/?api=1&amp;origin=Josep+Tarradellas+Barcelona-El+Prat+Airport&amp;destination=La+Pallissa%2C+Pals&amp;travelmode=driving" target="_blank" rel="noopener">BCN to Pals ↗</a><a href="https://www.google.com/maps/dir/?api=1&amp;origin=Josep+Tarradellas+Barcelona-El+Prat+Airport&amp;destination=Camping+Calella+de+Palafrugell&amp;travelmode=driving" target="_blank" rel="noopener">BCN to camp ↗</a></div>
-      </article>
-      <article class="arrival-airport">
-        <div class="arrival-code">GRO</div>
-        <div class="arrival-name">Girona Costa Brava · the closer arrival</div>
-        <p class="arrival-copy">Best for the people flying into Girona. Each family books its own car for its own landing time; use the live route on the day rather than promising a fixed August drive time.</p>
-        <div class="arrival-links"><a data-leg="pals" style="display:none" href="https://www.google.com/maps/dir/?api=1&amp;origin=Girona-Costa+Brava+Airport&amp;destination=La+Pallissa%2C+Pals&amp;travelmode=driving" target="_blank" rel="noopener">GRO to Pals ↗</a><a href="https://www.google.com/maps/dir/?api=1&amp;origin=Girona-Costa+Brava+Airport&amp;destination=Camping+Calella+de+Palafrugell&amp;travelmode=driving" target="_blank" rel="noopener">GRO to camp ↗</a></div>
-      </article>
-    </div>
+  <div class="leave-home" data-reveal>
+    <div class="leave-home-k">Leave at home</div>
+    <div class="leave-home-v">Windbreaks, beach tents, trolleys, folding-chair villages, giant coolers and booze in the suitcase. Also leave any oil, product or substance that is unlabelled, controlled or legally unclear. Spain applies severe penalties to illegal drugs, including when travelling through airports.</div>
   </div>
 
-  <div class="lounge-feature" data-leg="lounge" style="display:none" data-reveal>
-    <div class="split sub">
-      <div class="eyebrow">For those with access</div>
-      <h3>The airside hour.</h3>
-      <p>Breakfast or a first glass at Heathrow; one last quiet pause at Barcelona before home.</p>
-    </div>
-    <div class="lounge-grid">
-      <figure class="lounge-figure"><img src="assets/lounge-lhr.jpg" alt="Illustrative view of a calm Heathrow airport lounge overlooking the runway" loading="lazy"><figcaption>London Heathrow · lounge access depends on terminal and card</figcaption></figure>
-      <figure class="lounge-figure"><img src="assets/lounge-bcn.jpg" alt="Illustrative view of a sunlit Barcelona airport lounge overlooking the runway" loading="lazy"><figcaption>Barcelona El Prat · check the departure terminal first</figcaption></figure>
-    </div>
-    <p class="lounge-note">Illustrative lounge views. The actual lounge, guest allowance, child policy, opening hours and availability depend on the terminal and access programme; check the <a href="https://www.americanexpress.com/en-gb/benefits/lounge-collection/" target="_blank" rel="noopener">Amex Lounge Finder</a> before travel.</p>
+  <div class="official-links" data-reveal>
+    <a href="https://www.gov.uk/foreign-travel-advice/spain/safety-and-security" target="_blank" rel="noopener">Spain travel and driving advice ↗</a>
+    <a href="https://www.dgt.es/muevete-con-seguridad/viaja-seguro/con-ninos/" target="_blank" rel="noopener">Spanish child-seat guidance ↗</a>
+    <a href="https://www.gov.uk/foreign-travel-advice/spain/health" target="_blank" rel="noopener">GHIC and healthcare ↗</a>
+    <a data-leg="lounge" style="display:none" href="https://www.americanexpress.com/en-gb/travel/lounges/the-platinum-card/" target="_blank" rel="noopener">Amex Platinum lounge finder ↗</a>
   </div>
 </section>
 
@@ -815,7 +930,7 @@ html, body { overflow-x: clip; }
 <article class="spot-feature" data-reveal>
   <figure class="spot-fig"><img src="assets/platja-de-pals.jpg" alt="Platja de Pals" loading="lazy"><figcaption>Platja de Pals, dunes and the Medes beyond</figcaption></figure>
   <div class="feat-grid">
-    <div><h3><a href="https://www.google.com/maps/search/?api=1&query=Platja%20de%20Pals" target="_blank" rel="noopener">Platja de Pals</a></h3><div class="spot-tag">The big sky beach</div></div>
+    <div><h3><a href="https://www.google.com/maps/search/?api=1&query=Platja%20de%20Pals" target="_blank" rel="noopener">Platja de Pals</a></h3><div class="spot-tag">Miles of open sand</div></div>
     <div><p class="spot-body">Three kilometres of dune-backed sand with room for ten of us and everyone else. Gentle shelving at the north end, with pine woods behind for shade.</p>
 <div class="spot-facts">
 <div class="fact-row"><div class="fact-k">Drive</div><div class="fact-v">10 min</div></div>
@@ -853,7 +968,7 @@ html, body { overflow-x: clip; }
 </article>
 <article class="spot-row rev" data-reveal>
   <figure class="row-fig"><img src="assets/banyoles.jpg" alt="Estany de Banyoles" loading="lazy"><figcaption>Estany de Banyoles</figcaption></figure>
-  <div class="row-txt"><h3><a href="https://www.google.com/maps/search/?api=1&query=Estany%20de%20Banyoles" target="_blank" rel="noopener">Estany de Banyoles</a></h3><div class="spot-tag">Fresh water under wooded hills</div><p class="spot-body">Catalonia’s biggest lake, warm, swimmable in the marked zones. Fifty minutes inland, so it’s the full day out. A change from salt.</p>
+  <div class="row-txt"><h3><a href="https://www.google.com/maps/search/?api=1&query=Estany%20de%20Banyoles" target="_blank" rel="noopener">Estany de Banyoles</a></h3><div class="spot-tag">A lake, no salt, no jellyfish</div><p class="spot-body">Catalonia’s biggest lake, warm, swimmable in the marked zones. Fifty minutes inland, so it’s the full day out. A change from salt.</p>
 </div>
 </article>
 </section>
@@ -945,7 +1060,7 @@ html, body { overflow-x: clip; }
   <div class="sources-line">Official access details: <a href="https://visitpalafrugell.cat/en/beaches-and-routes/" target="_blank" rel="noopener">Palafrugell</a> · <a href="https://visitbegur.cat/en/discover/beaches/" target="_blank" rel="noopener">Begur</a> · <a href="https://visitpalamos.cat/en/platja-de-castell/" target="_blank" rel="noopener">Castell</a></div>
 
   <div class="split asym sub towel" data-reveal>
-    <h3>Beyond the towel.</h3>
+    <h3>Away from the beach.</h3>
     <p>For the day someone announces they are bored of the beach. It usually lands around Thursday.</p>
   </div>
 <article class="spot-feature" data-reveal>
@@ -988,7 +1103,7 @@ html, body { overflow-x: clip; }
 <section id="datenights" class="dark-section">
   <div class="wrap-inner">
     <div class="split" data-reveal>
-      <h2>Two chairs, one table.</h2>
+      <h2>Dinner without the children.</h2>
       <p>The campsite week is the one stretch where two adults can slip out while the other family holds the fort. Return the favour the next night.</p>
     </div>
 <article class="spot-feature spot-dk" data-reveal>
@@ -1024,7 +1139,7 @@ html, body { overflow-x: clip; }
 </article>
 <article class="spot-row spot-dk" data-reveal>
   <figure class="row-fig sq"><img src="assets/clara-begur.jpg" alt="Clara, at Hotel Aiguaclara, Begur" loading="lazy"><figcaption>Clara, under the pergola (photo: the hotel)</figcaption></figure>
-  <div class="row-txt"><h3><a href="https://www.google.com/maps/search/?api=1&query=Hotel%20Aiguaclara%2C%20Begur" target="_blank" rel="noopener">Clara, at Hotel Aiguaclara, Begur</a></h3><p class="spot-body">The restaurant in the old garden of an 1866 Cuban-era mansion in the heart of Begur: marble tables under a glass pergola, soft light, small plates for the middle of the table, lovely food, service that can be scattered. Climb to the castle for the last light, then walk down to the table.</p>
+  <div class="row-txt"><h3><a href="https://www.google.com/maps/search/?api=1&query=Hotel%20Aiguaclara%2C%20Begur" target="_blank" rel="noopener">Clara, at Hotel Aiguaclara, Begur</a></h3><p class="spot-body">The restaurant in the old garden of an 1866 Cuban-era mansion in the middle of Begur: marble tables under a glass pergola, soft light, small plates for the middle of the table, lovely food, service that can be scattered. Climb to the castle for the last light, then walk down to the table.</p>
 <div class="spot-facts">
 <div class="fact-row dk"><div class="fact-k">From camp</div><div class="fact-v">20 min taxi</div></div>
 <div class="fact-row dk"><div class="fact-k">Book</div><div class="fact-v">+34 613 04 55 04</div></div>
@@ -1325,142 +1440,6 @@ html, body { overflow-x: clip; }
     </div>
   </div>
   <p class="light-footnote">Falset is about two and a half hours inland from the campsite, up into the Priorat wine country.</p>
-</section>
-
-<section id="packing" class="wrap trip-kit packing-section">
-  <div class="split asym" data-reveal>
-    <h2>Pack light. Use the page.</h2>
-    <p>The one-bag beach rule, the packing list and a private-on-this-phone flight card for anyone who wants to copy useful details into the group chat.</p>
-  </div>
-  <div class="split sub" data-reveal>
-    <div class="eyebrow">How the days tend to go</div>
-    <h3>Decide after coffee.</h3>
-    <p>A few habits describe us. None of them tells anyone where they have to be.</p>
-  </div>
-  <div class="rhythm-grid" data-reveal>
-    <article class="rhythm-note"><div class="eyebrow">Move, if you want</div><h3>The early people</h3><p>Phil is the 05:30, 15 to 29 km runner. Estelle is more likely to head out around 08:00 for 5 km. Anyone else might train at about 08:30. Once they are back, the clock has finished its work.</p></article>
-    <article class="rhythm-note"><div class="eyebrow">Beach, lightly</div><h3>Pick by mood</h3><p>Pool, cove, walk or nothing. A towel each, one small bag, children in the sea and lunch when everyone gets hungry.</p></article>
-    <article class="rhythm-note"><div class="eyebrow">Children first</div><h3>Then the long table</h3><p>Feed the children at the campsite when it suits, then let them play within sight on the sand while the adults take their time over something delicious.</p></article>
-    <article class="rhythm-note"><div class="eyebrow">Once or twice</div><h3>Stay in</h3><p>Spag bol, salad and cold bottles at the campsite. The rest of the time, follow the appetite and eat out.</p></article>
-  </div>
-
-  <div class="beach-manifesto" data-reveal>
-    <h3>The local beach rule.</h3>
-    <div class="beach-manifesto-copy">
-      <p><strong>A towel, a bag, the children. Done.</strong> No windbreak, tent, trolley, chair village or festival-grade encampment. Loïc's armbands come every time, but they are a swimming aid, not a substitute for an adult staying within arm's reach.</p>
-    </div>
-  </div>
-
-  <div class="packing-head" data-reveal>
-    <h3>The list that earns its luggage space.</h3>
-    <div class="packing-progress" id="packing-progress" aria-live="polite"></div>
-  </div>
-  <div class="pack-grid" data-reveal>
-    <fieldset class="pack-group">
-      <legend>Each person</legend>
-      <div class="pack-list">
-        <label class="pack-item"><input type="checkbox" data-pack-key="passport"><span>Passport, plus a photo stored securely on the phone</span></label>
-        <label class="pack-item"><input type="checkbox" data-pack-key="ghic"><span>GHIC/EHIC and travel-insurance details</span></label>
-        <label class="pack-item"><input type="checkbox" data-pack-key="swimwear"><span>Two swimsuits, so one can be wet</span></label>
-        <label class="pack-item"><input type="checkbox" data-pack-key="towel"><span>One quick-dry or ordinary beach towel</span></label>
-        <label class="pack-item"><input type="checkbox" data-pack-key="shoes"><span>Sandals plus trainers that can walk or run</span></label>
-        <label class="pack-item"><input type="checkbox" data-pack-key="dinner"><span>One good dinner outfit; repeat without apology</span></label>
-        <label class="pack-item"><input type="checkbox" data-pack-key="clothes"><span>Light clothes, underwear and one thin evening layer</span></label>
-        <label class="pack-item"><input type="checkbox" data-pack-key="sunwear"><span>Hat, sunglasses and a refillable water bottle</span></label>
-        <label class="pack-item"><input type="checkbox" data-pack-key="tech"><span>Phone charger, plug adaptor and headphones</span></label>
-        <label class="pack-item"><input type="checkbox" data-pack-key="medicines"><span>Personal medicines in original labelled packaging</span></label>
-      </div>
-    </fieldset>
-
-    <fieldset class="pack-group">
-      <legend>One shared bag</legend>
-      <div class="pack-list">
-        <label class="pack-item"><input type="checkbox" data-pack-key="armbands"><span>Loïc's armbands. Check the fit before day one</span></label>
-        <label class="pack-item"><input type="checkbox" data-pack-key="spf"><span>High-SPF sun cream, face SPF and aftersun</span></label>
-        <label class="pack-item"><input type="checkbox" data-pack-key="firstaid"><span>Small first-aid kit, plasters and children's pain relief</span></label>
-        <label class="pack-item"><input type="checkbox" data-pack-key="mosquito"><span>Mosquito repellent and bite cream</span></label>
-        <label class="pack-item"><input type="checkbox" data-pack-key="wetbag"><span>One wet bag or carrier for swimsuits</span></label>
-        <label class="pack-item"><input type="checkbox" data-pack-key="snorkel"><span>A couple of masks/snorkels, only if they will be used</span></label>
-        <label class="pack-item"><input type="checkbox" data-pack-key="power"><span>Power bank and car charging cable for phones</span></label>
-        <label class="pack-item"><input type="checkbox" data-pack-key="speaker"><span>The speaker, charged. Every evening needs a soundtrack</span></label>
-        <label class="pack-item"><input type="checkbox" data-pack-key="laundry"><span>Small laundry bag and a few washing capsules</span></label>
-        <label class="pack-item"><input type="checkbox" data-pack-key="cards"><span>Driving licence, physical payment card and a backup card</span></label>
-        <label class="pack-item" data-leg="lounge" style="display:none"><input type="checkbox" data-pack-key="prioritypass"><span>Amex Platinum, enrolled Priority Pass and lounge app/login</span></label>
-      </div>
-    </fieldset>
-
-    <fieldset class="pack-group">
-      <legend>First supermarket run</legend>
-      <div class="pack-list">
-        <label class="pack-item"><input type="checkbox" data-pack-key="booze"><span>Wine, beer, cava, spirits, mixers and plenty of ice</span></label>
-        <label class="pack-item"><input type="checkbox" data-pack-key="water"><span>Cold water and easy soft drinks</span></label>
-        <label class="pack-item"><input type="checkbox" data-pack-key="breakfast"><span>Coffee, milk, yoghurt, fruit, bread and breakfast things</span></label>
-        <label class="pack-item"><input type="checkbox" data-pack-key="kidfood"><span>Simple early suppers and beach snacks for the children</span></label>
-        <label class="pack-item"><input type="checkbox" data-pack-key="bolognese"><span>One or two spag-bol nights: pasta, mince, tomatoes, onions, garlic, parmesan</span></label>
-        <label class="pack-item"><input type="checkbox" data-pack-key="salad"><span>Salad, garlic bread and something good to drink with it</span></label>
-        <label class="pack-item"><input type="checkbox" data-pack-key="house"><span>Bin bags, kitchen roll, washing-up liquid and dishwasher tablets</span></label>
-        <label class="pack-item"><input type="checkbox" data-pack-key="topup"><span>Stop there. This is a first run, not provisions for a siege</span></label>
-      </div>
-    </fieldset>
-  </div>
-  <div class="packing-tools">
-    <div class="packing-local">Ticked items are remembered on this phone only. The whole page works offline once it has loaded; add it to your home screen before flying.</div>
-    <button class="trip-reset" id="packing-reset" type="button">Reset list</button>
-  </div>
-
-  <div class="leave-home" data-reveal>
-    <div class="leave-home-k">Leave at home</div>
-    <div class="leave-home-v">Windbreaks, beach tents, trolleys, folding-chair villages, giant coolers and booze in the suitcase. Also leave any oil, product or substance that is unlabelled, controlled or legally unclear. Spain applies severe penalties to illegal drugs, including when travelling through airports.</div>
-  </div>
-
-  <div class="flight-board">
-    <div class="split asym" data-reveal>
-      <h2>Add your flights.</h2>
-      <p>Each family can enter its own times, lounge plan and notes, save them on the phone, then copy a clean version into the group chat. Do not enter booking references.</p>
-    </div>
-    <div class="flight-form" data-reveal>
-      <div class="eyebrow">Your travel party</div>
-      <h3>Build a shareable flight card.</h3>
-      <p class="flight-form-lede">Useful details only. The page stores this locally on the device; it does not upload anything.</p>
-      <form id="flight-form">
-        <fieldset class="flight-fields">
-          <legend>People and access</legend>
-          <label class="span-2">Lead name<input name="name" required maxlength="80" autocomplete="name" placeholder="e.g. Estelle"></label>
-          <label>Travellers<input name="travellers" type="number" min="1" max="12" inputmode="numeric" placeholder="4"></label>
-          <label>Carrier / flight<input name="carrier" maxlength="80" placeholder="BA · flight number if known"></label>
-          <label class="span-4">Lounge access<input name="lounge" maxlength="160" placeholder="e.g. Amex Platinum cardholder + one guest · children/lounges to confirm"></label>
-        </fieldset>
-        <fieldset class="flight-fields">
-          <legend>Outbound</legend>
-          <label>Date<input name="out-date" type="date" required></label>
-          <label>From<input name="out-from" required maxlength="4" placeholder="LHR"></label>
-          <label>To<input name="out-to" required maxlength="4" placeholder="BCN"></label>
-          <label>Departs<input name="out-depart" type="time"></label>
-          <label>Arrives<input name="out-arrive" type="time"></label>
-        </fieldset>
-        <fieldset class="flight-fields">
-          <legend>Return</legend>
-          <label>Date<input name="back-date" type="date"></label>
-          <label>From<input name="back-from" maxlength="4" placeholder="BCN"></label>
-          <label>To<input name="back-to" maxlength="4" placeholder="LHR"></label>
-          <label>Departs<input name="back-depart" type="time"></label>
-          <label>Arrives<input name="back-arrive" type="time"></label>
-          <label class="span-4">Notes<textarea name="notes" maxlength="300" placeholder="Terminal, transfer, car seat, who is collecting whom…"></textarea></label>
-        </fieldset>
-        <button class="flight-submit" type="submit">Save flight card</button>
-        <div class="flight-status" id="flight-status" aria-live="polite"></div>
-      </form>
-      <p class="flight-privacy"><strong>Privacy:</strong> no booking reference, passport number, email or payment details. Saved cards remain in this browser until removed or its site data is cleared.</p>
-    </div>
-    <div class="saved-flights" id="saved-flights" aria-live="polite"></div>
-  </div>
-
-  <div class="official-links" data-reveal>
-    <a href="https://www.gov.uk/foreign-travel-advice/spain/safety-and-security" target="_blank" rel="noopener">Spain travel and driving advice ↗</a>
-    <a href="https://www.dgt.es/muevete-con-seguridad/viaja-seguro/con-ninos/" target="_blank" rel="noopener">Spanish child-seat guidance ↗</a>
-    <a href="https://www.gov.uk/foreign-travel-advice/spain/health" target="_blank" rel="noopener">GHIC and healthcare ↗</a>
-    <a data-leg="lounge" style="display:none" href="https://www.americanexpress.com/en-gb/travel/lounges/the-platinum-card/" target="_blank" rel="noopener">Amex Platinum lounge finder ↗</a>
-  </div>
 </section>
 
 <section id="weather" class="wrap weather-sec">
@@ -1890,14 +1869,9 @@ html, body { overflow-x: clip; }
   render();
 })();
 </script>
-<script>
-(function () {
-  var travel = document.getElementById('travel');
-  var packing = document.getElementById('packing');
-  if (travel && packing) travel.insertAdjacentElement('afterend', packing);
-})();
-</script>
 <script src="assets/trip-kit.js"></script>
+<script src="assets/trip-data.js"></script>
+<script src="assets/you.js"></script>
 <script src="assets/leaflet/leaflet.js"></script>
 
 <script>
@@ -1993,7 +1967,7 @@ html, body { overflow-x: clip; }
   var ORDER = ['lilyandmax','daisyandphil','estelleandchris','camandben'];
   var DEFAULTS = {
     estelleandchris: {
-      flights: 'BA \u00b7 LHR 15:15 to BCN 18:35 (Thu 20 Aug), back BCN 19:30 to LHR 20:45 (Wed 2 Sep)',
+      flights: 'BA \u00b7 LHR T5 15:15 to BCN T1 18:35 (Thu 20 Aug), back BCN 19:30 to LHR 20:45 (Wed 2 Sep)',
       car: 'Budget \u00b7 Peugeot e-2008 or similar \u00b7 collect BCN Thu 20 Aug 19:30, return Wed 2 Sep 17:30',
       tnotes: '2 Amex Platinum: pre-book the Heathrow lounges. BA Bronze: free seat selection from 7 days before.'
     }
@@ -2004,13 +1978,13 @@ html, body { overflow-x: clip; }
   function clearUser(){ try { localStorage.removeItem(KEY); } catch(e){} }
 
   var HERO_CAMP = {
-    h1: 'A week among the coves, loosely held.',
-    lede: 'A week at Camping Palafrugell with nothing booked. The days sort themselves out.',
+    h1: 'A week among the coves.',
+    lede: 'A week at Camping Palafrugell with nothing booked. We decide each morning.',
     dates: '23 Aug · check in, Camping Palafrugell<br>30 Aug · fly home from Barcelona'
   };
   var HERO_FALSET = {
-    h1: 'Two weeks in Catalonia, loosely held.',
-    lede: 'Three nights in Pals, a week among the coves, then three more in the Priorat. Three appointments hold the shape.',
+    h1: 'Two weeks in Catalonia.',
+    lede: 'Three nights in Pals, a week among the coves, then three more in the Priorat. Three things are booked.',
     dates: '20 Aug · land, drive to Pals<br>23 Aug · down to Camping Palafrugell<br>30 Aug · on to Falset, the vineyard<br>2 Sep · fly home from Barcelona'
   };
   var heroEls = {
@@ -2037,6 +2011,7 @@ html, body { overflow-x: clip; }
     loadTravel(u);
     var cal = document.getElementById('cal-ics');
     if (cal) cal.href = 'data:text/calendar;charset=utf-8,' + encodeURIComponent(icsFor(s));
+    document.dispatchEvent(new CustomEvent('cat26:user', { detail: u }));
   }
 
   function renderChip(u){
@@ -2048,7 +2023,13 @@ html, body { overflow-x: clip; }
       brand.parentNode.insertBefore(chip, brand.nextSibling);
     }
     chip.innerHTML = USERS[u].label + ' <button type="button" id="switch-user">switch</button>';
-    document.getElementById('switch-user').addEventListener('click', function(){ clearUser(); openGate(); });
+    document.getElementById('switch-user').addEventListener('click', function(){
+      clearUser();
+      var you = document.getElementById('you');
+      if (you) { you.hidden = true; you.innerHTML = ''; }
+      document.dispatchEvent(new CustomEvent('cat26:user', { detail: null }));
+      openGate();
+    });
   }
 
   function openGate(){
@@ -2060,7 +2041,7 @@ html, body { overflow-x: clip; }
       + '<h1>Who’s this?</h1>'
       + '<p>Pick your name and you’ll see the version relevant to your trip.</p>'
       + '<div class="lg-list">' + btns + '</div>'
-      + '<div class="lg-note">No password, this just tailors the page to your leg. Flight and car details you add are saved only on this phone, never uploaded.</div>';
+      + '<div class="lg-note">No password, this just tailors the page to your leg. Anything you add (plans, budgets, flights, the car) is saved only on this phone and never uploaded. Passport details go in a separate locker behind a PIN you choose.</div>';
     document.body.appendChild(g);
     g.querySelectorAll('button[data-u]').forEach(function(b){
       b.addEventListener('click', function(){ var u=b.dataset.u; setUser(u); g.style.display='none'; applyScope(u); });
@@ -2104,7 +2085,7 @@ html, body { overflow-x: clip; }
       if (data.flights) rows += '<div class="travel-saved-row"><span>Flights</span><span>'+esc(data.flights)+'</span></div>';
       if (data.car) rows += '<div class="travel-saved-row"><span>Hire car</span><span>'+esc(data.car)+'</span></div>';
       if (data.tnotes) rows += '<div class="travel-saved-row"><span>Notes</span><span>'+esc(data.tnotes)+'</span></div>';
-      out.innerHTML = '<div class="travel-saved-card">'+rows+'<div class="travel-saved-actions"><button type="button" id="travel-edit">Edit</button><button type="button" id="travel-share">Share</button><button type="button" id="travel-remove">Remove</button></div></div>';
+      out.innerHTML = '<div class="travel-saved-card">'+rows+'<div class="travel-saved-actions"><button type="button" id="travel-edit">Edit</button><button type="button" id="travel-share">Share</button><button type="button" id="travel-remove">Remove</button><a class="travel-docs-link" href="#you-docs">Passports and references</a></div></div>';
       form.style.display = 'none';
       document.getElementById('travel-edit').addEventListener('click', function(){ form.style.display=''; out.innerHTML=''; form.flights.value=data.flights||''; form.car.value=data.car||''; form.tnotes.value=data.tnotes||''; });
       document.getElementById('travel-remove').addEventListener('click', function(){ try { localStorage.setItem(tKey(u), '{}'); } catch(err){} loadTravel(u); });
